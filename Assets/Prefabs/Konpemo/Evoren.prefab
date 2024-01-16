@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2298792344917526368}
   - component: {fileID: 9011007181043038086}
   - component: {fileID: 5099566240458152581}
-  - component: {fileID: 846525561869745967}
   - component: {fileID: 3908492980145962254}
   - component: {fileID: 5618691328645322884}
   - component: {fileID: 5949388022820397811}
+  - component: {fileID: 846525561869745967}
   m_Layer: 0
   m_Name: Evoren
   m_TagString: Untagged
@@ -109,22 +109,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &846525561869745967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5120437060716382174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208fe31dffee9f14f97f45df4aead9a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFlying: 0
-  isSlewDown: 0
-  isParalysed: 0
-  isPoisoned: 0
 --- !u!195 &3908492980145962254
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -178,3 +162,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charStateManager: {fileID: 5618691328645322884}
+--- !u!114 &846525561869745967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120437060716382174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208fe31dffee9f14f97f45df4aead9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlying: 0
+  isParalysed: 0
+  isPoisoned: 0

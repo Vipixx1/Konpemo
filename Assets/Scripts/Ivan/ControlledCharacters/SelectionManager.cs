@@ -11,6 +11,8 @@ public class SelectionManager : MonoBehaviour
     [SerializeField]
     EventManager eventManager;
 
+    [SerializeField] private bool locker;
+    [SerializeField] private GameObject mOwner;
 
     private bool allyUnitHit;
     private bool UnitHit;
@@ -27,8 +29,8 @@ public class SelectionManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && this.Lock(this.gameObject))
+        {   
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             allyUnitHit = Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie);
@@ -54,6 +56,31 @@ public class SelectionManager : MonoBehaviour
                 Debug.Log("tous les konpemos déseléctionnés");
                 Debug.Log(selectedKonpemos.Count);
             }
+            this.Unlock(this.gameObject);
+        }
+    }
+
+    public bool Lock(GameObject owner)
+    {
+        if (locker)
+        {
+            if(owner.name == mOwner.name) return true;
+            else return false;
+        }
+        else
+        {
+            locker = true;
+            mOwner = owner;
+            return true;
+        }
+    }
+
+    public void Unlock(GameObject preOwner)
+    {
+        if(preOwner.name == mOwner.name)
+        {
+            locker = false;
+            mOwner = null;
         }
     }
 
@@ -78,6 +105,14 @@ public class SelectionManager : MonoBehaviour
     private bool CheckKonpemoSelected(KonpemoManager konpemoManager)
     {
         return (selectedKonpemos.Contains(konpemoManager));
+    }
+    public KonpemoManager GetLastKonpemoSelected()
+    {
+        if (selectedKonpemos.Count > 0)
+        {
+            return selectedKonpemos[selectedKonpemos.Count - 1];
+        }
+        return null;
     }
     private List<KonpemoManager> GetKonpemoManagers()
     {

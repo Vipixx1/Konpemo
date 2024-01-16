@@ -10,7 +10,7 @@ public class CursorManager : MonoBehaviour
     private Vector3 mousePos;
     void Start()
     {
-        Cursor.visible = false;
+
     }
 
     // Update is called once per frame

@@ -5,10 +5,11 @@ using UnityEngine;
 public class KonpemoManager : MonoBehaviour
 {
     public CharStateManager charStateManager;
-
+    public Konpemo konpemo;
     private void Start()
     {
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
+        konpemo = this.gameObject.GetComponent<Konpemo>();
     }
     public void AddMoveListener(EventManager eventManager)
     {
@@ -30,34 +31,54 @@ public class KonpemoManager : MonoBehaviour
     {
         eventManager.goToAtkEvent.RemoveListener(AtkMoveHandler);
     }
-
-    public void AddNormalCapListener()
+    public void AddCapacityListener(EventManager eventManager)
     {
-        
+        switch (konpemo.capacityType)
+        {
+            case 1:
+                eventManager.rCapacityEvent.AddListener(RCapacityHandler);
+                break;
+            case 2:
+                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
+                break;
+            case 3:
+                eventManager.zCapacityEvent.AddListener(ZCapacityHandler);
+                break;
+            default:
+                Debug.Log("Impossible d'attacher la capacité");
+                break;
+        }
     }
-    public void RemoveNormalCapListener()
+    public void RemoveCapacityListener(EventManager eventManager)
     {
-
+        switch (konpemo.capacityType)
+        {
+            case 1:
+                eventManager.rCapacityEvent.RemoveListener(RCapacityHandler);
+                break;
+            case 2:
+                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
+                break;
+            case 3:
+                eventManager.zCapacityEvent.RemoveListener(ZCapacityHandler);
+                break;
+            default:
+                Debug.Log("Impossible d'attacher la capacité");
+                break;
+        }
     }
 
-    public void AddCibleTerrainCapListener()
+    public void RCapacityHandler()
     {
-
+        Debug.Log("R CAPACITY TO PUT HERE");
     }
-
-    public void RemoveCibleTerrainCapListener()
+    public void ECapacityHandler(GameObject cibleToCastOn)
     {
-
+        Debug.Log("E CAPACITY TO PUT HERE");
     }
-
-    public void AddCibleUnitCapListener()
+    public void ZCapacityHandler(Vector3 localisationSpell)
     {
-
-    }
-
-    public void RemoveCibleUnitCapListenr()
-    {
-
+        Debug.Log("Z CAPACITY TO PUT HERE");
     }
 
     public void MoveHandler(Vector3 position)

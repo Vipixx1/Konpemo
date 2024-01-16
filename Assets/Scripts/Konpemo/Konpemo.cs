@@ -18,6 +18,8 @@ public abstract class Konpemo : MonoBehaviour
     public bool isParalysed = false;
     public bool isPoisoned = false;
 
+    [SerializeField]
+    public int capacityType;
     public virtual void Start()
     {
         SetBaseStats();

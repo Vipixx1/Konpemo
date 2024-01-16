@@ -10,7 +10,7 @@ public class Caspow : Konpemo
         speed.BaseValue = 4f;
         attackSpeed.BaseValue = 1f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 1f;
+        rangeAttack.BaseValue = 3f;
         rangeView.BaseValue = 5f;
     }
 

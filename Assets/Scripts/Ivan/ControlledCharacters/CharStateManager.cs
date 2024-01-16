@@ -20,8 +20,9 @@ public class CharStateManager : MonoBehaviour
 
     void Start()
     {
-        konpemo = agent.GetComponent<Konpemo>();
         agent = GetComponent<NavMeshAgent>();
+        konpemo = agent.GetComponent<Konpemo>();
+
 
         agent.speed = konpemo.speed.Value;
 

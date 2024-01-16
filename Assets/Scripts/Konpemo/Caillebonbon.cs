@@ -11,7 +11,7 @@ public class Caillebonbon : Konpemo
         speed.BaseValue = 4f;
         attackSpeed.BaseValue = 1/0.75f;
         cooldown.BaseValue = 20f;
-        rangeAttack.BaseValue = 3f;
+        rangeAttack.BaseValue = 5f;
         rangeView.BaseValue = 5f;
     }
     public override void Attack() // Coupe Vent

@@ -15,7 +15,7 @@ public class Serbiere : Konpemo
         speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.5f;
         cooldown.BaseValue = 30f;
-        rangeAttack.BaseValue = 3f;
+        rangeAttack.BaseValue = 5f;
         rangeView.BaseValue = 5f;
     }
 

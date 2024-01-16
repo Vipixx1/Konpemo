@@ -12,7 +12,7 @@ public class Beatowtron : Konpemo
         speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.2f;
         cooldown.BaseValue = 10f;
-        rangeAttack.BaseValue = 3f;
+        rangeAttack.BaseValue = 5f;
         rangeView.BaseValue = 5f;
     }
 

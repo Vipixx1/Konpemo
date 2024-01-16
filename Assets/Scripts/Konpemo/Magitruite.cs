@@ -18,7 +18,7 @@ public class Magitruite : Konpemo
         speed.BaseValue = 0.5f;
         attackSpeed.BaseValue = 0.5f;
         cooldown.BaseValue = 0f;
-        rangeAttack.BaseValue = 1f;
+        rangeAttack.BaseValue = 3f;
         rangeView.BaseValue = 5f;
     }
 
@@ -28,7 +28,7 @@ public class Magitruite : Konpemo
 
         foreach (Collider collider in hitColliders.Where(collider => collider.gameObject.layer != this.gameObject.layer))
         {
-            if (collider.GetComponent<Konpemo>().speed.StatModifiers != null)
+            if (collider.GetComponent<Konpemo>().speed.StatModifiers.Count > 0)
             {
                 bool isHitByGouttelette = false;
                 foreach (StatModifier speedMod in collider.GetComponent<Konpemo>().speed.StatModifiers)

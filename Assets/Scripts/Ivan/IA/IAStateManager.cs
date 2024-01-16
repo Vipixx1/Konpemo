@@ -8,22 +8,21 @@ public class IAStateManager : MonoBehaviour
     [SerializeField]
     public LayerMask masqueEnnemi; //c'est l'ennemi de l'IA
     [SerializeField]
-    private KingManager kingManager;
+    public KingManager kingManager;
 
     public NavMeshAgent agent;
+    public Konpemo konpemo;
+    public Konpemo cible;
+    public Konpemo king;
 
     IABaseState currentState;
-    public IAIdleState IAIdleState = new IAIdleState();
-    public IAAttackingState IAAttackingState = new IAAttackingState();
-    public IAMovingState IAMovingState = new IAMovingState();
-
-    private Konpemo king;
-    public Konpemo cible;
-    public Konpemo konpemo;
+    public IAIdleState IAIdleState = new();
+    public IAAttackingState IAAttackingState = new();
+    public IAMovingState IAMovingState = new();
 
     void Start()
-    {   //peut etre à MODIFIER si sur un gameObject différent
-        konpemo = GetComponent<Konpemo>();
+    {   // à MODIFIER si sur un gameObject différent
+        konpemo = agent.GetComponent<Konpemo>();
         masqueEnnemi = LayerMask.GetMask("Blue");
         kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
         agent = GetComponent<NavMeshAgent>();

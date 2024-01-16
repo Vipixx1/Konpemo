@@ -12,7 +12,7 @@ public class Evoren : Konpemo
         speed.BaseValue = 3f;
         attackSpeed.BaseValue = 1f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 2f;
+        rangeAttack.BaseValue = 3f;
         rangeView.BaseValue = 5f;
     }
 

@@ -23,7 +23,6 @@ public class CharStateManager : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         konpemo = agent.GetComponent<Konpemo>();
 
-
         agent.speed = konpemo.speed.Value;
 
         currentState = charIdleState;

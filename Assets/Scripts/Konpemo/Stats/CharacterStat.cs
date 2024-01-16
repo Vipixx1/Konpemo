@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 public class CharacterStat
 {
     public float BaseValue;
+    private float minValue;
+
     protected float lastBaseValue = float.MinValue;
     protected float _value;
 
@@ -114,8 +116,6 @@ public class CharacterStat
 
         return (float)Math.Round(finalValue, 4);
     }
-
-    
 
     
 }

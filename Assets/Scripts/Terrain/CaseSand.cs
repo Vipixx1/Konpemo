@@ -7,29 +7,28 @@ public class CaseSand : MonoBehaviour
     private float percentSpeedReduction = -0.1f;
     private void OnTriggerEnter(Collider other)
     {
-        Konpemo konpemo = other.GetComponent<Konpemo>();
-        if (konpemo != null)
+        if (other.TryGetComponent<Konpemo>(out var konpemo))
         {
-            Debug.Log("aaa" + konpemo.speed.Value);
+            //Debug.Log("a : " + konpemo.speed.Value);
             if (konpemo.speed.StatModifiers.Count > 0)
             {
                 bool isOnSand = false;
                 foreach (StatModifier speedMod in konpemo.speed.StatModifiers)
                 {
-                    if (speedMod.Source == this) { isOnSand = true; }
+                    if (speedMod.Source.ToString() == "CaseSand") { isOnSand = true; }
                 }
 
                 if (! isOnSand)
                 {
-                    konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, this));
-                    Debug.Log("bbb" + konpemo.speed.Value);
+                    konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "CaseSand"));
+                    //Debug.Log("b : " + konpemo.speed.Value);
                 }
 
             }
             else
             {
-                konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, this));
-                Debug.Log("ccc" + konpemo.speed.Value);
+                konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "CaseSand"));
+                //Debug.Log("c : " + konpemo.speed.Value);
             }
             
         }
@@ -40,7 +39,7 @@ public class CaseSand : MonoBehaviour
         Konpemo konpemo = other.GetComponent<Konpemo>();
         if (konpemo != null)
         {
-            konpemo.speed.RemoveAllModifiersFromSource(this);
+            konpemo.speed.RemoveAllModifiersFromSource("CaseSand");
         }
     }
 }

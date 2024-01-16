@@ -18,7 +18,7 @@ public class KonpemoManager : MonoBehaviour
     public void AddMoveListener(EventManager eventManager)
     {
         eventManager.goToEvent.AddListener(MoveHandler);
-        Debug.Log("Listener bien ajouté");
+        //Debug.Log("Listener bien ajouté");
     }
 
     public void RemoveMoveListener(EventManager eventManager)
@@ -49,7 +49,7 @@ public class KonpemoManager : MonoBehaviour
                 eventManager.zCapacityEvent.AddListener(ZCapacityHandler);
                 break;
             default:
-                Debug.Log("Impossible d'attacher la capacité");
+                //Debug.Log("Impossible d'attacher la capacité");
                 break;
         }
     }
@@ -102,14 +102,14 @@ public class KonpemoManager : MonoBehaviour
 
     public void MoveHandler(Vector3 position)
     {
-        Debug.Log("J'ai reçu un goToEvent");
+        //Debug.Log("J'ai reçu un goToEvent");
         charStateManager.destination = position;
         charStateManager.SwitchState(charStateManager.charMovingState);
     }
 
     public void AtkMoveHandler(Konpemo cible)
     {
-        Debug.Log("J'ai reçu un goToAtkEvent");
+        //Debug.Log("J'ai reçu un goToAtkEvent");
         charStateManager.cibleKonpemo = cible;
         charStateManager.SwitchState(charStateManager.charAtkMovState);
     }

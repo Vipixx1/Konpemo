@@ -40,9 +40,9 @@ public class SelectionManager : MonoBehaviour
                 konpemoManagerHit = hit.collider.gameObject.GetComponent<KonpemoManager>();
                 if (!CheckKonpemoSelected(konpemoManagerHit))//Konpemo not selected
                 {
-                    Debug.Log("unité touché, tentative d'ajout listeners");
+                    //Debug.Log("unité touché, tentative d'ajout listeners");
                     SelectKonpemo(konpemoManagerHit);
-                    Debug.Log(selectedKonpemos.Count);
+                    //Debug.Log(selectedKonpemos.Count);
                 }
                 else//Konpemo already selected
                 {
@@ -53,8 +53,8 @@ public class SelectionManager : MonoBehaviour
             else if (!Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUnite))  //on ne clique pas sur une unité
             {
                 UnSelectKonpemos();
-                Debug.Log("tous les konpemos déseléctionnés");
-                Debug.Log(selectedKonpemos.Count);
+                //Debug.Log("tous les konpemos déseléctionnés");
+                //Debug.Log(selectedKonpemos.Count);
             }
             this.Unlock(this.gameObject);
         }

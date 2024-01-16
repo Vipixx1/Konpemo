@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class KonpemoManager : MonoBehaviour
 {
-    public CharStateManager charStateManager;
+    private CharStateManager charStateManager;
     public Konpemo konpemo;
+
+    private bool cdCapacityUp;
     private void Start()
     {
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
         konpemo = this.gameObject.GetComponent<Konpemo>();
+
+        cdCapacityUp = true;
     }
     public void AddMoveListener(EventManager eventManager)
     {
@@ -70,18 +74,30 @@ public class KonpemoManager : MonoBehaviour
 
     public void RCapacityHandler()
     {
-        Debug.Log("R CAPACITY TO PUT HERE");
-        konpemo.Capacity();
+        if (cdCapacityUp)
+        {
+            Debug.Log("R CAPACITY TO PUT HERE");
+            konpemo.Capacity();
+            StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
+        }
     }
     public void ECapacityHandler(GameObject cibleToCastOn)
     {
-        Debug.Log("E CAPACITY TO PUT HERE");
-        //konpemo.Capacity(cibleToCastOn);
+        if (cdCapacityUp)
+        {
+            Debug.Log("E CAPACITY TO PUT HERE");
+            //konpemo.Capacity(cibleToCastOn);
+            StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
+        }
     }
     public void ZCapacityHandler(Vector3 localisationSpell)
     {
-        Debug.Log("Z CAPACITY TO PUT HERE");
-        //konpemo.Capacity(localisationSpell);
+        if (cdCapacityUp)
+        {
+            Debug.Log("Z CAPACITY TO PUT HERE");
+            //konpemo.Capacity(localisationSpell);
+            StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
+        }
     }
 
     public void MoveHandler(Vector3 position)
@@ -96,5 +112,12 @@ public class KonpemoManager : MonoBehaviour
         Debug.Log("J'ai reçu un goToAtkEvent");
         charStateManager.cibleKonpemo = cible;
         charStateManager.SwitchState(charStateManager.charAtkMovState);
+    }
+
+    private IEnumerator CapacityCooldown(float timeToWait)
+    {
+        cdCapacityUp = false;
+        yield return new WaitForSeconds(timeToWait);
+        cdCapacityUp = true;
     }
 }

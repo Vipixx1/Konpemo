@@ -6,12 +6,6 @@ using UnityEngine.AI;
 public class IAStateManager : MonoBehaviour
 {
     [SerializeField]
-    public float porteeVision;
-    [SerializeField]
-    public float porteeAtk;
-    [SerializeField]
-    public bool etat_cible;
-    [SerializeField]
     public LayerMask masqueEnnemi; //c'est l'ennemi de l'IA
     [SerializeField]
     private KingManager kingManager;
@@ -23,15 +17,21 @@ public class IAStateManager : MonoBehaviour
     public IAAttackingState IAAttackingState = new IAAttackingState();
     public IAMovingState IAMovingState = new IAMovingState();
 
-    private GameObject king;
+    private Konpemo king;
     public Konpemo cible;
     public Konpemo konpemo;
 
     void Start()
-    {
+    {   //peut etre à MODIFIER si sur un gameObject différent
         konpemo = GetComponent<Konpemo>();
+        masqueEnnemi = LayerMask.GetMask("Blue");
+        kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
+        agent = GetComponent<NavMeshAgent>();
+
+        agent.speed = konpemo.speed.Value;
+
         currentState = IAIdleState;
-        currentState.EnterState(this);  
+        currentState.EnterState(this);
     }
 
     void Update()
@@ -45,7 +45,7 @@ public class IAStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    public GameObject CibleLaPlusProche(float porteAtk, LayerMask masqueUniteRecherche) //Renvois le GO le plus proche a attaquer
+    public Konpemo CibleLaPlusProche(float porteAtk, LayerMask masqueUniteRecherche) //Renvois le GO le plus proche a attaquer
     {
         Collider[] unitsColliders = Physics.OverlapSphere(this.gameObject.transform.position, porteAtk, masqueUniteRecherche);
         if (unitsColliders.Length > 0)
@@ -62,7 +62,7 @@ public class IAStateManager : MonoBehaviour
                     distCible = minDistGO.transform.position - this.gameObject.transform.position;
                 }
             }
-            return minDistGO;
+            return minDistGO.GetComponent<Konpemo>();
         }
         else
         {
@@ -70,7 +70,7 @@ public class IAStateManager : MonoBehaviour
         }
     }
 
-    public GameObject CheckKing(float portee)
+    public Konpemo CheckKing(float portee)
     {
         //code optimisé au début je faisais un overlapSphere
         king = kingManager.getKing();
@@ -87,6 +87,8 @@ public class IAStateManager : MonoBehaviour
             return null;
         }
     }
+
+
 
 
 }

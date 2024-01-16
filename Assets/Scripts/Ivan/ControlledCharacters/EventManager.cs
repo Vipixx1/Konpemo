@@ -67,10 +67,10 @@ public class EventManager : MonoBehaviour
         {
             //uiManager.DisplaySpriteBlue();
             //uiManager.Display(SpriteLastKonpemo);
-            konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();   //DEBUG
+            konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
             if(konpemoManagerSelected != null)
             {
-                konpemoSelected = konpemoManagerSelected.GetComponent<Konpemo>();   //DEBUG
+                konpemoSelected = konpemoManagerSelected.GetComponent<Konpemo>();
                 //Debug.Log(konpemoSelected.ToString());
                 switch (konpemoSelected.capacityType)
                 {

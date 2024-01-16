@@ -21,7 +21,7 @@ public class FlagManager : MonoBehaviour
         masquePreKing = 1 << preKing.gameObject.layer;
         if (masquePreKing == masqueUniteAllie)
         {
-            kingManager.setKing(preKing.gameObject);
+            kingManager.setKing(preKing.gameObject.GetComponent<Konpemo>());
             this.gameObject.SetActive(false);
         }
     }

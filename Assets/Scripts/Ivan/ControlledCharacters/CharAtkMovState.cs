@@ -13,16 +13,11 @@ public class CharAtkMovState : CharBaseState
     public override void UpdateState(CharStateManager csm)
     {
         distanceToCible = (csm.cibleKonpemo.transform.position - csm.transform.position).magnitude;
-        /*if (csm.etat_cible) //cible est morte
-        {
-            ia.cible = null;
-            ia.SwitchState(ia.IAIdleState);
-        }*/
-        if (distanceToCible <= csm.porteeAtk) //cible a portee d'atk
+        if (distanceToCible <= csm.konpemo.rangeAttack.Value) //cible a portee d'atk
         {
             csm.SwitchState(csm.charAtkState);
         }
-        else if (distanceToCible >= csm.porteeVision)
+        else if (distanceToCible >= csm.konpemo.rangeView.Value)
         {
             //pas de stop de l'agent, ça fait plus réaliste
             csm.SwitchState(csm.charIdleState);

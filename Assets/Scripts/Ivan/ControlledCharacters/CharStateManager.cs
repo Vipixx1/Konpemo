@@ -5,17 +5,7 @@ using UnityEngine.AI;
 
 public class CharStateManager : MonoBehaviour
 {
-    [SerializeField]
-    private float agentSpeed = 5;
-    [SerializeField]
-    public float porteeAtk = 3;
-    [SerializeField]
-    public float porteeVision = 50;
-
-
     public NavMeshAgent agent;
-    public Vector3 destination;
-    public Konpemo cibleKonpemo;
     public Konpemo konpemo;
 
     CharBaseState currentState;
@@ -24,18 +14,24 @@ public class CharStateManager : MonoBehaviour
     public CharMovingState charMovingState = new CharMovingState();
     public CharAtkMovState charAtkMovState = new CharAtkMovState();
 
+    public Vector3 destination;
+    public Konpemo cibleKonpemo;
+
 
     void Start()
     {
         konpemo = agent.GetComponent<Konpemo>();
-        agent.speed = agentSpeed;//konpemo.speed.value;
+        agent = GetComponent<NavMeshAgent>();
+
+        agent.speed = konpemo.speed.Value;
+
         currentState = charIdleState;
         currentState.EnterState(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        agent.speed = konpemo.speed.Value;
         currentState.UpdateState(this);
     }
 

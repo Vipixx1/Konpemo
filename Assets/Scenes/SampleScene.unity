@@ -7365,7 +7365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5d889797563414eb4d552e4854babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charStateManager: {fileID: 1036518414}
+  konpemo: {fileID: 0}
 --- !u!114 &1036518414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7378,10 +7378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd46b2970c5a6634aa5a23c0dc7c32be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentSpeed: 5
-  porteeAtk: 3
-  porteeVision: 50
   agent: {fileID: 1036518415}
+  konpemo: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   cibleKonpemo: {fileID: 0}
 --- !u!195 &1036518415
@@ -15462,7 +15460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9066103306739602158, guid: f3cb1e6c092e9524490d811bd7a8087e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 9066103306739602158, guid: f3cb1e6c092e9524490d811bd7a8087e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15470,7 +15468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9066103306739602158, guid: f3cb1e6c092e9524490d811bd7a8087e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9066103306739602158, guid: f3cb1e6c092e9524490d811bd7a8087e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15547,15 +15545,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00585d4dc82eebc44a0e46ea5d58cfa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  porteeVision: 10
-  porteeAtk: 3
-  etat_cible: 0
   masqueEnnemi:
     serializedVersion: 2
-    m_Bits: 128
-  kingManager: {fileID: 1084025540}
-  agent: {fileID: 8213116489922020095}
+    m_Bits: 0
+  kingManager: {fileID: 0}
+  agent: {fileID: 0}
   cible: {fileID: 0}
+  konpemo: {fileID: 0}
 --- !u!1001 &9107538242101300484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15586,6 +15582,10 @@ PrefabInstance:
       objectReference: {fileID: 963194228}
     - target: {fileID: 793698513521348594, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 846525561869745967, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
+      propertyPath: capacityType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1702867059819918123, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
@@ -15656,15 +15656,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
     - target: {fileID: 5183728455417669898, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 5183728455417669898, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1036518405}
     - target: {fileID: 5183728455417669898, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: offset.x
       value: -1
@@ -15673,12 +15668,10 @@ PrefabInstance:
       propertyPath: offset.y
       value: 1
       objectReference: {fileID: 0}
-=======
-    - target: {fileID: 5949388022820397811, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
-      propertyPath: konpemo
-      value: 
-      objectReference: {fileID: 1036518406}
->>>>>>> Stashed changes
+    - target: {fileID: 9171923753784187151, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9171923753784187151, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.5

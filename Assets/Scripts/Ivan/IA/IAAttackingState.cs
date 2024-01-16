@@ -5,27 +5,36 @@ using UnityEngine;
 
 public class IAAttackingState : IABaseState
 {
+    private bool canAttack;
+    private float timeBetweenAttack;
     public override void EnterState(IAStateManager ia)
     {
-
+        canAttack = true;
     }
     public override void UpdateState(IAStateManager ia)
     {
-        if (ia.etat_cible) //cible est morte
-        {
-            ia.cible = null;
-            ia.SwitchState(ia.IAIdleState);
-        }
-        else if ((ia.cible.transform.position - ia.transform.position).magnitude >= ia.porteeAtk) //cible hors de portee d'atk
+        if ((ia.cible.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value) //cible hors de portee d'atk
         {
             ia.SwitchState(ia.IAMovingState);
         }
-        else
+        else if (canAttack)
         {
+            timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
             ia.konpemo.SetTarget(ia.cible);
             ia.konpemo.Attack();
-            Debug.Log("Deal Damages");//deal damage
+            ia.StartCoroutine(AttackCooldown(timeBetweenAttack));
+            //Debug.Log("Deal Damages")
         }
+        else
+        {
+            //Debug.Log("pas d'attaques");
+        }
+    }
+    public IEnumerator AttackCooldown(float timeToWait)
+    {
+        canAttack=false;
+        yield return new WaitForSeconds(timeToWait);
+        canAttack = true;
     }
     public override void OnCollisionEnter(IAStateManager ia)
     {

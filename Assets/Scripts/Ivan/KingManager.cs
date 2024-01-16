@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class KingManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject theKing;
-    public void setKing(GameObject gameObjectKing)
+    private Konpemo theKing;
+    public void setKing(Konpemo gameObjectKing)
     {
         if (theKing == null)
         {
@@ -16,7 +16,7 @@ public class KingManager : MonoBehaviour
         }
     }
 
-    public GameObject getKing()
+    public Konpemo getKing()
     {
         return theKing;
     }

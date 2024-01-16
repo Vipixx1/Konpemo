@@ -11,14 +11,13 @@ public class IAIdleState : IABaseState
     }
     public override void UpdateState(IAStateManager ia)
     {
-        if (ia.cible = ia.CheckKing(ia.porteeVision))
+        if (ia.cible = ia.CheckKing(ia.konpemo.rangeView.Value))
         {
             Debug.Log("Je follow le ROI");
             ia.SwitchState(ia.IAMovingState);
         }
-        else if (ia.cible = ia.CibleLaPlusProche(ia.porteeVision, ia.masqueEnnemi))
+        else if (ia.cible = ia.CibleLaPlusProche(ia.konpemo.rangeView.Value, ia.masqueEnnemi))
         {
-            //Debug.Log("Idle");
             ia.SwitchState(ia.IAMovingState);
         }
     }

@@ -1,29 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 
 public class Magitruite : Konpemo
 {
     private float speedDown = 1f;
-    public Magitruite() : base(10f, 10f, 0f, 0.5f, 0f, 2f, 0f, false)
+
+    public override void SetBaseStats()
     {
-        // Magitruite other stats ?
+        health.BaseValue = 10f;
+        health.SetCurrentHealth(10f);
+        strength.BaseValue = 0f;
+        defense.BaseValue = 0f;
+        speed.BaseValue = 0.5f;
+        attackSpeed.BaseValue = 0.5f;
+        cooldown.BaseValue = 0f;
+        rangeAttack.BaseValue = 1f;
+        rangeView.BaseValue = 5f;
     }
 
     public override void Attack() // Gouttelette
     {
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 4f, 6);
+
         foreach (Collider collider in hitColliders.Where(collider => collider.gameObject.layer != this.gameObject.layer))
         {
-            if (! collider.GetComponent<Konpemo>().isSlewDown)
+            if (collider.GetComponent<Konpemo>().speed.StatModifiers != null)
             {
-                collider.GetComponent<Konpemo>().SpeedDown(speedDown);
+                bool isHitByGouttelette = false;
+                foreach (StatModifier speedMod in collider.GetComponent<Konpemo>().speed.StatModifiers)
+                {
+                    if (speedMod.Source.ToString() == "Gouttelette") { isHitByGouttelette = true; }
+                }
+
+                if (! isHitByGouttelette)
+                {
+                    StartCoroutine(Gouttelette(collider.GetComponent<Konpemo>()));
+                }
             }
-            
         }
+    }
+
+    public IEnumerator Gouttelette(Konpemo konpemo)
+    {
+        konpemo.speed.AddModifier(new StatModifier(-0.1f, StatModType.PercentMult, "Gouttelette"));
+        yield return new WaitForSeconds(5);
+        konpemo.speed.RemoveAllModifiersFromSource("Gouttelette");
+
     }
     public override void Passive()
     {
@@ -33,27 +59,26 @@ public class Magitruite : Konpemo
     public override void TakingDamage(float damageTaken) //2e passif !
     {
         System.Random rand = new System.Random();
-        this.currentHp -= rand.Next(0, 2);
-        if (this.currentHp <= 0) { Death(); } 
+        this.health.TakingFlatDamage(rand.Next(0, 2), 0);
     }
 
     public override void Healing(float hpHealed)
     {
         System.Random rand = new System.Random();
-        this.currentHp = Math.Min(baseHp, this.currentHp + rand.Next(0, 2));
+        this.health.HealingFlatDamage(rand.Next(0, 2));
     }
 
-    public override IEnumerator Poison()
+    public override IEnumerator Poison(float poisonTickDamage, int poisonDuration)
     {
         int timer = 0;
-        while (timer < 10)
+        while (timer < poisonDuration)
         {
             System.Random rand = new System.Random();
-            this.currentHp -= rand.Next(0, 2);
-            if (this.currentHp <= 0) { Death(); }
+            this.health.TakingFlatDamage(rand.Next(0, 2), 0);
+            // if (this.health.currentHealth <= 0) { Death(); }
             timer++;
             yield return new WaitForSeconds(1);
         }
-        if (timer >= 10) { isPoisoned  = false; }
+        if (timer >= poisonDuration) { isPoisoned  = false; }
     }
 }

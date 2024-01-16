@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KingManager : MonoBehaviour
 {
@@ -11,19 +12,32 @@ public class KingManager : MonoBehaviour
         if (theKing == null)
         {
             theKing = gameObjectKing;
+
         }
     }
-    public void endOfTheGameWhen()
+
+    public GameObject getKing()
     {
-        //if king died or king reached based
-        //end of the game
+        return theKing;
+    }
+    public void endOfTheGameLose()
+    {
+        Debug.Log("Lose");
+        //SceneManager.LoadSceneAsync("GameOverScreen");
+    }
+
+    public void endOfTheGameWin()
+    {
+        Debug.Log("Win");
+        //SceneManager.LoadSceneAsync("VictoryScreen");
     }
 
     private void Update()
     {
-        if (theKing != null)
+        /*if !theKing.health.isAlive)
         {
-            endOfTheGameWhen();
-        }
+            endOfTheGameLose();
+        }*/
     }
+    //besoin de mettre un trigger pour la condition de victoire
 }

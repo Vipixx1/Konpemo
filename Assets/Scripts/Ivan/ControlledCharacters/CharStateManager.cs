@@ -12,9 +12,11 @@ public class CharStateManager : MonoBehaviour
     [SerializeField]
     public float porteeVision = 50;
 
+
     public NavMeshAgent agent;
     public Vector3 destination;
     public GameObject cibleKonpemo;
+    public Konpemo konpemo;
 
     CharBaseState currentState;
     public CharIdleState charIdleState = new CharIdleState();
@@ -25,7 +27,8 @@ public class CharStateManager : MonoBehaviour
 
     void Start()
     {
-        agent.speed = agentSpeed;
+        konpemo = agent.GetComponent<Konpemo>();
+        agent.speed = agentSpeed;//konpemo.speed.value;
         currentState = charIdleState;
         currentState.EnterState(this);
     }

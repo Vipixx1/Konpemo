@@ -34,12 +34,12 @@ public class SelectionManager : MonoBehaviour
             allyUnitHit = Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie);
             if (allyUnitHit)
             {
-                if (!Input.GetKey(KeyCode.LeftShift)) unSelectKonpemos();
+                if (!Input.GetKey(KeyCode.LeftShift)) UnSelectKonpemos();
                 konpemoManagerHit = hit.collider.gameObject.GetComponent<KonpemoManager>();
-                if (!checkKonpemoSelected(konpemoManagerHit))//Konpemo not selected
+                if (!CheckKonpemoSelected(konpemoManagerHit))//Konpemo not selected
                 {
                     Debug.Log("unité touché, tentative d'ajout listeners");
-                    selectKonpemo(konpemoManagerHit);
+                    SelectKonpemo(konpemoManagerHit);
                     Debug.Log(selectedKonpemos.Count);
                 }
                 else//Konpemo already selected
@@ -50,14 +50,14 @@ public class SelectionManager : MonoBehaviour
             }
             else if (!Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUnite))  //on ne clique pas sur une unité
             {
-                unSelectKonpemos();
+                UnSelectKonpemos();
                 Debug.Log("tous les konpemos déseléctionnés");
                 Debug.Log(selectedKonpemos.Count);
             }
         }
     }
 
-    private void selectKonpemo(KonpemoManager konpemoManager)
+    private void SelectKonpemo(KonpemoManager konpemoManager)
     {
         eventManager.AddListener(konpemoManager);
         selectedKonpemos.Add(konpemoManager);
@@ -67,7 +67,7 @@ public class SelectionManager : MonoBehaviour
         eventManager.RemoveListener(konpemoManager);
         selectedKonpemos.Remove(konpemoManager);
     }
-    private void unSelectKonpemos()
+    private void UnSelectKonpemos()
     {
         foreach (KonpemoManager mKonpemoManager in selectedKonpemos)
         {
@@ -75,8 +75,12 @@ public class SelectionManager : MonoBehaviour
         }
         selectedKonpemos.Clear();
     }
-    private bool checkKonpemoSelected(KonpemoManager konpemoManager)
+    private bool CheckKonpemoSelected(KonpemoManager konpemoManager)
     {
         return (selectedKonpemos.Contains(konpemoManager));
+    }
+    private List<KonpemoManager> GetKonpemoManagers()
+    {
+        return selectedKonpemos;
     }
 }

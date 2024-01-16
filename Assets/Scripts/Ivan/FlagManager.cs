@@ -21,10 +21,8 @@ public class FlagManager : MonoBehaviour
         masquePreKing = 1 << preKing.gameObject.layer;
         if (masquePreKing == masqueUniteAllie)
         {
-            Debug.Log("coucou");
             kingManager.setKing(preKing.gameObject);
             this.gameObject.SetActive(false);
-            //Envois d'un kingAppearedEvent
         }
     }
 }

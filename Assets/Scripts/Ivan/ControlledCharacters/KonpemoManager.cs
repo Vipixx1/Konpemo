@@ -31,6 +31,35 @@ public class KonpemoManager : MonoBehaviour
         eventManager.goToAtkEvent.RemoveListener(AtkMoveHandler);
     }
 
+    public void AddNormalCapListener()
+    {
+        
+    }
+    public void RemoveNormalCapListener()
+    {
+
+    }
+
+    public void AddCibleTerrainCapListener()
+    {
+
+    }
+
+    public void RemoveCibleTerrainCapListener()
+    {
+
+    }
+
+    public void AddCibleUnitCapListener()
+    {
+
+    }
+
+    public void RemoveCibleUnitCapListenr()
+    {
+
+    }
+
     public void MoveHandler(Vector3 position)
     {
         Debug.Log("J'ai reçu un goToEvent");

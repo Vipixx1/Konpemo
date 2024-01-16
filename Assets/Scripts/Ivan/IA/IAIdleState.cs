@@ -13,6 +13,7 @@ public class IAIdleState : IABaseState
     {
         if (ia.cible = ia.CheckKing(ia.porteeVision))
         {
+            Debug.Log("Je follow le ROI");
             ia.SwitchState(ia.IAMovingState);
         }
         else if (ia.cible = ia.CibleLaPlusProche(ia.porteeVision, ia.masqueEnnemi))

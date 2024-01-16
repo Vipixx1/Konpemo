@@ -13,6 +13,8 @@ public class IAStateManager : MonoBehaviour
     public bool etat_cible;
     [SerializeField]
     public LayerMask masqueEnnemi; //c'est l'ennemi de l'IA
+    [SerializeField]
+    private KingManager kingManager;
 
     public NavMeshAgent agent;
 
@@ -21,7 +23,7 @@ public class IAStateManager : MonoBehaviour
     public IAAttackingState IAAttackingState = new IAAttackingState();
     public IAMovingState IAMovingState = new IAMovingState();
 
-    public LayerMask kingMask;
+    private GameObject king;
     public GameObject cible;
 
     void Start()
@@ -68,13 +70,18 @@ public class IAStateManager : MonoBehaviour
 
     public GameObject CheckKing(float portee)
     {
-        if (Physics.CheckSphere(this.gameObject.transform.position, portee, kingMask))
+        //code optimisé au début je faisais un overlapSphere
+        king = kingManager.getKing();
+        if (king != null)
         {
-            Collider[] colliders = Physics.OverlapSphere(this.gameObject.transform.position, portee, kingMask);
-            return colliders[0].gameObject; //normalement il n'y a qu'un seul roi
+            if((king.transform.position - this.gameObject.transform.position).magnitude <= portee)
+            {
+                return king;
+            }
+            return null;
         }
         else
-        {
+        { 
             return null;
         }
     }

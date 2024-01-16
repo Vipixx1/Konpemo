@@ -9,17 +9,28 @@ public class EventManager : MonoBehaviour
     Camera mainCamera;
     RaycastHit hit;
     Ray ray;
+    Ray rayE;
+    Ray rayZ;
     GameObject cibleGameObject;
+
     public UnityEvent<Vector3> goToEvent;
     public UnityEvent<GameObject> goToAtkEvent;
+    public UnityEvent rCapacityEvent;
+    public UnityEvent<GameObject> eCapacityEvent;
+    public UnityEvent<Vector3> zCapacityEvent;
+
     [SerializeField] private LayerMask masqueUnite;
     [SerializeField] private LayerMask masqueUniteEnnemi;
+    [SerializeField] private UIManager uiManager;
     private Vector3 positionSouris;
     // Start is called before the first frame update
     void Start()
     {
         goToEvent = new UnityEvent<Vector3>();
         goToAtkEvent = new UnityEvent<GameObject>();
+        rCapacityEvent = new UnityEvent();
+        eCapacityEvent = new UnityEvent<GameObject>();
+        zCapacityEvent = new UnityEvent<Vector3>();
         mainCamera = Camera.main;
     }
 
@@ -47,6 +58,24 @@ public class EventManager : MonoBehaviour
                 Debug.Log("J'envois un goToAtkEvent");
                 goToAtkEvent.Invoke(cibleGameObject);
             }
+        }
+        if (Input.GetKeyDown (KeyCode.R)) //capacité spéciale
+        {
+            rCapacityEvent.Invoke();
+        }
+        if(Input.GetKeyDown (KeyCode.E)) //capacite cible perso
+        {
+            rayE = mainCamera.ScreenPointToRay(Input.mousePosition);
+            //uiManager.
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi))
+            {
+                eCapacityEvent.Invoke(hit.collider.gameObject);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            rayZ = mainCamera.ScreenPointToRay(Input.mousePosition);
         }
     }
 

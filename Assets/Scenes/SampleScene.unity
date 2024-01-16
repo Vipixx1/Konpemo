@@ -4117,11 +4117,6 @@ Transform:
   - {fileID: 1227796618}
   - {fileID: 411159462}
   - {fileID: 2108316292}
-<<<<<<< HEAD
-  - {fileID: 1706235160}
-  - {fileID: 1227796618}
-=======
->>>>>>> 483281fa2d6846b51cf2f97666ce54b2ffbbaee7
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &593442584

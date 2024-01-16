@@ -1,41 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using static UnityEngine.GraphicsBuffer;
 
 public class Evoren : Konpemo
 {
-    public Evoren() : base(500f, 500f, 5f, 3f, 40f, 1f, 15f, false)
+    public override void SetBaseStats()
     {
-        // Evoren other stats ?
+        health.BaseValue = 500f;
+        health.SetCurrentHealth(500f);
+        strength.BaseValue = 40f;
+        defense.BaseValue = 5f;
+        speed.BaseValue = 3f;
+        attackSpeed.BaseValue = 1f;
+        cooldown.BaseValue = 15f;
+        rangeAttack.BaseValue = 1f;
+        rangeView.BaseValue = 5f;
     }
 
     public override void Capacity() // Gonflette
     {
         StartCoroutine(Gonflette());
-        SetCooldown(cooldown);
+        SetCooldown(cooldown.Value);
     }
 
     public IEnumerator Gonflette()
     {
-        this.currentDamage += 20f;
-        this.currentDef += 3f;
-        yield return new WaitForSeconds(10);
-        this.currentDamage -= 20f;
-        this.currentDef -= 3f;
-    }
+        StatModifier gonfletteStrength = new(20f, StatModType.Flat);
+        StatModifier gonfletteDefense = new(3f, StatModType.Flat);
 
-    private void Start()
-    {
+        strength.AddModifier(gonfletteStrength);
+        defense.AddModifier(gonfletteDefense);
+        
+        yield return new WaitForSeconds(10);
+        
+        strength.RemoveModifier(gonfletteStrength);
+        defense.RemoveModifier(gonfletteDefense);
+
     }
+    // Faire des tests
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("Evoren HP: " + currentHp);
-            Debug.Log("Evoren ATK: " + currentDamage);
-            Debug.Log("Evoren DEF: " + currentDef);
+            Debug.Log("Evoren HP: " + health.Value);
+            Debug.Log("Evoren ATK: " + strength.Value);
+            Debug.Log("Evoren DEF: " + defense.Value);
         }
         if (Input.GetKeyDown(KeyCode.G))
         {

@@ -25,6 +25,9 @@ public class StatModifier
 
 public enum StatModType
 {
+    // The numbers correspond to the order priority of each StatModType, if we want to add another type of modifier with a an order priority between
+    // 2 of the already existing modifier, we can by putting a number between the 2 modifier.
+
     Flat = 100,
     PercentAdd = 200,
     PercentMult = 300,

@@ -5,8 +5,6 @@ using System.Collections.ObjectModel;
 [Serializable]
 public class CharacterStat
 {
-    protected bool isDirty = true;
-
     public float BaseValue;
     protected float lastBaseValue = float.MinValue;
     protected float _value;
@@ -14,17 +12,20 @@ public class CharacterStat
     private readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
+    // This bool will allow us to not call CalculateFinalValue() everytime we need to call for the Stat.Value but no change has been made.
+    protected bool isDirty = true;
+
     public CharacterStat()
     {
         statModifiers = new List<StatModifier>();
         StatModifiers = statModifiers.AsReadOnly();
     }
-
     public CharacterStat(float baseValue) : this()
     {
         BaseValue = baseValue;
     }
-    public virtual float GetValue
+
+    public virtual float Value
     {
         get
         {
@@ -104,6 +105,7 @@ public class CharacterStat
                     sumPercentAdd = 0; // Reset the sum back to 0
                 }
             }
+
             else if (mod.Type == StatModType.PercentMult)
             {
                 finalValue *= 1 + mod.Value;

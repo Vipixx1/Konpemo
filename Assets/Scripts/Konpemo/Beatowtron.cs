@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Beatowtron : Konpemo
 {
-    private float rangeHeal = 5f;
-    public Beatowtron() : base(300f,300f, 0f, 2f, 10f, 5f, 10f, false)
+    private float rangeHeal = 3f;
+    public override void SetBaseStats()
     {
-        // Beatowtron other stats ?
+        health.BaseValue = 300f;
+        health.SetCurrentHealth(300f);
+        strength.BaseValue = 10f;
+        defense.BaseValue = 0f;
+        speed.BaseValue = 2f;
+        attackSpeed.BaseValue = 0.2f;
+        cooldown.BaseValue = 10f;
+        rangeAttack.BaseValue = 3f;
+        rangeView.BaseValue = 5f;
     }
 
     public override void Capacity() // Soin

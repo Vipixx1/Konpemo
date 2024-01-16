@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using static UnityEngine.GraphicsBuffer;
 
 public class Ninjax : Konpemo
 {
@@ -11,16 +7,23 @@ public class Ninjax : Konpemo
 
     [SerializeField] private Konpemo target; //Pour les tests
 
-    public Ninjax() : base(350f, 350f, 3f, 5f, 15f, 0.3f, 25f, false)
+    public override void SetBaseStats()
     {
-        //this.range = 2f;
-        //Ninjax other stats ?
+        health.BaseValue = 350f;
+        health.SetCurrentHealth(350f);
+        strength.BaseValue = 15f;
+        defense.BaseValue = 3f;
+        speed.BaseValue = 5f;
+        attackSpeed.BaseValue = 3f;
+        cooldown.BaseValue = 25f;
+        rangeAttack.BaseValue = 3f;
+        rangeView.BaseValue = 5f;
     }
     public override void Attack() // Piqûre
     {
         Piqure piqure = Instantiate(piqurePrefab, pointDeTir.position, pointDeTir.rotation);
         Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
-        piqure.Setup(dirProj, this.currentDamage);
+        piqure.Setup(dirProj, this.strength.Value);
     }
 
     public override void Capacity() // Brouillard

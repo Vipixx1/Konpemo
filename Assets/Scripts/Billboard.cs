@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
 
+    [SerializeField] private Camera cam;
+    [SerializeField] private Vector3 offset;
+    
+
+    private void Start()
+    {
+        cam = Camera.main;
+        offset = new Vector3(-1, 1, 0);
+    }
     void LateUpdate()
     {
         transform.rotation = cam.transform.rotation;

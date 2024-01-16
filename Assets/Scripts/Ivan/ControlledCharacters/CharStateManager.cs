@@ -15,7 +15,7 @@ public class CharStateManager : MonoBehaviour
 
     public NavMeshAgent agent;
     public Vector3 destination;
-    public GameObject cibleKonpemo;
+    public Konpemo cibleKonpemo;
     public Konpemo konpemo;
 
     CharBaseState currentState;

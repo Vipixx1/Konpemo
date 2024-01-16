@@ -23,7 +23,9 @@ public class CharAtkState : CharBaseState
         }
         else
         {
-            Debug.Log("DEGAT DEGAT"); //deal damage
+            //Debug.Log("DEGAT DEGAT"); //deal damage
+            csm.konpemo.SetTarget(csm.cibleKonpemo);
+            csm.konpemo.Attack();
 
         }
     }

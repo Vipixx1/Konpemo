@@ -81,6 +81,10 @@ public class Sourimi : Konpemo
         {
             this.Attack();
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            this.health.GetHealthDebug();
+        }
     }
 
 }

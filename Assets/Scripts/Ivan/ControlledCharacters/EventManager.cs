@@ -11,12 +11,12 @@ public class EventManager : MonoBehaviour
     Ray ray;
     Ray rayE;
     Ray rayZ;
-    GameObject cibleGameObject;
+    Konpemo cibleGameObject;
     KonpemoManager konpemoManagerSelected;
     Konpemo konpemoSelected;
 
     public UnityEvent<Vector3> goToEvent;
-    public UnityEvent<GameObject> goToAtkEvent;
+    public UnityEvent<Konpemo> goToAtkEvent;
     public UnityEvent rCapacityEvent;
     public UnityEvent<GameObject> eCapacityEvent;
     public UnityEvent<Vector3> zCapacityEvent;
@@ -31,7 +31,7 @@ public class EventManager : MonoBehaviour
     void Start()
     {
         goToEvent = new UnityEvent<Vector3>();
-        goToAtkEvent = new UnityEvent<GameObject>();
+        goToAtkEvent = new UnityEvent<Konpemo>();
         rCapacityEvent = new UnityEvent();
         eCapacityEvent = new UnityEvent<GameObject>();
         zCapacityEvent = new UnityEvent<Vector3>();
@@ -58,7 +58,7 @@ public class EventManager : MonoBehaviour
             ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi)) //un ennemi est touché
             {
-                cibleGameObject = hit.collider.gameObject;
+                cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
                 Debug.Log("J'envois un goToAtkEvent");
                 goToAtkEvent.Invoke(cibleGameObject);
             }

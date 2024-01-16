@@ -45,9 +45,5 @@ public class Evoren : Konpemo
             Debug.Log("Evoren ATK: " + strength.Value);
             Debug.Log("Evoren DEF: " + defense.Value);
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Capacity();
-        }
     }
 }

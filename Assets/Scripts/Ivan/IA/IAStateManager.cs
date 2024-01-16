@@ -24,10 +24,12 @@ public class IAStateManager : MonoBehaviour
     public IAMovingState IAMovingState = new IAMovingState();
 
     private GameObject king;
-    public GameObject cible;
+    public Konpemo cible;
+    public Konpemo konpemo;
 
     void Start()
     {
+        konpemo = GetComponent<Konpemo>();
         currentState = IAIdleState;
         currentState.EnterState(this);  
     }

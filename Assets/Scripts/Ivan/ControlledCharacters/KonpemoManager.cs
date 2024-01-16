@@ -71,14 +71,17 @@ public class KonpemoManager : MonoBehaviour
     public void RCapacityHandler()
     {
         Debug.Log("R CAPACITY TO PUT HERE");
+        konpemo.Capacity();
     }
     public void ECapacityHandler(GameObject cibleToCastOn)
     {
         Debug.Log("E CAPACITY TO PUT HERE");
+        //konpemo.Capacity(cibleToCastOn);
     }
     public void ZCapacityHandler(Vector3 localisationSpell)
     {
         Debug.Log("Z CAPACITY TO PUT HERE");
+        //konpemo.Capacity(localisationSpell);
     }
 
     public void MoveHandler(Vector3 position)
@@ -88,7 +91,7 @@ public class KonpemoManager : MonoBehaviour
         charStateManager.SwitchState(charStateManager.charMovingState);
     }
 
-    public void AtkMoveHandler(GameObject cible)
+    public void AtkMoveHandler(Konpemo cible)
     {
         Debug.Log("J'ai reçu un goToAtkEvent");
         charStateManager.cibleKonpemo = cible;

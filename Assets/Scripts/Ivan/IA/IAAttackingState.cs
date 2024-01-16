@@ -22,6 +22,8 @@ public class IAAttackingState : IABaseState
         }
         else
         {
+            ia.konpemo.SetTarget(ia.cible);
+            ia.konpemo.Attack();
             Debug.Log("Deal Damages");//deal damage
         }
     }

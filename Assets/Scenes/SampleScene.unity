@@ -15656,6 +15656,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 5183728455417669898, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: cam
       value: 
@@ -15672,6 +15673,12 @@ PrefabInstance:
       propertyPath: offset.y
       value: 1
       objectReference: {fileID: 0}
+=======
+    - target: {fileID: 5949388022820397811, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
+      propertyPath: konpemo
+      value: 
+      objectReference: {fileID: 1036518406}
+>>>>>>> Stashed changes
     - target: {fileID: 9171923753784187151, guid: 5c7c86a88ec20a247b8a7e604f2d1203, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.5

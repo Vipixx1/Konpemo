@@ -27,4 +27,8 @@ public class Health : CharacterStat
     {
         this.currentHealth = Math.Min(this.BaseValue, this.currentHealth + healValue);
     }
+    public void GetHealthDebug()
+    {
+        Debug.Log(this.currentHealth);
+    }
 }

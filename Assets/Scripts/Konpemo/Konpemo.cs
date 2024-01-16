@@ -28,7 +28,8 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Attack()
     {
-        this.konpemoEnemy?.TakingDamage(this.strength.Value);
+
+        konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
     public virtual void Capacity() 

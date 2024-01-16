@@ -12,8 +12,8 @@ public class Beatowtron : Konpemo
         speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.2f;
         cooldown.BaseValue = 10f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 8f;
+        rangeView.BaseValue = 15f;
     }
 
     public override void Capacity() // Soin

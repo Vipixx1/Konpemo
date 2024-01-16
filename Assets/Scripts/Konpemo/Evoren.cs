@@ -12,8 +12,8 @@ public class Evoren : Konpemo
         speed.BaseValue = 3f;
         attackSpeed.BaseValue = 1f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 3f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 5f;
+        rangeView.BaseValue = 15f;
     }
 
     public override void Capacity() // Gonflette

@@ -16,8 +16,8 @@ public class Sourimi : Konpemo
         speed.BaseValue = 3f;
         attackSpeed.BaseValue = 0.3f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 10f;
+        rangeView.BaseValue = 15f;
     }
 
     public override void Attack() // Ball'Foudre

@@ -15,8 +15,8 @@ public class Serbiere : Konpemo
         speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.5f;
         cooldown.BaseValue = 30f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 10f;
+        rangeView.BaseValue = 15f;
     }
 
     public override void Attack() // Vortex Feu

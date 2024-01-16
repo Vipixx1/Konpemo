@@ -62,8 +62,9 @@ public class Sourimi : Konpemo
     }
 
     // Pour faire des tests :
-    private void Start()
+    public override void Start()
     {
+        this.SetBaseStats();
         this.SetTarget(target);
     }
     private void Update()

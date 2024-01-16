@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class Health : CharacterStat
 {
-    protected float currentHealth;
+    private float currentHealth;
 
     public void SetCurrentHealth(float currentHealth)
     {
         this.currentHealth = currentHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return this.currentHealth;
     }
 
     public void TakingFlatDamage(float rawDamage, float defense)

@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using UnityEngine;
 using System;
 using System.Linq;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Magitruite : Konpemo
 {
-    private float speedDown = 1f;
+    private float percentSpeedReduction = -0.1f;
 
     public override void SetBaseStats()
     {
@@ -41,12 +41,13 @@ public class Magitruite : Konpemo
                     StartCoroutine(Gouttelette(collider.GetComponent<Konpemo>()));
                 }
             }
+            StartCoroutine(Gouttelette(collider.GetComponent<Konpemo>())); 
         }
     }
 
     public IEnumerator Gouttelette(Konpemo konpemo)
     {
-        konpemo.speed.AddModifier(new StatModifier(-0.1f, StatModType.PercentMult, "Gouttelette"));
+        konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "Gouttelette"));
         yield return new WaitForSeconds(5);
         konpemo.speed.RemoveAllModifiersFromSource("Gouttelette");
 

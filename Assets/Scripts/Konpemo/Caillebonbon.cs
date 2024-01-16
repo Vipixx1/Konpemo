@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Caillebonbon : Konpemo
 {
-    //private float rangeAtk;
-    public Caillebonbon() : base(200f, 200f, 3f, 4f, 40f, 0.75f, 20f, false)
+    public override void SetBaseStats()
     {
-        //this.rangeAtk = 2f;
-        // Caillebonbon other stats ?
+        health.BaseValue = 200f;
+        health.SetCurrentHealth(200f);
+        strength.BaseValue = 40f;
+        defense.BaseValue = 3f;
+        speed.BaseValue = 4f;
+        attackSpeed.BaseValue = 1/0.75f;
+        cooldown.BaseValue = 20f;
+        rangeAttack.BaseValue = 3f;
+        rangeView.BaseValue = 5f;
     }
     public override void Attack() // Coupe Vent
     {

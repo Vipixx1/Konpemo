@@ -1,64 +1,32 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public abstract class Konpemo : MonoBehaviour
 {
-    protected float currentHp;
-    protected float baseHp;
+    public Health health = new();
+    public Strength strength = new();
+    public Defense defense = new();
+    public Speed speed = new();
+    public AttackSpeed attackSpeed = new();
+    public Cooldown cooldown = new();
+    public RangeAttack rangeAttack = new();
+    public RangeView rangeView = new();
+    
+    protected Konpemo konpemoEnemy = null;
 
-    protected float currentDef;
-    //protected float baseDef;
+    public bool isFlying = false;
+    public bool isParalysed = false;
+    public bool isPoisoned = false;
 
-    protected float currentSpeed;
-    //protected float baseSpeed;
-
-    protected float currentDamage;
-    //protected float baseDamage;
-
-    protected float delayAtk;
-    //protected float baseDelayAtk;
-
-    protected float cooldown; //Time ?
-    //protected float baseCooldown;
-
-    protected Konpemo konpemoEnemy;
-
-    public bool isFlying;
-    public bool isSlewDown;
-    public bool isParalysed;
-    public bool isPoisoned;
-
-    public Konpemo(float currentHp, float baseHp, float currentDef, /*float baseDef,*/ float currentSpeed, /*float baseSpeed,*/ float currentDamage, /*float baseDamage, */float delayAtk, float cooldown, bool isFlying)
+    public virtual void Start()
     {
-        this.currentHp = currentHp;
-        this.baseHp = baseHp;
-
-        this.currentDef = currentDef;
-        //this.baseDef = baseDef;
-
-        this.currentSpeed = currentSpeed;
-        //this.baseSpeed = baseSpeed;
-
-        this.currentDamage = currentDamage;
-        //this.baseDamage = baseDamage;
-
-        this.delayAtk = delayAtk;
-        this.cooldown = cooldown;
-        this.isFlying = isFlying;
-
-        konpemoEnemy = null;
-        isSlewDown = false;
-        isParalysed = false;
-        isPoisoned = false;
+        SetBaseStats();
     }
+    public abstract void SetBaseStats();
 
     public virtual void Attack()
     {
-        this.konpemoEnemy?.TakingDamage(this.currentDamage);
+        this.konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
     public virtual void Capacity() 
@@ -75,40 +43,34 @@ public abstract class Konpemo : MonoBehaviour
         Debug.Log("No passive");
     }
 
-    public virtual void SetCooldown(float cooldown) /*Time cooldown ?*/
+    public virtual void TakingDamage(float rawDamage)
     {
-        Debug.Log("Timer started" + cooldown);
+        this.health.TakingFlatDamage(rawDamage, this.defense.Value);
     }
 
-    public virtual void TakingDamage(float damageTaken)
+    public virtual void Healing(float healthHealed)
     {
-        this.currentHp -= Math.Max(1, damageTaken - this.currentDef);
-        if (this.currentHp <= 0) { Death();  }
+        this.health.HealingFlatDamage(healthHealed);
+    }
+    public virtual void SetCooldown(float cooldown)
+    {
+        Debug.Log("Timer started" + cooldown);
     }
     public virtual void SetTarget(Konpemo target)
     {
         this.konpemoEnemy = target;
     }
 
-    public virtual void Healing(float hpHealed)
+    public virtual void Death()
     {
-        this.currentHp = Math.Min(this.baseHp, this.currentHp + hpHealed);
+        this.gameObject.SetActive(false);
     }
-
-
-
 
     // Status of the Konpemo
-    public virtual void SpeedDown(float speedDown)
-    {
-        this.currentSpeed = Math.Max(0.1f, this.currentSpeed - speedDown);
-        this.isSlewDown = true;
-    }
-
-    public virtual void Poisoning()
+    public virtual void Poisoning(float poisonTickDamage, int poisonDuration)
     {
         this.isPoisoned = true;
-        StartCoroutine(Poison());
+        StartCoroutine(Poison(poisonTickDamage, poisonDuration));
     }
 
     public virtual void Paralysing()
@@ -119,22 +81,17 @@ public abstract class Konpemo : MonoBehaviour
         }
     }
 
-    public virtual void Death()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-    public virtual IEnumerator Poison()
+    public virtual IEnumerator Poison(float poisonTickDamage, int poisonDuration)
     {
         int timer = 0;
-        while (timer < 10)
+        while (timer < poisonDuration)
         {
-            this.currentHp -= 10f;
-            if (this.currentHp <= 0) { Death(); }
+            this.health.TakingFlatDamage(poisonTickDamage, 0);
+            /*if (this.currentHealth <= 0) { Death(); }*/
             timer++;
             yield return new WaitForSeconds(1);
         }
-        if (timer >= 10) { isPoisoned = false; }
+        if (timer >= poisonDuration) { isPoisoned = false; }
     }
 
     public virtual IEnumerator Paralyse()

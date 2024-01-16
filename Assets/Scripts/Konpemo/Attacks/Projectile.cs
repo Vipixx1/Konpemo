@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,7 @@ using static Unity.VisualScripting.Member;
 
 public abstract class Projectile : MonoBehaviour
 {
+    protected Vector3 vector;
     protected Vector3 dirProj;
 
     protected float damageProj;
@@ -15,23 +17,37 @@ public abstract class Projectile : MonoBehaviour
     protected int numberMax;
 
     public abstract void Setup(Vector3 dirProj, float damageProj);
-   
+
+    public virtual void OnDisable()
+    {
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.numberEnemyHit = 0;
+    }
+
     private void Update()
     {
-        Vector3 force = speedProj * Time.deltaTime * this.dirProj;
-        this.GetComponent<Rigidbody>().AddForce(force.x, force.y, force.z);
+        Vector3 vector = speedProj * Time.deltaTime * this.dirProj;
+        this.GetComponent<Rigidbody>().AddForce(vector.x, vector.y, vector.z);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Rajouter une condition si c'est un Konpemo ennemi qui est touché. Traverse les alliés, est bloqué par les murs.
         Konpemo konpemo = other.GetComponent<Konpemo>();
-        konpemo.TakingDamage(damageProj);
-        numberEnemyHit++;
-        if (numberEnemyHit >= numberMax) 
+        if (konpemo != null)
         {
-            Destroy(this.gameObject);
+            konpemo.TakingDamage(damageProj);
+            numberEnemyHit++;
+            if (numberEnemyHit >= numberMax)
+            {
+                this.gameObject.SetActive(false);
+            }
+        }
+        else 
+        {
+            this.gameObject.SetActive(false);
         }
         
     }
+
 }

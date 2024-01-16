@@ -9,9 +9,8 @@ public class BallFoudre : Projectile
     {
         this.dirProj = dirProj;
         this.damageProj = damageProj;
-        this.speedProj = 200f;
+        this.speedProj = 100f;
         this.numberEnemyHit = 0;
         this.numberMax = 1;
-        Destroy(this.gameObject, 5f);
     }
 }

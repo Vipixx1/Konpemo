@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Serbiere : Konpemo
 {
-    //private float rangeAtk;
-    public Serbiere() : base(300f, 300f, 0f, 2f, 100f, 2f, 30f, false)
+    //rangeTrap = 3f;
+    //nbTrap = 1
+    //nbTrapMax = 2
+
+    public override void SetBaseStats()
     {
-        //this.rangeAtk = 2f;
-        //this.rangeTrap = 2f;
-        //this.nbTrap = 1
-        //this.npTrapMax = 2
-        //Serbiere other stats ?
+        health.BaseValue = 300f;
+        health.SetCurrentHealth(300f);
+        strength.BaseValue = 100f;
+        defense.BaseValue = 0f;
+        speed.BaseValue = 2f;
+        attackSpeed.BaseValue = 0.5f;
+        cooldown.BaseValue = 30f;
+        rangeAttack.BaseValue = 3f;
+        rangeView.BaseValue = 5f;
     }
 
     public override void Attack() // Vortex Feu
@@ -22,7 +26,7 @@ public class Serbiere : Konpemo
             Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, 5f, 8);
             foreach (Collider collider in hitColliders)
             {
-                collider.GetComponent<Konpemo>().TakingDamage(this.currentDamage);
+                collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
             }
         }
         else if (this.gameObject.layer == 8)
@@ -30,7 +34,7 @@ public class Serbiere : Konpemo
             Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, 5f, 7);
             foreach (Collider collider in hitColliders)
             {
-                collider.GetComponent<Konpemo>().TakingDamage(this.currentDamage);
+                collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
             }
         }
     }

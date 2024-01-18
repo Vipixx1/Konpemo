@@ -7,7 +7,7 @@ public class AllyUnitManager : MonoBehaviour
 {
     public UnityEvent<Konpemo> allyDied;
     public UnityEvent<Konpemo> allySpawn;
-    public List<Konpemo> aliveAllyKonpemos;
+    public   List<Konpemo> aliveAllyKonpemos;
     void Start()
     {
         aliveAllyKonpemos = new List<Konpemo>();

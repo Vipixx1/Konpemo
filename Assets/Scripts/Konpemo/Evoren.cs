@@ -9,11 +9,11 @@ public class Evoren : Konpemo
         health.SetCurrentHealth(500f);
         strength.BaseValue = 40f;
         defense.BaseValue = 5f;
-        speed.BaseValue = 3f;
+        speed.BaseValue = 5f;
         attackSpeed.BaseValue = 1f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 2f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 5f;
+        rangeView.BaseValue = 15f;
     }
 
     public override void Capacity() // Gonflette
@@ -36,8 +36,7 @@ public class Evoren : Konpemo
         defense.RemoveModifier(gonfletteDefense);
 
     }
-    // Faire des tests
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -45,5 +44,5 @@ public class Evoren : Konpemo
             Debug.Log("Evoren ATK: " + strength.Value);
             Debug.Log("Evoren DEF: " + defense.Value);
         }
-    }
+    }*/
 }

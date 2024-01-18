@@ -49,7 +49,7 @@ public class EventManager : MonoBehaviour
             {
                 Physics.Raycast(ray, out hit, Mathf.Infinity, masqueSol); //signifie inverse du masque des unites
                 positionSouris = hit.point;
-                Debug.Log("Envois d'un goToEvent");
+                //Debug.Log("Envois d'un goToEvent");
                 goToEvent.Invoke(positionSouris);  //le false correspnd à ne pas chase
             }
         }
@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi)) //un ennemi est touché
             {
                 cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
-                Debug.Log("J'envois un goToAtkEvent");
+                //Debug.Log("J'envois un goToAtkEvent");
                 goToAtkEvent.Invoke(cibleGameObject);
             }
         }
@@ -84,7 +84,7 @@ public class EventManager : MonoBehaviour
                         StartCoroutine(Capacity3Coroutine(uiManager, selectionManager));
                         break;
                     default:
-                        Debug.Log("Impossible de lancer la capacité");
+                        //Debug.Log("Impossible de lancer la capacité");
                         break;
                 }
             }

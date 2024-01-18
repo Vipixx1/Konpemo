@@ -16,8 +16,8 @@ public class Ninjax : Konpemo
         speed.BaseValue = 5f;
         attackSpeed.BaseValue = 3f;
         cooldown.BaseValue = 25f;
-        rangeAttack.BaseValue = 3f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 10f;
+        rangeView.BaseValue = 15f;
     }
     public override void Attack() // Piqûre
     {
@@ -32,8 +32,9 @@ public class Ninjax : Konpemo
     }
 
     // Pour faire des tests :
-    private void Start()
+    public override void Start()
     {
+        this.SetBaseStats();
         this.SetTarget(target);
     }
     private void Update()

@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 696244832951134985}
   - component: {fileID: 8738241626979022027}
   - component: {fileID: 3208262136283342672}
-  - component: {fileID: 7592064700714824850}
+  - component: {fileID: 8516675008039013254}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 8738241626979022027}
---- !u!114 &7592064700714824850
+--- !u!114 &8516675008039013254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,9 +336,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4445292318933544547}
   - {fileID: 1885469718964853162}
   - {fileID: 9212905757589072486}
-  - {fileID: 4445292318933544547}
   - {fileID: 2069034154882726573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -369,8 +369,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.0053902, z: 1}
-  m_Center: {x: 0, y: -0.002693683, z: 0}
+  m_Size: {x: 0.62098473, y: 0.7479996, z: 1.3964237}
+  m_Center: {x: -0.18950763, y: 0.09171161, z: 0.0926159}
 --- !u!195 &5830403371991844343
 NavMeshAgent:
   m_ObjectHideFlags: 0

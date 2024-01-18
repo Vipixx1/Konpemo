@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0d7a8d6edab82b74f9c640aef38963a8, type: 2}
     - target: {fileID: 8353117356273093927, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.733566
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8353117356273093927, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2207955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8353117356273093927, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.4286137
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8353117356273093927, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -98,4 +98,6 @@ MonoBehaviour:
   isPoisoned: 0
   capacityType: 0
   allyUnitManager: {fileID: 0}
+  enemyUnitManager: {fileID: 0}
   allyUnitMaskName: Blue
+  enemyUnitMaskName: Red

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Konpemo : MonoBehaviour
@@ -20,9 +21,33 @@ public abstract class Konpemo : MonoBehaviour
 
     [SerializeField]
     public int capacityType;
+    [SerializeField]
+    public AllyUnitManager allyUnitManager;
+    [SerializeField]
+    private string allyUnitMaskName = "Blue";
     public virtual void Start()
     {
+        allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
         SetBaseStats();
+        if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
+        {
+            allyUnitManager.allySpawn.Invoke(this);
+            StartCoroutine(IsAliveCoroutine());
+        }
+    }
+    public virtual IEnumerator IsAliveCoroutine()
+    {
+        while(true)
+        {
+            if (health.GetCurrentHealth() < 1)
+            {
+                Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                allyUnitManager.allyDied.Invoke(this);
+                this.Death();
+                break;
+            }
+            yield return null;
+        }
     }
     public abstract void SetBaseStats();
 

@@ -7,6 +7,7 @@ public class CharStateManager : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Konpemo konpemo;
+    public KingManager kingManager;
 
     CharBaseState currentState;
     public CharIdleState charIdleState = new CharIdleState();
@@ -20,8 +21,9 @@ public class CharStateManager : MonoBehaviour
 
     void Start()
     {
-        konpemo = agent.GetComponent<Konpemo>();
         agent = GetComponent<NavMeshAgent>();
+        konpemo = agent.GetComponent<Konpemo>();
+        kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
 
         agent.speed = konpemo.speed.Value;
 

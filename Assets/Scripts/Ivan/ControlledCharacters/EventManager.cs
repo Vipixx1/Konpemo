@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour
             bool unitHit = Physics.Raycast(ray, Mathf.Infinity, masqueUnite);
             if (!unitHit) //move if not a unite hit
             {
-                Physics.Raycast(ray, out hit, Mathf.Infinity, ~masqueUnite); //signifie inverse du masque des unites
+                Physics.Raycast(ray, out hit, Mathf.Infinity, masqueSol); //signifie inverse du masque des unites
                 positionSouris = hit.point;
                 Debug.Log("Envois d'un goToEvent");
                 goToEvent.Invoke(positionSouris);  //le false correspnd à ne pas chase

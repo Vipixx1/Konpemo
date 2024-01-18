@@ -22,12 +22,10 @@ public class IAStateManager : MonoBehaviour
 
     void Start()
     {   // à MODIFIER si sur un gameObject différent
-        konpemo = agent.GetComponent<Konpemo>();
+        konpemo = GetComponent<Konpemo>();
         masqueEnnemi = LayerMask.GetMask("Blue");
         kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
         agent = GetComponent<NavMeshAgent>();
-
-        agent.speed = konpemo.speed.Value;
 
         currentState = IAIdleState;
         currentState.EnterState(this);
@@ -35,6 +33,7 @@ public class IAStateManager : MonoBehaviour
 
     void Update()
     {
+        agent.speed = konpemo.speed.Value;
         currentState.UpdateState(this);
     }
 

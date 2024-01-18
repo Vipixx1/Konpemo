@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class AllyUnitManager : MonoBehaviour
 {
     public UnityEvent<Konpemo> allyDied;
     public UnityEvent<Konpemo> allySpawn;
-    public   List<Konpemo> aliveAllyKonpemos;
+    public List<Konpemo> aliveAllyKonpemos;
+
+    [SerializeField]
+    private UIManager uiManager;
     void Start()
     {
         aliveAllyKonpemos = new List<Konpemo>();
@@ -17,6 +21,10 @@ public class AllyUnitManager : MonoBehaviour
         allySpawn.AddListener(AllySpawnHandler);
         
     }
+    private void Update()
+    {
+        CheckAllAllyDied();
+    }
     public void AllyDiedHandler(Konpemo konpemo)
     {
         aliveAllyKonpemos.Remove(konpemo);
@@ -24,5 +32,12 @@ public class AllyUnitManager : MonoBehaviour
     public void AllySpawnHandler(Konpemo konpemo)
     {
         aliveAllyKonpemos.Add(konpemo);
+    }
+    private void CheckAllAllyDied()
+    {
+        if (aliveAllyKonpemos.Count < 1)
+        {
+            uiManager.DisplayLoseScreen();
+        }
     }
 }

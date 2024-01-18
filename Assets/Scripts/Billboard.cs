@@ -9,6 +9,10 @@ public class Billboard : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Vector3 offset;
 
+    public void Start()
+    {
+        cam = Camera.main;    
+    }
     void LateUpdate()
     {
         transform.rotation = cam.transform.rotation;

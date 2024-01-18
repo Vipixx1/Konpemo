@@ -6,22 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class KingManager : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject gameOverScreen;
-    [SerializeField]
-    private TMP_Text timeStamp;
-    [SerializeField]
-    private TMP_Text unitLostCounter;
-    [SerializeField]
-    private TimeManager timeManager;
     [SerializeField]
     private Konpemo theKing;
-    private int mUnitLostCounter;
-    private string endTime;
+    [SerializeField]
+    private UIManager uiManager;
 
     private void Start()
     {
-        gameOverScreen.SetActive(false);
+
     }
     public void setKing(Konpemo gameObjectKing)
     {
@@ -43,10 +35,7 @@ public class KingManager : MonoBehaviour
         {
             if (theKing.health.GetCurrentHealth() < 1)
             {
-                endTime = timeManager.GetTime();
-                gameOverScreen.SetActive(true);
-                timeStamp.text = "Time: "+endTime;
-                unitLostCounter.text = "10 (units lost)";
+                uiManager.DisplayLoseScreen();
                 break;
             }
             yield return null;
@@ -54,8 +43,4 @@ public class KingManager : MonoBehaviour
         yield return null;
     }
     //besoin de mettre un trigger pour la condition de victoire
-    public void UnitDied()
-    {
-        mUnitLostCounter += 1;
-    }
 }

@@ -19,6 +19,7 @@ public class IAStateManager : MonoBehaviour
     public IAIdleState IAIdleState = new();
     public IAAttackingState IAAttackingState = new();
     public IAMovingState IAMovingState = new();
+    public IAPatrollingState IAAPatrollingState = new();
 
     void Start()
     {   // à MODIFIER si sur un gameObject différent

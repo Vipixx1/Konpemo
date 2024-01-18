@@ -6,5 +6,4 @@ public abstract class CharBaseState
 {
     public abstract void EnterState(CharStateManager ia);
     public abstract void UpdateState(CharStateManager ia);
-    public abstract void OnCollisionEnter(CharStateManager ia);
 }

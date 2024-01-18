@@ -17,12 +17,14 @@ public class EventManager : MonoBehaviour
 
     public UnityEvent<Vector3> goToEvent;
     public UnityEvent<Konpemo> goToAtkEvent;
+    public UnityEvent<Konpemo> goToFlwAllyEvent;
     public UnityEvent rCapacityEvent;
     public UnityEvent<GameObject> eCapacityEvent;
     public UnityEvent<Vector3> zCapacityEvent;
 
     [SerializeField] private LayerMask masqueUnite;
     [SerializeField] private LayerMask masqueUniteEnnemi;
+    [SerializeField] private LayerMask masqueUniteAllie;
     [SerializeField] private LayerMask masqueSol;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private SelectionManager selectionManager;
@@ -32,6 +34,7 @@ public class EventManager : MonoBehaviour
     {
         goToEvent = new UnityEvent<Vector3>();
         goToAtkEvent = new UnityEvent<Konpemo>();
+        goToFlwAllyEvent = new UnityEvent<Konpemo>();
         rCapacityEvent = new UnityEvent();
         eCapacityEvent = new UnityEvent<GameObject>();
         zCapacityEvent = new UnityEvent<Vector3>();
@@ -48,17 +51,20 @@ public class EventManager : MonoBehaviour
             if (!unitHit && Physics.Raycast(ray, out hit, Mathf.Infinity, masqueSol)) //move if not a unite hit
             {
                 positionSouris = hit.point;
-                goToEvent.Invoke(positionSouris);  //le false correspnd à ne pas chase
+                goToEvent.Invoke(positionSouris);
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi)) //un ennemi est touché
             {
                 cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
                 //Debug.Log("J'envois un goToAtkEvent");
                 goToAtkEvent.Invoke(cibleGameObject);
+            }
+            //Debug.Log("J'envois pas un goToFollowEvent");
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie)) //un allié est touché
+            {
+                cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
+                Debug.Log("J'envois un goToFollowEvent");
+                goToFlwAllyEvent.Invoke(cibleGameObject);
             }
         }
         if(Input.GetKeyDown (KeyCode.E)) //capacite cible perso
@@ -139,6 +145,7 @@ public class EventManager : MonoBehaviour
     {
         konpemoManager.AddMoveListener(this);
         konpemoManager.AddAtkMoveListener(this);
+        konpemoManager.AddFlwAllyListener(this);
         konpemoManager.AddCapacityListener(this);
     }
 
@@ -146,6 +153,7 @@ public class EventManager : MonoBehaviour
     {
         konpemoManager.RemoveMoveListener(this);
         konpemoManager.RemoveAtkMoveListener(this);
+        konpemoManager.RemoveFlwAllyListener(this);
         konpemoManager.RemoveCapacityListener(this);
     }
 }

@@ -10,6 +10,8 @@ public class KingManager : MonoBehaviour
     private Konpemo theKing;
     [SerializeField]
     private UIManager uiManager;
+    [SerializeField]
+    private AllyUnitManager allyUnitManager;
 
     private void Start()
     {
@@ -35,7 +37,7 @@ public class KingManager : MonoBehaviour
         {
             if (theKing.health.GetCurrentHealth() < 1)
             {
-                uiManager.DisplayLoseScreen();
+                uiManager.DisplayLoseScreen(allyUnitManager.GetTotalAllyUnitDied());
                 break;
             }
             yield return null;

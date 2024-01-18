@@ -8,12 +8,14 @@ public class CharStateManager : MonoBehaviour
     public NavMeshAgent agent;
     public Konpemo konpemo;
     public KingManager kingManager;
+    public LayerMask allyUnitMask;
 
     CharBaseState currentState;
     public CharIdleState charIdleState = new CharIdleState();
     public CharAtkState charAtkState = new CharAtkState();
     public CharMovingState charMovingState = new CharMovingState();
     public CharAtkMovState charAtkMovState = new CharAtkMovState();
+    public CharFlwAllyState charFlwAllyState = new CharFlwAllyState();
 
     public Vector3 destination;
     public Konpemo cibleKonpemo;
@@ -24,6 +26,7 @@ public class CharStateManager : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         konpemo = agent.GetComponent<Konpemo>();
         kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
+        allyUnitMask = LayerMask.GetMask("Blue");
 
         agent.speed = konpemo.speed.Value;
 

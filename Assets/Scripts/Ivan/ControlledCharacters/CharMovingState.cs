@@ -18,8 +18,4 @@ public class CharMovingState : CharBaseState
             csm.SwitchState(csm.charIdleState);
         }
     }
-    public override void OnCollisionEnter(CharStateManager csm)
-    {
-
-    }
 }

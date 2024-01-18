@@ -43,12 +43,12 @@ public class UIManager : MonoBehaviour
     {
         blueCursor.enabled = false;
     }
-    public void DisplayLoseScreen()
+    public void DisplayLoseScreen(int unitsLost)
     {
         endTime = timeManager.GetTime();
         gameOverScreen.SetActive(true);
         timeStampLose.text = "Time: " + endTime;
-        unitLostCounter.text = "10 (units lost)";
+        unitLostCounter.text = unitsLost + " (units lost)";
     }
 
 }

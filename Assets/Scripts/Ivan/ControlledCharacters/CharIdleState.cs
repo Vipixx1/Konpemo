@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class CharIdleState : CharBaseState
 {
-    public override void EnterState(CharStateManager ia)
+    public override void EnterState(CharStateManager csm)
     {
 
     }
-    public override void UpdateState(CharStateManager ia)
-    {
-
-    }
-    public override void OnCollisionEnter(CharStateManager ia)
+    public override void UpdateState(CharStateManager csm)
     {
 
     }

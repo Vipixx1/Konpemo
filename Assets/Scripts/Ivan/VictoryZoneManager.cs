@@ -20,7 +20,7 @@ public class VictoryZoneManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ICI");
+        //Debug.Log("ICI");
         if(kingManager.getKing() != null)
         {
             if (kingManager.getKing().gameObject.name == other.gameObject.name)

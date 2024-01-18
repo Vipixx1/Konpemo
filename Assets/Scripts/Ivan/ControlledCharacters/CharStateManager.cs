@@ -7,6 +7,7 @@ public class CharStateManager : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Konpemo konpemo;
+    public KingManager kingManager;
 
     CharBaseState currentState;
     public CharIdleState charIdleState = new CharIdleState();
@@ -22,6 +23,7 @@ public class CharStateManager : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         konpemo = agent.GetComponent<Konpemo>();
+        kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
 
         agent.speed = konpemo.speed.Value;
 
@@ -39,5 +41,13 @@ public class CharStateManager : MonoBehaviour
     {
         currentState = state;
         state.EnterState(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(agent != null)
+        {
+            Gizmos.DrawWireSphere(agent.destination, 1);
+        }
     }
 }

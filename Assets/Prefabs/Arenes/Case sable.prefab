@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3712507129306731236}
   - component: {fileID: 5843391346738379540}
   - component: {fileID: 7660589980775257866}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Case sable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

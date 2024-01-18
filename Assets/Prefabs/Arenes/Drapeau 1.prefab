@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9066103306739602158}
   - component: {fileID: 6223752895871855278}
   - component: {fileID: 102563410409673614}
-  - component: {fileID: -1559520942015175274}
+  - component: {fileID: 7438606101243474521}
   m_Layer: 0
-  m_Name: Drapeau
+  m_Name: Drapeau 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 5, z: 1}
+  m_Size: {x: 10, y: 5, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &102563410409673614
 Rigidbody:
@@ -84,7 +84,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1559520942015175274
+--- !u!114 &7438606101243474521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,13 +93,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1584252020978613675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f86e4e3f3c7564897b5104ce038390, type: 3}
+  m_Script: {fileID: 11500000, guid: fa72577d42bb6a845b783e6045b1837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kingManager: {fileID: 0}
-  masqueUniteAllie:
-    serializedVersion: 2
-    m_Bits: 128
+  timeManager: {fileID: 0}
+  victoryScreen: {fileID: 0}
+  timeStamp: {fileID: 0}
 --- !u!1 &3780557732191993514
 GameObject:
   m_ObjectHideFlags: 0

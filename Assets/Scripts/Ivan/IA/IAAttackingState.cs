@@ -19,11 +19,18 @@ public class IAAttackingState : IABaseState
         }
         else if (canAttack)
         {
-            timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
-            ia.konpemo.SetTarget(ia.cible);
-            ia.konpemo.Attack();
-            ia.StartCoroutine(AttackCooldown(timeBetweenAttack));
-            //Debug.Log("Deal Damages")
+            if (ia.cible.isActiveAndEnabled)
+            {
+                timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
+                ia.konpemo.SetTarget(ia.cible);
+                ia.konpemo.Attack();
+                ia.StartCoroutine(AttackCooldown(timeBetweenAttack));
+                //Debug.Log("Deal Damages");
+            }
+            else
+            {
+                ia.SwitchState(ia.IAIdleState);
+            }
         }
         else
         {

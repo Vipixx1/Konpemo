@@ -67,7 +67,7 @@ public class KonpemoManager : MonoBehaviour
                 eventManager.zCapacityEvent.RemoveListener(ZCapacityHandler);
                 break;
             default:
-                Debug.Log("Impossible d'attacher la capacité");
+                Debug.Log("Impossible d'enlever la capacité");
                 break;
         }
     }

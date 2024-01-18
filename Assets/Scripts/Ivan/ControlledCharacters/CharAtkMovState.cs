@@ -15,21 +15,17 @@ public class CharAtkMovState : CharBaseState
         distanceToCible = (csm.cibleKonpemo.transform.position - csm.transform.position).magnitude;
         if (distanceToCible <= csm.konpemo.rangeAttack.Value) //cible a portee d'atk
         {
+            csm.agent.SetDestination(csm.transform.position);
             csm.SwitchState(csm.charAtkState);
         }
-        else if (distanceToCible >= csm.konpemo.rangeView.Value)
+        else if (distanceToCible >= csm.konpemo.rangeView.Value) //cible hors de portee d'atk
         {
-            //pas de stop de l'agent, ça fait plus réaliste
             csm.SwitchState(csm.charIdleState);
         }
-        else  //pour l'instant les ia poursuivent jusqu'à la mort
+        else  //cible dans la portee de vision
         {
             csm.agent.SetDestination(csm.cibleKonpemo.transform.position);
         }
-    }
-    public override void OnCollisionEnter(CharStateManager csm)
-    {
-
     }
 }
 

@@ -10,6 +10,7 @@ public class CharAtkState : CharBaseState
     public override void EnterState(CharStateManager csm)
     {
         canAttack = true;
+        //csm.agent.SetDestination(csm.transform.position);
     }
     public override void UpdateState(CharStateManager csm)
     {
@@ -25,7 +26,7 @@ public class CharAtkState : CharBaseState
                 csm.konpemo.SetTarget(csm.cibleKonpemo);
                 csm.konpemo.Attack();
                 csm.StartCoroutine(AttackCooldown(timeBetweenAttack));
-                Debug.Log("ATK");
+                //Debug.Log("ATK");
             }
         }
         else
@@ -38,9 +39,5 @@ public class CharAtkState : CharBaseState
         canAttack = false;
         yield return new WaitForSeconds(timeToWait);
         canAttack = true;
-    }
-    public override void OnCollisionEnter(CharStateManager csm)
-    {
-
     }
 }

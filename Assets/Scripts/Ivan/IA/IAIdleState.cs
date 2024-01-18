@@ -21,6 +21,12 @@ public class IAIdleState : IABaseState
         {
             ia.SwitchState(ia.IAMovingState);
         }
+        /*else if(Input.GetKeyDown(KeyCode.P))
+        {
+            ia.IAAPatrollingState.patrolBalises.Add(new Vector3(10, ia.transform.position.y,0));
+            ia.IAAPatrollingState.patrolBalises.Add(new Vector3(20, ia.transform.position.y, 0));
+            ia.SwitchState(ia.IAAPatrollingState);
+        }*/
     }
     public override void OnCollisionEnter(IAStateManager ia)
     {

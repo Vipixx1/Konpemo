@@ -37,6 +37,16 @@ public class KonpemoManager : MonoBehaviour
     {
         eventManager.goToAtkEvent.RemoveListener(AtkMoveHandler);
     }
+    public void AddFlwAllyListener(EventManager eventManager)
+    {
+        eventManager.goToFlwAllyEvent.AddListener(FlwAllyHandler);
+    }
+
+    public void RemoveFlwAllyListener(EventManager eventManager)
+    {
+        eventManager.goToFlwAllyEvent.RemoveListener(FlwAllyHandler);
+    }
+
     public void AddCapacityListener(EventManager eventManager)
     {
         switch (konpemo.capacityType)
@@ -114,6 +124,12 @@ public class KonpemoManager : MonoBehaviour
         //Debug.Log("J'ai reçu un goToAtkEvent");
         charStateManager.cibleKonpemo = cible;
         charStateManager.SwitchState(charStateManager.charAtkMovState);
+    }
+
+    public void FlwAllyHandler(Konpemo allyToFollow)
+    {
+        charStateManager.cibleKonpemo = allyToFollow;
+        charStateManager.SwitchState(charStateManager.charFlwAllyState);
     }
 
     private IEnumerator CapacityCooldown(float timeToWait)

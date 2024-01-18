@@ -21,15 +21,14 @@ public class IAMovingState : IABaseState
         }
         if (distanceToCible <= ia.konpemo.rangeAttack.Value) //cible a portee d'atk
         {
-            //Debug.Log((ia.cible.transform.position - ia.transform.position).magnitude);
+            ia.agent.SetDestination(ia.transform.position);
             ia.SwitchState(ia.IAAttackingState);
         }
-        else if (distanceToCible >= ia.konpemo.rangeView.Value)
+        else if (distanceToCible >= ia.konpemo.rangeView.Value)  // cible hors de portee de vision
         {
-            //pas de stop de l'agent, ça fait plus réaliste
             ia.SwitchState(ia.IAIdleState);
         }
-        else  //pour l'instant les ia poursuivent jusqu'à la mort
+        else  //cible a portee de vision
         {
             ia.agent.SetDestination(ia.cible.transform.position);
         }

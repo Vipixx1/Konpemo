@@ -22,27 +22,52 @@ public abstract class Konpemo : MonoBehaviour
     [SerializeField]
     public int capacityType;
     [SerializeField]
-    public AllyUnitManager allyUnitManager;
+    private AllyUnitManager allyUnitManager;
+    [SerializeField]
+    private EnemyUnitManager enemyUnitManager;
     [SerializeField]
     private string allyUnitMaskName = "Blue";
+    [SerializeField]
+    private string enemyUnitMaskName = "Red";
+
     public virtual void Start()
     {
         allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
         SetBaseStats();
         if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
         {
             allyUnitManager.allySpawn.Invoke(this);
-            StartCoroutine(IsAliveCoroutine());
+            StartCoroutine(IsAllyAliveCoroutine());
+        }
+        if (this.gameObject.layer == LayerMask.NameToLayer(enemyUnitMaskName))
+        {
+            enemyUnitManager.enemySpawn.Invoke(this);
+            StartCoroutine(IsEnemyAliveCoroutine());
         }
     }
-    public virtual IEnumerator IsAliveCoroutine()
+    public virtual IEnumerator IsAllyAliveCoroutine()
     {
         while(true)
         {
             if (health.GetCurrentHealth() < 1)
             {
-                Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
                 allyUnitManager.allyDied.Invoke(this);
+                this.Death();
+                break;
+            }
+            yield return null;
+        }
+    }
+    public virtual IEnumerator IsEnemyAliveCoroutine()
+    {
+        while (true)
+        {
+            if (health.GetCurrentHealth() < 1)
+            {
+                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                enemyUnitManager.enemyDied.Invoke(this);
                 this.Death();
                 break;
             }

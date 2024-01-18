@@ -23,7 +23,10 @@ public class CharStateManager : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         konpemo = agent.GetComponent<Konpemo>();
+<<<<<<< HEAD
         kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
+=======
+>>>>>>> 58c4bff5c061ac324d8762d9f785764131d9a82e
 
         agent.speed = konpemo.speed.Value;
 

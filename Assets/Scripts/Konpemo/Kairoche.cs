@@ -12,8 +12,8 @@ public class Kairoche : Konpemo
         speed.BaseValue = 1f;
         attackSpeed.BaseValue = 1f;
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 1f;
-        rangeView.BaseValue = 5f;
+        rangeAttack.BaseValue = 5f;
+        rangeView.BaseValue = 15f;
     }
     
     public override void Capacity() // Taunt

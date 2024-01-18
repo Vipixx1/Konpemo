@@ -43,8 +43,9 @@ public class SelectionManager : MonoBehaviour
                     //Debug.Log("unité touché, tentative d'ajout listeners");
                     SelectKonpemo(konpemoManagerHit);
                     //Debug.Log(selectedKonpemos.Count);
+                    
                 }
-                else//Konpemo already selected
+                else //Konpemo already selected
                 {
                     Debug.Log("remove des listeners");
                     unSelectKonpemo(konpemoManagerHit);
@@ -88,17 +89,20 @@ public class SelectionManager : MonoBehaviour
     {
         eventManager.AddListener(konpemoManager);
         selectedKonpemos.Add(konpemoManager);
+        konpemoManager.selectionEffect.gameObject.SetActive(true);
     }
     private void unSelectKonpemo(KonpemoManager konpemoManager)
     {
         eventManager.RemoveListener(konpemoManager);
         selectedKonpemos.Remove(konpemoManager);
+        konpemoManager.selectionEffect.gameObject.SetActive(false);
     }
     private void UnSelectKonpemos()
     {
         foreach (KonpemoManager mKonpemoManager in selectedKonpemos)
         {
             eventManager.RemoveListener(mKonpemoManager);
+            mKonpemoManager.selectionEffect.gameObject.SetActive(false);
         }
         selectedKonpemos.Clear();
     }

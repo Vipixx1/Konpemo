@@ -5,16 +5,18 @@ using UnityEngine;
 public class KonpemoManager : MonoBehaviour
 {
     private CharStateManager charStateManager;
-    public Konpemo konpemo;
+    private Konpemo konpemo; //public ???
+    [SerializeField] public GameObject selectionEffect;
 
     private bool cdCapacityUp;
     private void Start()
     {
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
         konpemo = this.gameObject.GetComponent<Konpemo>();
-
+        
         cdCapacityUp = true;
     }
+
     public void AddMoveListener(EventManager eventManager)
     {
         eventManager.goToEvent.AddListener(MoveHandler);

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CaseSand : MonoBehaviour
 {
-    private float percentSpeedReduction = -0.1f;
-    private void OnTriggerEnter(Collider other)
+    private float percentSpeedReduction = -0.5f;
+
+    public void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent<Konpemo>(out var konpemo))
         {
@@ -20,21 +21,21 @@ public class CaseSand : MonoBehaviour
 
                 if (! isOnSand)
                 {
-                    konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "CaseSand"));
+                    konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentMult, "CaseSand"));
                     //Debug.Log("b : " + konpemo.speed.Value);
                 }
 
             }
             else
             {
-                konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "CaseSand"));
+                konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentMult, "CaseSand"));
                 //Debug.Log("c : " + konpemo.speed.Value);
             }
             
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         Konpemo konpemo = other.GetComponent<Konpemo>();
         if (konpemo != null)

@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     //Load the level you want : Level1, Level2, Level3, Level4 or Level5 
     public void LoadLevel()
     {
-        if (counter.konpemoCount == 5) SceneManager.LoadScene("Level1"); // A remplacer par levelToLoad
+        if (KonpemoCounting.konpemoCount == 5) SceneManager.LoadScene("Level1"); // A remplacer par levelToLoad
     }
 
     //Set the name of level you want to load, if no name has been set, make levelToLoad null

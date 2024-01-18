@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8896593126704209949, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e20464728c95584799eb7abfdc67b7c, type: 2}
     - target: {fileID: 9070751188618058732, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -100,6 +104,8 @@ MonoBehaviour:
   isParalysed: 0
   isPoisoned: 0
   capacityType: 0
+  allyUnitManager: {fileID: 0}
+  allyUnitMaskName: Blue
   pointDeTir: {fileID: 7178672191951217767}
   target: {fileID: 0}
 --- !u!114 &3684668096050203537
@@ -115,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 0}
-  amountToPool: 1
 --- !u!4 &7178672191951217767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9212905757589072486, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}

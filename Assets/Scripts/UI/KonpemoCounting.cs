@@ -6,35 +6,35 @@ using UnityEngine;
 public class KonpemoCounting : MonoBehaviour
 {
     [SerializeField] private TMP_Text nbKonpemoText;
-    public int konpemoCount = 0;
-    public int nbKonpemoMax = 5;
+    public static int konpemoCount = 0;
+    public static int nbKonpemoMax = 5;
 
     [SerializeField] private TMP_Text nbEvorenText;
-    public int evorenCount = 0;
+    public static int evorenCount = 0;
 
     [SerializeField] private TMP_Text nbSourimiText;
-    public int sourimiCount = 0;
+    public static int sourimiCount = 0;
 
     [SerializeField] private TMP_Text nbKairocheText;
-    public int kairocheCount = 0;
+    public static int kairocheCount = 0;
 
     [SerializeField] private TMP_Text nbSerbiereText;
-    public int serbiereCount = 0;
+    public static int serbiereCount = 0;
 
     [SerializeField] private TMP_Text nbNinjaxText;
-    public int ninjaxCount = 0;
+    public static int ninjaxCount = 0;
 
     [SerializeField] private TMP_Text nbCaspowText;
-    public int caspowCount = 0;
+    public static int caspowCount = 0;
 
     [SerializeField] private TMP_Text nbBeatowtronText;
-    public int beatowtronCount = 0;
+    public static int beatowtronCount = 0;
 
     [SerializeField] private TMP_Text nbCaillebonbonText;
-    public int caillebonbonCount = 0;
+    public static int caillebonbonCount = 0;
 
     [SerializeField] private TMP_Text nbMagitruiteText;
-    public int magitruiteCount = 0;
+    public static int magitruiteCount = 0;
 
     public void Update()
     {

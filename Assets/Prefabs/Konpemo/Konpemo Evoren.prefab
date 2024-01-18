@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5020924374195174826, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Name
-      value: Evoren Variant
+      value: Konpemo Evoren
       objectReference: {fileID: 0}
     - target: {fileID: 7208771728519523810, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8896593126704209949, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d7a8d6edab82b74f9c640aef38963a8, type: 2}
     - target: {fileID: 9070751188618058732, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -93,3 +97,5 @@ MonoBehaviour:
   isParalysed: 0
   isPoisoned: 0
   capacityType: 0
+  allyUnitManager: {fileID: 0}
+  allyUnitMaskName: Blue

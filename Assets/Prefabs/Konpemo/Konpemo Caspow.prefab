@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isParalysed: 0
   isPoisoned: 0
+  canAttack: 1
   capacityType: 0
   allyUnitManager: {fileID: 0}
   enemyUnitManager: {fileID: 0}
@@ -564,7 +565,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2182258124633143539}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0624219907ef2fa4f82d52e1d7fecb61, type: 2}
   m_CullingMode: 0

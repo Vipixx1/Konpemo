@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: faeeef4492be5d840aa773398cd5d462, type: 2}
+    - target: {fileID: 8999962910918017696, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9070751188618058732, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -568,6 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isParalysed: 0
   isPoisoned: 0
+  canAttack: 1
   capacityType: 0
   allyUnitManager: {fileID: 0}
   enemyUnitManager: {fileID: 0}
@@ -580,7 +585,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730661099126391854}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dad6ced43d663a247855f5d1f1d28547, type: 2}
   m_CullingMode: 0

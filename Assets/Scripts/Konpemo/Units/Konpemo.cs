@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Konpemo : MonoBehaviour
 {
@@ -26,17 +27,18 @@ public abstract class Konpemo : MonoBehaviour
 
 
 	protected NavMeshAgent agent;
+
     public Animator animator;
 
     public virtual void Start()
     {
-		agent = this.gameObject.GetComponent<NavMeshAgent>();
+		agent = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
         SetBaseStats();
 		ChangeCapacityType();
         canAttack = true;
 		
-        allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
-        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
+        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();*/
 
         /*if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
         {
@@ -52,7 +54,7 @@ public abstract class Konpemo : MonoBehaviour
 	
     public virtual void ChangeCapacityType()
     {
-        capacityType = 0; //valeur par défaut (ne fait rien quand on lance une capacité)
+        capacityType = 0; //valeur par dï¿½faut (ne fait rien quand on lance une capacitï¿½)
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -94,7 +96,7 @@ public abstract class Konpemo : MonoBehaviour
     {
         Debug.Log("No capacity");
 
-        //Pour les capacités qui ciblent une position ou un allié précis, rajouter :
+        //Pour les capacitï¿½s qui ciblent une position ou un alliï¿½ prï¿½cis, rajouter :
         //Si appuie sur clique gauche { Action; SetCooldown(cdCapacity) }
         //Si appuie sur Echap ou clique droit { Annule;  pas de CD }
     }

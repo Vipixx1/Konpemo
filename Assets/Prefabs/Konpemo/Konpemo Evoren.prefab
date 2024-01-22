@@ -331,6 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isParalysed: 0
   isPoisoned: 0
+  canAttack: 1
   capacityType: 0
   allyUnitManager: {fileID: 0}
   enemyUnitManager: {fileID: 0}

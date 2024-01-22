@@ -45,7 +45,6 @@ public class Sourimi : Konpemo
 
     public override void Capacity(Vector3? localisation = null) // Dash quantique
     {
-		NavMeshAgent agent =
         if (localisation.HasValue)
         {
             localisationDash = localisation.Value;

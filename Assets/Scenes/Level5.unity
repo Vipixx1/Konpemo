@@ -4318,7 +4318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &276610087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9324,10 +9324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd7035c8316194ea3344febc40205d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redCursor: {fileID: 1027769287}
-  blueCursor: {fileID: 1210751856}
+  redCursor: {fileID: 0}
+  blueCursor: {fileID: 0}
   gameOverScreen: {fileID: 276610086}
+  defeatTimer: {fileID: 0}
   victoryScreen: {fileID: 299904219}
+  victoryTimer: {fileID: 0}
   timer: {fileID: 1256470182}
   konpemoLostCounter: {fileID: 0}
 --- !u!1001 &561167726

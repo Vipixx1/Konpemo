@@ -71,7 +71,7 @@ public class EventManager : MonoBehaviour
             konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
             if(konpemoManagerSelected != null)
             {
-                konpemoSelected = konpemoManagerSelected.GetComponent<Konpemo>();
+                konpemoSelected = konpemoManagerSelected.GetComponentInParent<Konpemo>();
                 //Debug.Log(konpemoSelected.ToString());
                 switch (konpemoSelected.capacityType)
                 {

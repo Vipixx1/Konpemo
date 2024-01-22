@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 4109871400279041381}
   - component: {fileID: 8152444010683568046}
   - component: {fileID: 5830403371991844343}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Konpemo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

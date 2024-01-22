@@ -25,7 +25,7 @@ public class KonpemoManager : MonoBehaviour
     {
         //health = this.GetComponent<Konpemo>().health.Value.ToString();
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
-        konpemo = this.gameObject.GetComponent<Konpemo>();
+        konpemo = this.gameObject.GetComponentInParent<Konpemo>();
 
         cdCapacityUp = true;
         /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();

@@ -19,6 +19,7 @@ public class Ninjax : Konpemo
 
     public override void Attack() // Piqûre
     {
+        animator.SetTrigger("Attack");
         Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);
         if (needle != null)
         {

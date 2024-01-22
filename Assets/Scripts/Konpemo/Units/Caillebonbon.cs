@@ -19,6 +19,7 @@ public class Caillebonbon : Konpemo
 
     public override void Attack() // Coupe Vent
     {
+        animator.SetTrigger("Attack");
         Projectile windBlade = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.CoupeVent);
         if (windBlade != null)
         {

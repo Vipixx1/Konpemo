@@ -33,6 +33,7 @@ public class Sourimi : Konpemo
 
     public override void Attack() // Ball'Foudre
     {
+        animator.SetTrigger("Attack");
         Projectile thunderBall = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.BallFoudre);
         if (thunderBall != null)
         {

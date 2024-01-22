@@ -24,6 +24,7 @@ public class Magitruite : Konpemo
 
     public override void Attack() // Gouttelette
     {
+        animator.SetTrigger("Attack");
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 4f, 6);
 
         foreach (Collider collider in hitColliders.Where(collider => collider.gameObject.layer != this.gameObject.layer))

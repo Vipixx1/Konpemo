@@ -16,6 +16,7 @@ public class Caspow : Konpemo
 
     public override void Attack() // Paralysie 1 chance sur 3
     {
+        animator.SetTrigger("Attack");
         this.konpemoEnemy.TakingDamage(this.strength.Value);
         System.Random rand = new System.Random();
         int nbParalysed = rand.Next(0, 3);

@@ -14,6 +14,7 @@ public class IAStateManager : MonoBehaviour
     public Konpemo konpemo;
     public Konpemo cible;
     public Konpemo king;
+    public List<Konpemo> taunterKonpemos = new List<Konpemo>();
 
     IABaseState currentState;
     public IAIdleState IAIdleState = new();
@@ -69,20 +70,31 @@ public class IAStateManager : MonoBehaviour
         }
     }
 
-    public Konpemo CheckKing(float portee)
+
+    public Konpemo CheckTauntAndKing(float portee)
     {
         //code optimisé au début je faisais un overlapSphere
-        king = kingManager.getKing();
-        if (king != null)
+        if (taunterKonpemos != null)
         {
-            if((king.transform.position - this.gameObject.transform.position).magnitude <= portee)
+            foreach (Konpemo taunterKonpemo in taunterKonpemos)
+            {
+                if ((taunterKonpemo.transform.position - this.gameObject.transform.position).magnitude <= portee)
+                {
+                    return taunterKonpemo;
+                }
+            }
+            return null;
+        }
+        else if (king != null)
+        {
+            if ((king.transform.position - this.gameObject.transform.position).magnitude <= portee)
             {
                 return king;
             }
             return null;
         }
         else
-        { 
+        {
             return null;
         }
     }

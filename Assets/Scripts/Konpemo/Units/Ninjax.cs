@@ -26,7 +26,7 @@ public class Ninjax : Konpemo
         piqure.Setup(dirProj, this.strength.Value);
     }
 
-    public override void Capacity() // Brouillard
+    public override void Capacity(Vector3? localisation = null) // Brouillard
     {
 
     }

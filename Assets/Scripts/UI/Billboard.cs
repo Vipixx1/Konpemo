@@ -15,7 +15,6 @@ public class Billboard : MonoBehaviour
     }
     void LateUpdate()
     {
-        Debug.Log(this.transform.rotation);
         transform.rotation = cam.transform.rotation;
         transform.position = target.position + offset;
     }

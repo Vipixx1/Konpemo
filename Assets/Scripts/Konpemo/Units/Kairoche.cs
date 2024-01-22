@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Kairoche : Konpemo
 {
+    [SerializeField]
+    private LayerMask redMask;
+    private IAStateManager iaStateManager;
     public override void SetBaseStats()
     {
         health.BaseValue = 650f;
@@ -15,17 +20,28 @@ public class Kairoche : Konpemo
         rangeAttack.BaseValue = 5f;
         rangeView.BaseValue = 15f;
     }
-    
-    public override void Capacity() // Taunt
+    public override void ChangeCapacityType()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f, 6);
-        foreach (Collider collider in hitColliders.Where(collider => collider.gameObject.layer != this.gameObject.layer))
-        {
-            collider.GetComponent<Konpemo>().SetTarget(this);
-        }
-
+        this.capacityType = 1;//Capacité ciblant rien du tout
     }
-
+    public override void Capacity(Vector3? localisation = null) // Taunt
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeView.Value, redMask);
+        foreach (Collider collider in hitColliders)
+        {
+            if(iaStateManager = collider.GetComponent<IAStateManager>())
+            {
+                StartCoroutine(tauntCoroutine(iaStateManager));
+            }
+        }
+    }
+    public IEnumerator tauntCoroutine(IAStateManager mIaStateManager)
+    {
+        mIaStateManager.taunterKonpemos.Add(this);
+        yield return new WaitForSeconds(cooldown.Value);
+        mIaStateManager.taunterKonpemos.Remove(this);
+        yield return null;
+    } 
     public override void Passive() // Explosion
     {
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f, LayerMask.GetMask("Konpemo"));

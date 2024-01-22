@@ -29,12 +29,15 @@ public abstract class Konpemo : MonoBehaviour
     private string allyUnitMaskName = "Blue";
     [SerializeField]
     private string enemyUnitMaskName = "Red";
+    public bool canAttack;
 
     public virtual void Start()
     {
+        canAttack = true;
         allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
         enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
         SetBaseStats();
+        ChangeCapacityType();
         if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
         {
             allyUnitManager.allySpawn.Invoke(this);
@@ -45,6 +48,10 @@ public abstract class Konpemo : MonoBehaviour
             enemyUnitManager.enemySpawn.Invoke(this);
             StartCoroutine(IsEnemyAliveCoroutine());
         }
+    }
+    public virtual void ChangeCapacityType()
+    {
+        capacityType = 0; //valeur par déaut (ne fait rien quand on lance une capacité)
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -82,7 +89,7 @@ public abstract class Konpemo : MonoBehaviour
         konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
-    public virtual void Capacity() 
+    public virtual void Capacity(Vector3? localisation = null) 
     {
         Debug.Log("No capacity");
 

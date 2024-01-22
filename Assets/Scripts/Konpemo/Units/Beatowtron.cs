@@ -16,7 +16,7 @@ public class Beatowtron : Konpemo
         rangeView.BaseValue = 15f;
     }
 
-    public override void Capacity() // Soin
+    public override void Capacity(Vector3? localisation = null)  // Soin
     {
         float hpHealed = RandomHeal();
 

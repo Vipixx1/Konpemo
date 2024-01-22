@@ -15,8 +15,11 @@ public class Evoren : Konpemo
         rangeAttack.BaseValue = 5f;
         rangeView.BaseValue = 15f;
     }
-
-    public override void Capacity() // Gonflette
+    public override void ChangeCapacityType()
+    {
+        this.capacityType = 1;//Capacité ciblant rien du tout
+    }
+    public override void Capacity(Vector3? localisation = null) // Gonflette
     {
         StartCoroutine(Gonflette());
         SetCooldown(cooldown.Value);

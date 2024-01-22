@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    Image redCursor;
+    GameObject redCursor;
     [SerializeField]
-    Image blueCursor;
+    GameObject blueCursor;
     [SerializeField]
     private TimeManager timeManager;
     [SerializeField]
@@ -23,25 +23,25 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        redCursor.enabled = false;
-        blueCursor.enabled = false;
+        redCursor.SetActive(false);
+        blueCursor.SetActive(false);
         gameOverScreen.SetActive(false);
     }
     public void DisplaySpriteRed()
     {
-        redCursor.enabled = true;
+        redCursor.SetActive(true);
     }
     public void HideSpriteRed()
     {
-        redCursor.enabled = false;
+        redCursor.SetActive(false);
     }
     public void DisplaySpriteBlue()
     {
-        blueCursor.enabled = true;
+        blueCursor.SetActive(true);
     }
     public void HideSpriteBlue()
     {
-        blueCursor.enabled = false;
+        blueCursor.SetActive(false);
     }
     public void DisplayLoseScreen(int unitsLost)
     {

@@ -19,7 +19,7 @@ public class Caillebonbon : Konpemo
 
     }
 
-    public override void Capacity() // Atterrissage
+    public override void Capacity(Vector3? localisation = null)  // Atterrissage
     {
         Debug.Log("Posons-nous un petit peu");
     }

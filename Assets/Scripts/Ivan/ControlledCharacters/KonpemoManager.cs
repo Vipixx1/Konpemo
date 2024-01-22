@@ -7,14 +7,40 @@ public class KonpemoManager : MonoBehaviour
     private CharStateManager charStateManager;
     private Konpemo konpemo; //public ???
     [SerializeField] public GameObject selectionEffect;
-
+    [SerializeField]
+    private AllyUnitManager allyUnitManager;
+    [SerializeField]
+    private EnemyUnitManager enemyUnitManager;
+    [SerializeField]
+    private string allyUnitMaskName = "Blue";
+    [SerializeField]
+    private string enemyUnitMaskName = "Red";
+    private Konpemo allyUnitKonpemo;
+    private Konpemo enemyUnitKonpemo;
+    /*[SerializeField]
+    private string health;*/
     private bool cdCapacityUp;
     private void Start()
     {
+        //health = this.GetComponent<Konpemo>().health.Value.ToString();
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
         konpemo = this.gameObject.GetComponent<Konpemo>();
         
         cdCapacityUp = true;
+        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
+        if (this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
+        {
+            allyUnitKonpemo = this.GetComponent<Konpemo>();
+            allyUnitManager.allySpawn.Invoke(allyUnitKonpemo);
+            StartCoroutine(IsAllyAliveCoroutine(allyUnitKonpemo));
+        }
+        if (this.gameObject.layer == LayerMask.NameToLayer(enemyUnitMaskName))
+        {
+            enemyUnitKonpemo = this.GetComponent<Konpemo>();
+            enemyUnitManager.enemySpawn.Invoke(enemyUnitKonpemo);
+            StartCoroutine(IsEnemyAliveCoroutine(enemyUnitKonpemo));
+        }*/
     }
 
     public void AddMoveListener(EventManager eventManager)
@@ -107,7 +133,7 @@ public class KonpemoManager : MonoBehaviour
         if (cdCapacityUp)
         {
             Debug.Log("Z CAPACITY TO PUT HERE");
-            //konpemo.Capacity(localisationSpell);
+            konpemo.Capacity(localisationSpell);
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
     }
@@ -137,5 +163,33 @@ public class KonpemoManager : MonoBehaviour
         cdCapacityUp = false;
         yield return new WaitForSeconds(timeToWait);
         cdCapacityUp = true;
+    }
+    public virtual IEnumerator IsAllyAliveCoroutine(Konpemo konpemo)
+    {
+        while (true)
+        {
+            if (konpemo.health.GetCurrentHealth() < 1)
+            {
+                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                allyUnitManager.allyDied.Invoke(konpemo);
+                konpemo.Death();
+                break;
+            }
+            yield return null;
+        }
+    }
+    public virtual IEnumerator IsEnemyAliveCoroutine(Konpemo konpemo)
+    {
+        while (true)
+        {
+            if (konpemo.health.GetCurrentHealth() < 1)
+            {
+                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                enemyUnitManager.enemyDied.Invoke(konpemo);
+                konpemo.Death();
+                break;
+            }
+            yield return null;
+        }
     }
 }

@@ -59,13 +59,13 @@ public class Magitruite : Konpemo
 
     public override void TakingDamage(float damageTaken) //2e passif !
     {
-        System.Random rand = new System.Random();
+        System.Random rand = new();
         this.health.TakingFlatDamage(rand.Next(0, 2), 0);
     }
 
     public override void Healing(float hpHealed)
     {
-        System.Random rand = new System.Random();
+        System.Random rand = new();
         this.health.HealingFlatDamage(rand.Next(0, 2));
     }
 
@@ -74,7 +74,7 @@ public class Magitruite : Konpemo
         int timer = 0;
         while (timer < poisonDuration)
         {
-            System.Random rand = new System.Random();
+            System.Random rand = new();
             this.health.TakingFlatDamage(rand.Next(0, 2), 0);
             // if (this.health.currentHealth <= 0) { Death(); }
             timer++;

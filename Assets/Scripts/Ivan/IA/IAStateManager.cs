@@ -5,16 +5,15 @@ using UnityEngine.AI;
 
 public class IAStateManager : MonoBehaviour
 {
-    [SerializeField]
-    public LayerMask masqueEnnemi; //c'est l'ennemi de l'IA
-    [SerializeField]
-    public KingManager kingManager;
-
-    public NavMeshAgent agent;
     public Konpemo konpemo;
-    public Konpemo cible;
-    public Konpemo king;
+    public NavMeshAgent agent;
 
+    public LayerMask enemyLayerMask;
+    public Konpemo target;
+
+    public Konpemo king;
+    private KingManager kingManager;
+ 
     IABaseState currentState;
     public IAIdleState IAIdleState = new();
     public IAAttackingState IAAttackingState = new();
@@ -22,11 +21,13 @@ public class IAStateManager : MonoBehaviour
     public IAPatrollingState IAAPatrollingState = new();
 
     void Start()
-    {   // à MODIFIER si sur un gameObject différent
-        konpemo = GetComponent<Konpemo>();
-        masqueEnnemi = LayerMask.GetMask("Blue");
+    {   
+        konpemo = GetComponentInParent<Konpemo>();
+        agent = GetComponentInParent<NavMeshAgent>();
+
+        enemyLayerMask = LayerMask.GetMask("Blue");
+
         kingManager = GameObject.Find("KingManager").GetComponent<KingManager>();
-        agent = GetComponent<NavMeshAgent>();
 
         currentState = IAIdleState;
         currentState.EnterState(this);
@@ -44,21 +45,21 @@ public class IAStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    public Konpemo CibleLaPlusProche(float porteAtk, LayerMask masqueUniteRecherche) //Renvois le GO le plus proche a attaquer
+    public Konpemo GetClosestTarget(float rangeAtk, LayerMask konpemoTargetLayerMask) // Renvoie le GameObject le plus proche a attaquer
     {
-        Collider[] unitsColliders = Physics.OverlapSphere(this.gameObject.transform.position, porteAtk, masqueUniteRecherche);
+        Collider[] unitsColliders = Physics.OverlapSphere(this.gameObject.transform.position, rangeAtk, konpemoTargetLayerMask);
         if (unitsColliders.Length > 0)
         {
             GameObject minDistGO = unitsColliders[0].gameObject;
-            Vector3 distCible = minDistGO.transform.position - this.gameObject.transform.position;
+            Vector3 TargetDist = minDistGO.transform.position - this.gameObject.transform.position;
             foreach (Collider unitCollider in unitsColliders)
             {
-                //trouver le plus près a partir des transforms
-                Vector3 newDistCible = unitCollider.transform.position - this.gameObject.transform.position;
-                if (newDistCible.magnitude <= distCible.magnitude)
+                // Trouve la cible la plus proche a partir des transforms
+                Vector3 newTargetDist = unitCollider.transform.position - this.gameObject.transform.position;
+                if (newTargetDist.magnitude <= TargetDist.magnitude)
                 {
                     minDistGO = unitCollider.gameObject;
-                    distCible = minDistGO.transform.position - this.gameObject.transform.position;
+                    TargetDist = minDistGO.transform.position - this.gameObject.transform.position;
                 }
             }
             return minDistGO.GetComponent<Konpemo>();
@@ -69,25 +70,19 @@ public class IAStateManager : MonoBehaviour
         }
     }
 
-    public Konpemo CheckKing(float portee)
+    public Konpemo CheckKing(float rangeView)
     {
-        //code optimisé au début je faisais un overlapSphere
-        king = kingManager.getKing();
+        // Code optimisé, au début je faisais un overlapSphere
+        king = kingManager.GetKing();
         if (king != null)
         {
-            if((king.transform.position - this.gameObject.transform.position).magnitude <= portee)
+            if ((king.transform.position - this.gameObject.transform.position).magnitude <= rangeView)
             {
                 return king;
             }
             return null;
         }
-        else
-        { 
-            return null;
-        }
+        return null;
     }
-
-
-
 
 }

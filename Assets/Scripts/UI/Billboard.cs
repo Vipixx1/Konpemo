@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-
     [SerializeField] private Camera cam;
-    [SerializeField] private Vector3 offset;
+
 
     public void Start()
     {
@@ -15,8 +13,6 @@ public class Billboard : MonoBehaviour
     }
     void LateUpdate()
     {
-        Debug.Log(this.transform.rotation);
         transform.rotation = cam.transform.rotation;
-        transform.position = target.position + offset;
     }
 }

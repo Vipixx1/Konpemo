@@ -20,7 +20,7 @@ public class CharAtkState : CharBaseState
         }
         else if (canAttack)
         {
-            if(csm.kingManager.getKing()?.name != csm.konpemo.name)
+            if(csm.kingManager.GetKing()?.name != csm.konpemo.name)
             {
                 timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
                 csm.konpemo.SetTarget(csm.cibleKonpemo);

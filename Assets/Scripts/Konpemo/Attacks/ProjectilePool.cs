@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ProjectilePool : MonoBehaviour
 {
     public static ProjectilePool SharedInstance;
+    private List<Projectile> pooledObjects;
 
     [SerializeField]
-    private Projectile objectToPool;
+    private Projectile ballFoudrePrefab;
 
-    private List<Projectile> pooledObjects;
-    private int amountToPool = 1;
+    [SerializeField]
+    private Projectile piqurePrefab;
+
+    [SerializeField]
+    private Projectile coupeVentPrefab;
+
+    
 
     void Awake()
     {
@@ -20,28 +27,49 @@ public class ProjectilePool : MonoBehaviour
     void Start()
     {
         pooledObjects = new List<Projectile>();
-        Projectile tmp;
+        /*Projectile tmp;
         for (int i = 0; i < amountToPool; i++)
         {
             tmp = Instantiate(objectToPool);
             tmp.gameObject.SetActive(false);
             pooledObjects.Add(tmp);
-        }
+        }*/
     }
     
-    public Projectile GetPooledObject()
+    public Projectile GetPooledObject(ProjectileType projType)
     {
-        for(int i = 0; i < amountToPool; i++)
+        for(int i = 0; i < pooledObjects.Count; i++)
         {
-            if(!pooledObjects[i].gameObject.activeInHierarchy)
+            if((!pooledObjects[i].gameObject.activeInHierarchy) && (pooledObjects[i].projType == projType))
             {
                 return pooledObjects[i];
             }
         }
+        switch(projType)
+        {
+            case ProjectileType.BallFoudre:
+                Projectile newBallFoudre = Instantiate(ballFoudrePrefab);
+                pooledObjects.Add(newBallFoudre);
+                return newBallFoudre;
 
-        Projectile tmp = Instantiate(objectToPool);
-        pooledObjects.Add(tmp);
-        amountToPool++;
-        return tmp;
+            case ProjectileType.Piqure:
+                Projectile newPiqure = Instantiate(piqurePrefab);
+                pooledObjects.Add(newPiqure);
+                return newPiqure;
+
+            case ProjectileType.CoupeVent:
+                Projectile newCoupeVent = Instantiate(coupeVentPrefab);
+                pooledObjects.Add(newCoupeVent);
+                return newCoupeVent;
+
+            default: return null;
+        }
+        
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) { foreach (Projectile elt in pooledObjects) Debug.Log(elt.ToString() + elt.projType.ToString()); }
     }
 }

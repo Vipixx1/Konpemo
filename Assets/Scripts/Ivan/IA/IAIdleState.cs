@@ -5,22 +5,21 @@ using UnityEngine;
 
 public class IAIdleState : IABaseState
 {
-    public override void EnterState(IAStateManager ia)
-    {
+    public override void EnterState(IAStateManager ia) {}
 
-    }
     public override void UpdateState(IAStateManager ia)
     {
-        //Debug.Log("IDLE");
-        if (ia.cible = ia.CheckKing(ia.konpemo.rangeView.Value))
+        if (ia.target = ia.CheckKing(ia.konpemo.rangeView.Value))
         {
-            //Debug.Log("Je follow le ROI");
+            //Debug.Log("I Follow the KING");
             ia.SwitchState(ia.IAMovingState);
         }
-        else if (ia.cible = ia.CibleLaPlusProche(ia.konpemo.rangeView.Value, ia.masqueEnnemi))
+
+        else if (ia.target = ia.GetClosestTarget(ia.konpemo.rangeView.Value, ia.enemyLayerMask))
         {
             ia.SwitchState(ia.IAMovingState);
         }
+
         /*else if(Input.GetKeyDown(KeyCode.P))
         {
             ia.IAAPatrollingState.patrolBalises.Add(new Vector3(10, ia.transform.position.y,0));
@@ -28,8 +27,6 @@ public class IAIdleState : IABaseState
             ia.SwitchState(ia.IAAPatrollingState);
         }*/
     }
-    public override void OnCollisionEnter(IAStateManager ia)
-    {
 
-    }
+    public override void OnCollisionEnter(IAStateManager ia) {}
 }

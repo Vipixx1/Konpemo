@@ -7,22 +7,24 @@ public class IAAttackingState : IABaseState
 {
     private bool canAttack;
     private float timeBetweenAttack;
+
     public override void EnterState(IAStateManager ia)
     {
         canAttack = true;
     }
+
     public override void UpdateState(IAStateManager ia)
     {
-        if ((ia.cible.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value) //cible hors de portee d'atk
+        if ((ia.target.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value) //cible hors de portee d'atk
         {
             ia.SwitchState(ia.IAMovingState);
         }
         else if (canAttack)
         {
-            if (ia.cible.isActiveAndEnabled)
+            if (ia.target.isActiveAndEnabled)
             {
                 timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
-                ia.konpemo.SetTarget(ia.cible);
+                ia.konpemo.SetTarget(ia.target);
                 ia.konpemo.Attack();
                 ia.StartCoroutine(AttackCooldown(timeBetweenAttack));
                 //Debug.Log("Deal Damages");
@@ -32,6 +34,7 @@ public class IAAttackingState : IABaseState
                 ia.SwitchState(ia.IAIdleState);
             }
         }
+
         else
         {
             //Debug.Log("pas d'attaques");
@@ -39,7 +42,7 @@ public class IAAttackingState : IABaseState
     }
     public IEnumerator AttackCooldown(float timeToWait)
     {
-        canAttack=false;
+        canAttack = false;
         yield return new WaitForSeconds(timeToWait);
         canAttack = true;
     }

@@ -7,7 +7,7 @@ public class IAPatrollingState: IABaseState
 {
     public List<Vector3> patrolBalises = new();
     private int baliseIndex;
-    private int baliseDetectionLimit = 1;
+    private readonly int baliseDetectionLimit = 1;
     public override void EnterState(IAStateManager ia)
     {
         
@@ -15,12 +15,12 @@ public class IAPatrollingState: IABaseState
     public override void UpdateState(IAStateManager ia)
     {
         //Debug.Log("IDLE");
-        if (ia.cible = ia.CheckKing(ia.konpemo.rangeView.Value))
+        if (ia.target = ia.CheckKing(ia.konpemo.rangeView.Value))
         {
-            //Debug.Log("Je follow le ROI");
+            //Debug.Log("I follow the KING");
             ia.SwitchState(ia.IAMovingState);
         }
-        else if (ia.cible = ia.CibleLaPlusProche(ia.konpemo.rangeView.Value, ia.masqueEnnemi))
+        else if (ia.target = ia.GetClosestTarget(ia.konpemo.rangeView.Value, ia.enemyLayerMask))
         {
             ia.SwitchState(ia.IAMovingState);
         }
@@ -28,7 +28,7 @@ public class IAPatrollingState: IABaseState
         {
             if(patrolBalises.Count-1 > baliseIndex)
             {
-                baliseIndex = baliseIndex + 1;
+                baliseIndex++;
             }
             else
             {

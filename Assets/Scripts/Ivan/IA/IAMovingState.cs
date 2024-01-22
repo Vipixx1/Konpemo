@@ -13,11 +13,11 @@ public class IAMovingState : IABaseState
     }
     public override void UpdateState(IAStateManager ia)
     {
-        distanceToCible = (ia.cible.transform.position - ia.transform.position).magnitude;
+        distanceToCible = (ia.target.transform.position - ia.transform.position).magnitude;
         visibleKing = ia.CheckKing(ia.konpemo.rangeView.Value);
         if (visibleKing != null)
         {
-            ia.cible = visibleKing;
+            ia.target = visibleKing;
         }
         if (distanceToCible <= ia.konpemo.rangeAttack.Value) //cible a portee d'atk
         {
@@ -30,7 +30,7 @@ public class IAMovingState : IABaseState
         }
         else  //cible a portee de vision
         {
-            ia.agent.SetDestination(ia.cible.transform.position);
+            ia.agent.SetDestination(ia.target.transform.position);
         }
     }
     public override void OnCollisionEnter(IAStateManager ia)

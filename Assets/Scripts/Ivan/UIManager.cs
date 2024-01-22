@@ -6,26 +6,29 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    Image redCursor;
-    [SerializeField]
-    Image blueCursor;
-    [SerializeField]
-    private TimeManager timeManager;
-    [SerializeField]
-    private GameObject gameOverScreen;
-    [SerializeField]
-    private TMP_Text timeStampLose;
-    [SerializeField]
-    private TMP_Text unitLostCounter;
+    [SerializeField] Image redCursor;
+    [SerializeField] Image blueCursor;
 
-    private string endTime;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject victoryScreen;
+
+    [SerializeField] private TMP_Text timer;
+
+    [SerializeField] private TMP_Text konpemoLostCounter;
 
     private void Start()
     {
         redCursor.enabled = false;
         blueCursor.enabled = false;
+
+        victoryScreen.SetActive(false);
         gameOverScreen.SetActive(false);
+        timer.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        ShowTime();    
     }
     public void DisplaySpriteRed()
     {
@@ -43,12 +46,28 @@ public class UIManager : MonoBehaviour
     {
         blueCursor.enabled = false;
     }
-    public void DisplayLoseScreen(int unitsLost)
+    public void DisplayDefeatScreen(int nbKonpemoLost)
     {
-        endTime = timeManager.GetTime();
         gameOverScreen.SetActive(true);
-        timeStampLose.text = "Time: " + endTime;
-        unitLostCounter.text = unitsLost + " (units lost)";
+        konpemoLostCounter.text = nbKonpemoLost + "fell...";
+        ShowTime();
+    }
+
+    public void DisplayVictoryScreen()
+    {
+        victoryScreen.SetActive(true);
+        ShowTime();
+    }
+
+    public void ShowTime()
+    {
+        int minutes = Mathf.FloorToInt(Time.time / 60F);
+        int seconds = Mathf.FloorToInt(Time.time - minutes * 60);
+
+        string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timer.text = niceTime;
+        timer.gameObject.SetActive(true);
+
     }
 
 }

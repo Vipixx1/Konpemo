@@ -6,14 +6,15 @@ public class KonpemoManager : MonoBehaviour
 {
     private CharStateManager charStateManager;
     private Konpemo konpemo; //public ???
-    [SerializeField] public GameObject selectionEffect;
+    
+    public GameObject selectionEffect;
 
     private bool cdCapacityUp;
     private void Start()
     {
-        charStateManager = this.gameObject.GetComponent<CharStateManager>();
-        konpemo = this.gameObject.GetComponent<Konpemo>();
-        
+        charStateManager = GetComponent<CharStateManager>();
+        konpemo = GetComponentInParent<Konpemo>();
+
         cdCapacityUp = true;
     }
 

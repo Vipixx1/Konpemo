@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class FlagManager : MonoBehaviour
 {
-    [SerializeField]
-    KingManager kingManager;
-    [SerializeField]
-    LayerMask masqueUniteAllie;
-    LayerMask masquePreKing;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] private KingManager kingManager;
 
-    }
+    [SerializeField] private LayerMask masqueUniteAllie;
+    
+    private LayerMask masquePreKing;
 
-    // Update is called once per frame
+
     private void OnTriggerEnter(Collider preKing)
     {
         masquePreKing = 1 << preKing.gameObject.layer;
         if (masquePreKing == masqueUniteAllie)
         {
-            kingManager.setKing(preKing.gameObject.GetComponent<Konpemo>());
+            kingManager.SetKing(preKing.gameObject.GetComponent<Konpemo>());
             this.gameObject.SetActive(false);
         }
     }

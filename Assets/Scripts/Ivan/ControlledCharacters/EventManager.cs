@@ -29,7 +29,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private SelectionManager selectionManager;
     private Vector3 positionSouris;
-    // Start is called before the first frame update
+
     void Start()
     {
         goToEvent = new UnityEvent<Vector3>();
@@ -41,7 +41,6 @@ public class EventManager : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))

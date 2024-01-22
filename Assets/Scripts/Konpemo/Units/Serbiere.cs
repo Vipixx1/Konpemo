@@ -21,7 +21,7 @@ public class Serbiere : Konpemo
 
     public override void Attack() // Vortex Feu
     {
-        if (this.gameObject.layer == 7)
+        /*if (this.gameObject.layer == 7)
         {
             Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, 5f, 8);
             foreach (Collider collider in hitColliders)
@@ -36,7 +36,7 @@ public class Serbiere : Konpemo
             {
                 collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
             }
-        }
+        }*/
     }
 
     public override void Capacity() // Piège de Breizh

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Caillebonbon : Konpemo
 {
+    [SerializeField] private Transform pointDeTir;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 200f;
@@ -14,9 +16,17 @@ public class Caillebonbon : Konpemo
         rangeAttack.BaseValue = 10f;
         rangeView.BaseValue = 15f;
     }
+
     public override void Attack() // Coupe Vent
     {
-
+        Projectile windBlade = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.CoupeVent);
+        if (windBlade != null)
+        {
+            windBlade.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
+            windBlade.gameObject.SetActive(true);
+            Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
+            windBlade.Setup(dirProj, this.strength.Value);
+        }
     }
 
     public override void Capacity() // Atterrissage

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Evoren : Konpemo
 {
+    [SerializeField] protected GameObject buffEffect;
     public override void SetBaseStats()
     {
         health.BaseValue = 500f;
@@ -18,12 +19,14 @@ public class Evoren : Konpemo
 
     public override void Capacity() // Gonflette
     {
+        animator.SetTrigger("Capacity");
         StartCoroutine(Gonflette());
         SetCooldown(cooldown.Value);
     }
 
     public IEnumerator Gonflette()
     {
+        buffEffect.SetActive(true);
         StatModifier gonfletteStrength = new(20f, StatModType.Flat);
         StatModifier gonfletteDefense = new(3f, StatModType.Flat);
 
@@ -32,6 +35,7 @@ public class Evoren : Konpemo
         
         yield return new WaitForSeconds(10);
         
+        buffEffect.SetActive(false);
         strength.RemoveModifier(gonfletteStrength);
         defense.RemoveModifier(gonfletteDefense);
 

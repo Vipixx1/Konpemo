@@ -5,30 +5,16 @@ using UnityEngine;
 
 public class VictoryZoneManager : MonoBehaviour
 {
-    [SerializeField]
-    KingManager kingManager;
-    [SerializeField]
-    TimeManager timeManager;
-    [SerializeField]
-    GameObject victoryScreen;
-    [SerializeField]
-    TMP_Text timeStamp;
-    private string endTime;
-    private void Start()
-    {
-        victoryScreen.SetActive(false);
-    }
+    [SerializeField] private KingManager kingManager;
+    [SerializeField] private UIManager uiManager;
+
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("ICI");
-        if(kingManager.getKing() != null)
+        if(kingManager.GetKing() != null)
         {
-            if (kingManager.getKing().gameObject.name == other.gameObject.name)
+            if (kingManager.GetKing().gameObject.name == other.gameObject.name)
             {
-                this.gameObject.SetActive(false);
-                endTime = timeManager.GetTime();
-                victoryScreen.SetActive(true);
-                timeStamp.text = "Time: " + endTime;
+                uiManager.DisplayVictoryScreen();
             }
         }
     }

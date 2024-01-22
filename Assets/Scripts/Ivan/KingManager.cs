@@ -6,43 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class KingManager : MonoBehaviour
 {
-    [SerializeField]
-    private Konpemo theKing;
-    [SerializeField]
-    private UIManager uiManager;
-    [SerializeField]
-    private AllyUnitManager allyUnitManager;
+    [SerializeField] private Konpemo king;
 
-    private void Start()
-    {
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private AllyUnitManager allyUnitManager;
 
-    }
-    public void setKing(Konpemo gameObjectKing)
+
+    public Konpemo GetKing() { return king; }
+
+    public void SetKing(Konpemo gameObjectKing)
     {
-        if (theKing == null)
+        if (king == null)
         {
-            theKing = gameObjectKing;
+            king = gameObjectKing;
             StartCoroutine(IsKingAliveCoroutine());
         }
-    }
-
-    public Konpemo getKing()
-    {
-        return theKing;
     }
 
     private IEnumerator IsKingAliveCoroutine()
     {
         while (true)
         {
-            if (theKing.health.GetCurrentHealth() < 1)
+            if (king.health.GetCurrentHealth() <= 0)
             {
-                uiManager.DisplayLoseScreen(allyUnitManager.GetTotalAllyUnitDied());
+                uiManager.DisplayDefeatScreen(allyUnitManager.GetTotalAllyUnitDied());
                 break;
             }
             yield return null;
         }
         yield return null;
     }
-    //besoin de mettre un trigger pour la condition de victoire
+
+    //Besoin de mettre un trigger pour la condition de victoire
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,39 +7,49 @@ using UnityEngine;
 public class KonpemoCounting : MonoBehaviour
 {
     [SerializeField] private TMP_Text nbKonpemoText;
-    public static int konpemoCount = 0;
+    //public static int konpemoCount = 0;
     public static int nbKonpemoMax = 5;
+    public static List<Konpemo> konpemosBlue = new();
 
     [SerializeField] private TMP_Text nbEvorenText;
+    [SerializeField] private Evoren evorenPrefab;
     public static int evorenCount = 0;
 
     [SerializeField] private TMP_Text nbSourimiText;
+    [SerializeField] private Sourimi sourimiPrefab;
     public static int sourimiCount = 0;
 
     [SerializeField] private TMP_Text nbKairocheText;
+    [SerializeField] private Kairoche kairochePrefab;
     public static int kairocheCount = 0;
 
     [SerializeField] private TMP_Text nbSerbiereText;
+    [SerializeField] private Serbiere serbierePrefab;
     public static int serbiereCount = 0;
 
     [SerializeField] private TMP_Text nbNinjaxText;
+    [SerializeField] private Ninjax ninjaxPrefab;
     public static int ninjaxCount = 0;
 
     [SerializeField] private TMP_Text nbCaspowText;
+    [SerializeField] private Caspow caspowPrefab;
     public static int caspowCount = 0;
 
     [SerializeField] private TMP_Text nbBeatowtronText;
+    [SerializeField] private Beatowtron beatowtronPrefab;
     public static int beatowtronCount = 0;
 
     [SerializeField] private TMP_Text nbCaillebonbonText;
+    [SerializeField] private Caillebonbon caillebonbonPrefab;
     public static int caillebonbonCount = 0;
 
     [SerializeField] private TMP_Text nbMagitruiteText;
+    [SerializeField] private Magitruite magitruitePrefab;
     public static int magitruiteCount = 0;
 
     public void Update()
     {
-        nbKonpemoText.text = "(" + konpemoCount.ToString() + "/" + nbKonpemoMax + ")";
+        nbKonpemoText.text = string.Format("({0}/{1})", konpemosBlue.Count, nbKonpemoMax);
 
         nbEvorenText.text = evorenCount.ToString();
         nbSourimiText.text = sourimiCount.ToString();
@@ -52,85 +63,206 @@ public class KonpemoCounting : MonoBehaviour
 
     }
 
-    public void KonpemoCounter()
-    {
-        konpemoCount = evorenCount + sourimiCount + kairocheCount + serbiereCount + ninjaxCount + caspowCount + beatowtronCount + caillebonbonCount + magitruiteCount;
-    }
-
     public void KonpemoCounterIncrease(string konpemo)
     {
-        if (konpemoCount < 5)
+        Enum.TryParse<KonpemoSpecies>(konpemo, out KonpemoSpecies konpemoSpecies);
+
+        if (konpemosBlue.Count < nbKonpemoMax)
         {
-            switch (konpemo)
+            switch (konpemoSpecies)
             {
-                case "Evoren":
+                case KonpemoSpecies.Evoren:
                     evorenCount++;
+                    konpemosBlue.Add(evorenPrefab);
                     break;
-                case "Sourimi":
+
+                case KonpemoSpecies.Sourimi:
                     sourimiCount++;
+                    konpemosBlue.Add(sourimiPrefab);
                     break;
-                case "Kairoche":
+
+                case KonpemoSpecies.Kairoche:
                     kairocheCount++;
+                    konpemosBlue.Add(kairochePrefab);
                     break;
-                case "Serbiere":
+
+                case KonpemoSpecies.Serbiere:
                     serbiereCount++;
+                    konpemosBlue.Add(serbierePrefab);
                     break;
-                case "Ninjax":
+
+                case KonpemoSpecies.Ninjax:
                     ninjaxCount++;
+                    konpemosBlue.Add(ninjaxPrefab);
                     break;
-                case "Caspow":
+
+                case KonpemoSpecies.Caspow:
                     caspowCount++;
+                    konpemosBlue.Add(caspowPrefab);
                     break;
-                case "Beatowtron":
+
+                case KonpemoSpecies.Beatowtron:
                     beatowtronCount++;
+                    konpemosBlue.Add(beatowtronPrefab);
                     break;
-                case "Caillebonbon":
+
+                case KonpemoSpecies.Caillebonbon:
                     caillebonbonCount++;
+                    konpemosBlue.Add(caillebonbonPrefab);
                     break;
-                case "Magitruite":
+
+                case KonpemoSpecies.Magitruite:
                     magitruiteCount++;
+                    konpemosBlue.Add(magitruitePrefab);
                     break;
 
                 default: Debug.Log("Can't add Konpemo"); break;
             }
         }
-        KonpemoCounter();
     }
 
     public void KonpemoCounterDecrease(string konpemo)
     {
-        switch (konpemo)
+        Enum.TryParse<KonpemoSpecies>(konpemo, out KonpemoSpecies konpemoSpecies);
+        switch (konpemoSpecies)
         {
-            case "Evoren":
-                if (evorenCount > 0) evorenCount--;
+            case KonpemoSpecies.Evoren:
+                if (evorenCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Evoren>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            evorenCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Sourimi":
-                if (sourimiCount > 0) sourimiCount--;
+
+            case KonpemoSpecies.Sourimi:
+                if (sourimiCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Sourimi>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            sourimiCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Kairoche":
-                if (kairocheCount > 0) kairocheCount--;
+
+            case KonpemoSpecies.Kairoche:
+                if (kairocheCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Kairoche>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            kairocheCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Serbiere":
-                if (serbiereCount > 0) serbiereCount--;
+
+            case KonpemoSpecies.Serbiere:
+                if (serbiereCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Serbiere>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            serbiereCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Ninjax":
-                if (ninjaxCount > 0) ninjaxCount--;
+
+            case KonpemoSpecies.Ninjax:
+                if (ninjaxCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Ninjax>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            ninjaxCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Caspow":
-                if (caspowCount > 0) caspowCount--;
+
+            case KonpemoSpecies.Caspow:
+                if (caspowCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Caspow>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            caspowCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Beatowtron":
-                if (beatowtronCount > 0) beatowtronCount--;
+
+            case KonpemoSpecies.Beatowtron:
+                if (beatowtronCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Beatowtron>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            beatowtronCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Caillebonbon":
-                if (caillebonbonCount > 0) caillebonbonCount--;
+
+            case KonpemoSpecies.Caillebonbon:
+                if (caillebonbonCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Caillebonbon>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            caillebonbonCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
-            case "Magitruite":
-                if (magitruiteCount > 0) magitruiteCount--;
+
+            case KonpemoSpecies.Magitruite:
+                if (magitruiteCount > 0)
+                {
+                    foreach (Konpemo kon in konpemosBlue)
+                    {
+                        if (kon.GetComponent<Magitruite>())
+                        {
+                            konpemosBlue.Remove(kon);
+                            magitruiteCount--;
+                            break;
+                        }
+                    }
+                }
                 break;
 
             default: break;
-        }
-        KonpemoCounter();
+        }    
     }
+
 }

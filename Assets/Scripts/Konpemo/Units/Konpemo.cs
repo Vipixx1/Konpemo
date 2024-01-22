@@ -15,7 +15,6 @@ public abstract class Konpemo : MonoBehaviour
     
     protected Konpemo konpemoEnemy = null;
 
-    public bool isFlying = false;
     public bool isParalysed = false;
     public bool isPoisoned = false;
 
@@ -25,16 +24,19 @@ public abstract class Konpemo : MonoBehaviour
     private AllyUnitManager allyUnitManager;
     [SerializeField]
     private EnemyUnitManager enemyUnitManager;
-    [SerializeField]
-    private string allyUnitMaskName = "Blue";
-    [SerializeField]
-    private string enemyUnitMaskName = "Red";
+
+    //private string teamLayerMask //= this.gameObject.layer;
+
+    public Animator animator;
+    
 
     public virtual void Start()
     {
-        allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
-        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
         SetBaseStats();
+
+        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
+        
         if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
         {
             allyUnitManager.allySpawn.Invoke(this);
@@ -44,7 +46,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             enemyUnitManager.enemySpawn.Invoke(this);
             StartCoroutine(IsEnemyAliveCoroutine());
-        }
+        }*/
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -52,7 +54,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             if (health.GetCurrentHealth() < 1)
             {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                //Debug.Log("Je suis MORT");
                 allyUnitManager.allyDied.Invoke(this);
                 this.Death();
                 break;
@@ -66,7 +68,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             if (health.GetCurrentHealth() < 1)
             {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                //Debug.Log("Je suis MORT");
                 enemyUnitManager.enemyDied.Invoke(this);
                 this.Death();
                 break;
@@ -78,7 +80,7 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Attack()
     {
-
+        animator.SetTrigger("Attack");
         konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
@@ -98,6 +100,7 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void TakingDamage(float rawDamage)
     {
+        //animator.SetTrigger("TakingDamage");
         this.health.TakingFlatDamage(rawDamage, this.defense.Value);
     }
 
@@ -116,7 +119,8 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Death()
     {
-        this.gameObject.SetActive(false);
+        animator.SetTrigger("Death");
+        //this.gameObject.SetActive(false);
     }
 
     // Status of the Konpemo
@@ -156,4 +160,17 @@ public abstract class Konpemo : MonoBehaviour
             this.isParalysed = false;
         }
     }
+
+}
+public enum KonpemoSpecies
+{
+    Evoren,
+    Sourimi,
+    Kairoche,
+    Serbiere,
+    Ninjax,
+    Caspow,
+    Beatowtron,
+    Caillebonbon,
+    Magitruite,
 }

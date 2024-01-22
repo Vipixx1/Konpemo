@@ -19,10 +19,6 @@ public class EnemyUnitManager : MonoBehaviour
         enemySpawn.AddListener(EnemySpawnHandler);
 
     }
-    private void Update()
-    {
-        
-    }
     public void EnemyDiedHandler(Konpemo konpemo)
     {
         aliveEnemyKonpemos.Remove(konpemo);

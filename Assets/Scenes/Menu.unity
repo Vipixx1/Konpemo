@@ -5919,14 +5919,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nbKonpemoText: {fileID: 1996517630}
   nbEvorenText: {fileID: 1279313842}
+  evorenPrefab: {fileID: 7717356129820751113, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
   nbSourimiText: {fileID: 1405586094}
+  sourimiPrefab: {fileID: 8740301366976802364, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
   nbKairocheText: {fileID: 529904556}
+  kairochePrefab: {fileID: 4269202519909768117, guid: e7a79a544482b1240aa73618354d2314, type: 3}
   nbSerbiereText: {fileID: 521793931}
+  serbierePrefab: {fileID: 7416713713206106189, guid: 1b0607ddbdd1b7c47a9dd7528dcfa851, type: 3}
   nbNinjaxText: {fileID: 933562301}
+  ninjaxPrefab: {fileID: 4598158198177499566, guid: cb591ae16ca637d40bff26b385625220, type: 3}
   nbCaspowText: {fileID: 691844162}
+  caspowPrefab: {fileID: 6878193946032054632, guid: 0e1dbf96bf3ac9a43b466d37c0d88e2f, type: 3}
   nbBeatowtronText: {fileID: 18883983}
+  beatowtronPrefab: {fileID: 7177769647934822376, guid: 7f9562c6f9582a24e9cd9c50d804617f, type: 3}
   nbCaillebonbonText: {fileID: 590443684}
+  caillebonbonPrefab: {fileID: 1634907548524949686, guid: d157dca34d29b2445bb9cd97b0df9af6, type: 3}
   nbMagitruiteText: {fileID: 1548245487}
+  magitruitePrefab: {fileID: 1900731640497700190, guid: 06918b1c30ce5a14c92ca3f0006d3035, type: 3}
 --- !u!1 &751074809
 GameObject:
   m_ObjectHideFlags: 0
@@ -11267,7 +11276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1720010715
 AudioListener:
   m_ObjectHideFlags: 0
@@ -11275,7 +11284,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720010714}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1720010716
 Camera:
   m_ObjectHideFlags: 0
@@ -11283,7 +11292,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720010714}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

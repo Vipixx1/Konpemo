@@ -37,8 +37,8 @@ public class SelectionManager : MonoBehaviour
             if (allyUnitHit)
             {
                 if (!Input.GetKey(KeyCode.LeftShift)) UnSelectKonpemos();
-                konpemoManagerHit = hit.collider.gameObject.GetComponent<KonpemoManager>();
-                if (!CheckKonpemoSelected(konpemoManagerHit))//Konpemo not selected
+                konpemoManagerHit = hit.collider.gameObject.GetComponentInChildren<KonpemoManager>();
+                if (!CheckKonpemoSelected(konpemoManagerHit)) //Konpemo not selected
                 {
                     //Debug.Log("unité touché, tentative d'ajout listeners");
                     SelectKonpemo(konpemoManagerHit);

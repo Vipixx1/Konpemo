@@ -16,6 +16,8 @@ public abstract class Projectile : MonoBehaviour
     protected int numberEnemyHit;
     protected int numberMax;
 
+    public ProjectileType projType;
+
     public abstract void Setup(Vector3 dirProj, float damageProj);
 
     public virtual void OnDisable()
@@ -49,4 +51,11 @@ public abstract class Projectile : MonoBehaviour
         
     }
 
+}
+
+public enum ProjectileType
+{
+    BallFoudre,
+    Piqure,
+    CoupeVent,
 }

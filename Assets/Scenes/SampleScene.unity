@@ -431,6 +431,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7938521223314417219, guid: 4d5c3b9396f8bc64699ce0216bac3687, type: 3}
   m_PrefabInstance: {fileID: 50915592}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &63330017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5465836178849383100, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
+  m_PrefabInstance: {fileID: 774718124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &63330022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63330017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0353843332aa4a04ba9103de2058e8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &70489396
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5d889797563414eb4d552e4854babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionEffect: {fileID: 356296875}
+  selectionEffect: {fileID: 0}
 --- !u!114 &83964351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,11 +2415,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1241673847689813689, guid: c1eb05a0f49a2ff43b6bedea5d8c5134, type: 3}
   m_PrefabInstance: {fileID: 348213208}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &356296875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7217728280549201140, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
-  m_PrefabInstance: {fileID: 774718124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &359321368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3039,13 +3052,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 7035991028180801005, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 6478705929935500203, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7035991028180801005, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035991028180801005, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7412544590396673384, guid: c873f7a0ff5d7384fb1333bd52d5627b, type: 3}
       propertyPath: m_Layer
@@ -4300,7 +4317,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1227796618}
   - {fileID: 411159462}
   - {fileID: 2108316292}
   - {fileID: 1638184048}
@@ -5402,7 +5418,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8720107057079754503, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5412,6 +5429,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5375237457220577579, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 83964350}
+    - targetCorrespondingSourceObject: {fileID: 5465836178849383100, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 63330022}
   m_SourcePrefab: {fileID: 100100000, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
 --- !u!1001 &801295912
 PrefabInstance:
@@ -6612,13 +6632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00585d4dc82eebc44a0e46ea5d58cfa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masqueEnnemi:
+  konpemo: {fileID: 0}
+  agent: {fileID: 0}
+  enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  kingManager: {fileID: 0}
-  agent: {fileID: 0}
-  konpemo: {fileID: 0}
-  cible: {fileID: 0}
+  target: {fileID: 0}
   king: {fileID: 0}
 --- !u!1001 &984230943
 PrefabInstance:
@@ -7003,6 +7022,7 @@ GameObject:
   - component: {fileID: 1037313940}
   - component: {fileID: 1037313939}
   - component: {fileID: 1037313938}
+  - component: {fileID: 1037313941}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7077,13 +7097,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037313937}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.77, y: 3.81, z: -2.95}
+  m_LocalRotation: {x: -0.0051251175, y: 0.87300575, z: -0.4876369, w: -0.006704936}
+  m_LocalPosition: {x: 18.350351, y: 34.467358, z: 27.565035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1037313941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037313937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c8987dad47ab140b61d277360ea4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
 --- !u!1001 &1038183252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7475,7 +7508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218cb9b220f337047ae32b51c4b26e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theKing: {fileID: 0}
+  king: {fileID: 0}
   uiManager: {fileID: 1868216943}
   allyUnitManager: {fileID: 1301301143}
 --- !u!1001 &1086424861
@@ -8303,7 +8336,7 @@ Transform:
   - {fileID: 1376258269}
   - {fileID: 1301301142}
   - {fileID: 3867780}
-  m_Father: {fileID: 590631931}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1239941247
 PrefabInstance:
@@ -10427,17 +10460,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5375237457220577579, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5465836178849383100, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8274394290865131373, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8274394290865131373, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8479987017052215272, guid: 67ed59f001946664e86a9c666379e8bb, type: 3}
       propertyPath: m_Layer
@@ -11157,9 +11194,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 413984273}
   - {fileID: 83964349}
   - {fileID: 1518819928}
+  - {fileID: 413984273}
   m_Father: {fileID: 411159462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1595146105
@@ -11303,13 +11340,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00585d4dc82eebc44a0e46ea5d58cfa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masqueEnnemi:
+  konpemo: {fileID: 0}
+  agent: {fileID: 0}
+  enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  kingManager: {fileID: 0}
-  agent: {fileID: 0}
-  konpemo: {fileID: 0}
-  cible: {fileID: 0}
+  target: {fileID: 0}
   king: {fileID: 0}
 --- !u!4 &1638184048 stripped
 Transform:
@@ -13018,7 +13054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1868216942
 Transform:
   m_ObjectHideFlags: 0
@@ -13048,10 +13084,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redCursor: {fileID: 1992585883}
   blueCursor: {fileID: 1329429881}
-  timeManager: {fileID: 1376258270}
-  gameOverScreen: {fileID: 0}
-  timeStampLose: {fileID: 0}
-  unitLostCounter: {fileID: 0}
+  gameOverScreen: {fileID: 552433189}
+  victoryScreen: {fileID: 1059157443}
+  timer: {fileID: 319249096}
+  konpemoLostCounter: {fileID: 1259846865}
 --- !u!1001 &1871819417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14918,4 +14954,5 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1091039861}
   - {fileID: 1364394255}
+  - {fileID: 1227796618}
   - {fileID: 590631931}

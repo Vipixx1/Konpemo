@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Ninjax : Konpemo
 {
-    [SerializeField] private Piqure piqurePrefab;
     [SerializeField] private Transform pointDeTir;
-
-    [SerializeField] private Konpemo target; //Pour les tests
 
     public override void SetBaseStats()
     {
@@ -19,11 +16,17 @@ public class Ninjax : Konpemo
         rangeAttack.BaseValue = 10f;
         rangeView.BaseValue = 15f;
     }
+
     public override void Attack() // Piqûre
     {
-        Piqure piqure = Instantiate(piqurePrefab, pointDeTir.position, pointDeTir.rotation);
-        Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
-        piqure.Setup(dirProj, this.strength.Value);
+        Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);
+        if (needle != null)
+        {
+            needle.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
+            needle.gameObject.SetActive(true);
+            Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
+            needle.Setup(dirProj, this.strength.Value);
+        }
     }
 
     public override void Capacity() // Brouillard
@@ -31,17 +34,4 @@ public class Ninjax : Konpemo
 
     }
 
-    // Pour faire des tests :
-    public override void Start()
-    {
-        this.SetBaseStats();
-        this.SetTarget(target);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            this.Attack();
-        }
-    }
 }

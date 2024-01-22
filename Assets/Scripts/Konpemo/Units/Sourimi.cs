@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Sourimi : Konpemo
 {
-
     [SerializeField] private Transform pointDeTir;
-    
-    [SerializeField] private Konpemo target; //Pour les tests
 
     public override void SetBaseStats()
     {
@@ -22,17 +19,14 @@ public class Sourimi : Konpemo
 
     public override void Attack() // Ball'Foudre
     {
-        Projectile thunderBall = ProjectilePool.SharedInstance.GetPooledObject();
+        Projectile thunderBall = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.BallFoudre);
         if (thunderBall != null )
         {
-            thunderBall.transform.position = pointDeTir.position;
-            thunderBall.transform.rotation = pointDeTir.rotation;
+            thunderBall.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
             thunderBall.gameObject.SetActive(true);
             Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
             thunderBall.Setup(dirProj, this.strength.Value);
         }
-        
-        
     }
 
     public override void Capacity() // Dash quantique
@@ -68,23 +62,4 @@ public class Sourimi : Konpemo
         }
         */
     }
-
-    // Pour faire des tests :
-    public override void Start()
-    {
-        this.SetBaseStats();
-        this.SetTarget(target);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A)) 
-        {
-            this.Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            this.health.GetHealthDebug();
-        }
-    }
-
 }

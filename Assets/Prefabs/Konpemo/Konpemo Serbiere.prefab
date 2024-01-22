@@ -297,6 +297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Konpemo Serbiere
       objectReference: {fileID: 0}
+    - target: {fileID: 5020924374195174826, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8353117356273093927, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -402,10 +406,10 @@ MonoBehaviour:
   offsetPiege: 0.1
   masqueBleu:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   masqueRouge:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   vortexDeFeu: {fileID: 8542174400819228296}
   rangeVortex: 3
   seeGizmoRangeVortex: 0

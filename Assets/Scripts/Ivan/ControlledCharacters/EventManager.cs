@@ -68,8 +68,6 @@ public class EventManager : MonoBehaviour
         }
         if(Input.GetKeyDown (KeyCode.E)) //capacite cible perso
         {
-            //uiManager.DisplaySpriteBlue();
-            //uiManager.Display(SpriteLastKonpemo);
             konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
             if(konpemoManagerSelected != null)
             {
@@ -84,7 +82,7 @@ public class EventManager : MonoBehaviour
                         StartCoroutine(Capacity2Coroutine(uiManager, selectionManager));
                         break;
                     case 3:
-                        StartCoroutine(Capacity3Coroutine(uiManager, selectionManager));
+                        StartCoroutine(Capacity3Coroutine(uiManager, selectionManager, konpemoSelected));
                         break;
                     default:
                         //Debug.Log("Impossible de lancer la capacité");
@@ -93,7 +91,7 @@ public class EventManager : MonoBehaviour
             }
         }
     }
-    private IEnumerator Capacity2Coroutine(UIManager mUiManager, SelectionManager mSelectionManager)  //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
+    private IEnumerator Capacity2Coroutine(UIManager mUiManager, SelectionManager mSelectionManager)  // Capacite ciblée sur ennemi //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oublié pk j'ai mis ca mais dans le doute)
     {
         mUiManager.DisplaySpriteRed();
         selectionManager.Lock(this.gameObject);
@@ -116,7 +114,7 @@ public class EventManager : MonoBehaviour
         }
         yield return null;
     }
-    private IEnumerator Capacity3Coroutine(UIManager mUiManager, SelectionManager mSelectionManager)  //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
+    private IEnumerator Capacity3Coroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap) //capacité ciblée sur sol //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
     {
         mUiManager.DisplaySpriteBlue();
         selectionManager.Lock(this.gameObject);
@@ -128,11 +126,14 @@ public class EventManager : MonoBehaviour
                 rayZ = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(rayZ, out hit, Mathf.Infinity, masqueSol))
                 {
-                    //Debug.Log("Capacity 3 event sent");
-                    zCapacityEvent.Invoke(hit.collider.transform.position);
-                    mUiManager.HideSpriteBlue();
-                    mSelectionManager.Unlock(this.gameObject);
-                    break;
+                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeView.Value)  //si le point de casting est à l'intérieur de la zone de vision
+                    {
+                        //Debug.Log("Capacity 3 event sent");
+                        zCapacityEvent.Invoke(hit.collider.transform.position);
+                        mUiManager.HideSpriteBlue();
+                        mSelectionManager.Unlock(this.gameObject);
+                        break;
+                    }
                 }
             }
             yield return null;
@@ -145,7 +146,6 @@ public class EventManager : MonoBehaviour
         konpemoManager.AddMoveListener(this);
         konpemoManager.AddAtkMoveListener(this);
         konpemoManager.AddFlwAllyListener(this);
-        konpemoManager.AddCapacityListener(this);
     }
 
     public void RemoveListener(KonpemoManager konpemoManager)
@@ -153,6 +153,14 @@ public class EventManager : MonoBehaviour
         konpemoManager.RemoveMoveListener(this);
         konpemoManager.RemoveAtkMoveListener(this);
         konpemoManager.RemoveFlwAllyListener(this);
+    }
+    //Les deux méthodes qui suivent sont séparés de celles au dessus afin de gérer les capacités konpemo par konpemo
+    public void AddCapacityListener(KonpemoManager konpemoManager)
+    {
+        konpemoManager.AddCapacityListener(this);
+    }
+    public void RemoveCapacityListener(KonpemoManager konpemoManager)
+    {
         konpemoManager.RemoveCapacityListener(this);
     }
 }

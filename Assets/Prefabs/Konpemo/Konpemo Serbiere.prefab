@@ -113,12 +113,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+
   - component: {fileID: 7025183578451285083}
   - component: {fileID: 5419205488593532518}
   - component: {fileID: 1343118125635052818}
   - component: {fileID: 6705859939281274903}
   m_Layer: 0
   m_Name: Cube (2)
+
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Image redCursor;
-    [SerializeField] Image blueCursor;
+    [SerializeField] private GameObject redCursor;
+    [SerializeField] private GameObject blueCursor;
 
     [SerializeField] private GameObject gameOverScreen;
+	[SerializeField] private TMP_Text defeatTimer;
+	
     [SerializeField] private GameObject victoryScreen;
+	[SerializeField] private TMP_Text victoryTimer;
 
     [SerializeField] private TMP_Text timer;
 
@@ -18,55 +21,59 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        redCursor.enabled = false;
-        blueCursor.enabled = false;
-
-        victoryScreen.SetActive(false);
+        redCursor.SetActive(false);
+        blueCursor.SetActive(false);
+		
+		victoryScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-        timer.gameObject.SetActive(false);
+		
+        timer.gameObject.SetActive(true);
     }
 
     void Update()
     {
-        ShowTime();    
+        timer.text = GetTime();    
     }
+	
     public void DisplaySpriteRed()
     {
-        redCursor.enabled = true;
+        redCursor.SetActive(true);
     }
     public void HideSpriteRed()
     {
-        redCursor.enabled = false;
+        redCursor.SetActive(false);
     }
     public void DisplaySpriteBlue()
     {
-        blueCursor.enabled = true;
+        blueCursor.SetActive(true);
     }
     public void HideSpriteBlue()
     {
-        blueCursor.enabled = false;
+        blueCursor.SetActive(false);
     }
+	
     public void DisplayDefeatScreen(int nbKonpemoLost)
     {
         gameOverScreen.SetActive(true);
+		defeatTimer.text = GetTime();
         konpemoLostCounter.text = nbKonpemoLost + "fell...";
-        ShowTime();
+        timer.gameObject.SetActive(false);
     }
 
     public void DisplayVictoryScreen()
     {
+		victoryTimer.text = GetTime();
         victoryScreen.SetActive(true);
-        ShowTime();
+        timer.gameObject.SetActive(false);
     }
 
-    public void ShowTime()
+    public string GetTime()
     {
         int minutes = Mathf.FloorToInt(Time.time / 60F);
         int seconds = Mathf.FloorToInt(Time.time - minutes * 60);
 
         string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-        timer.text = niceTime;
-        timer.gameObject.SetActive(true);
+        return niceTime;
 
     }
 

@@ -1,8 +1,17 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Sourimi : Konpemo
 {
-    [SerializeField] private Transform pointDeTir;
+    [SerializeField]
+	private Transform pointDeTir;
+
+    private float distance;
+    private float angle;
+    private float limitDash = 1;
+    private int limitIterationToDash = 10;
+    private Vector3 localisationDash;
 
     public override void SetBaseStats()
     {
@@ -16,11 +25,16 @@ public class Sourimi : Konpemo
         rangeAttack.BaseValue = 10f;
         rangeView.BaseValue = 15f;
     }
+	
+	public override void ChangeCapacityType()
+    {
+        this.capacityType = 3; // Capacité ciblant le sol
+    }
 
     public override void Attack() // Ball'Foudre
     {
         Projectile thunderBall = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.BallFoudre);
-        if (thunderBall != null )
+        if (thunderBall != null)
         {
             thunderBall.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
             thunderBall.gameObject.SetActive(true);
@@ -29,37 +43,36 @@ public class Sourimi : Konpemo
         }
     }
 
-    public override void Capacity() // Dash quantique
+    public override void Capacity(Vector3? localisation = null) // Dash quantique
     {
-        /*
-        Dessine un cercle autour du Sourimi qui montre la range du Dash
-        if (Input.GetMouseButtonDown(0))
+		NavMeshAgent agent =
+        if (localisation.HasValue)
         {
-            Raycast de position de clique souris
-            if (clique dans le cercle) 
-            {
-                Dash(position clique souris)
-            }
-            
-            else (ie clique hors du cercle)
-            {
-                Nouvelle position, la plus proche du clique et qui est dans le cercle
-                Dash(Nouvelle position)
-        }     
-        */
+            localisationDash = localisation.Value;
+        }
+        Dash(localisationDash);
     }
 
     private void Dash(Vector3 position)
     {
-        /*
-        this.Warp(position raycast de souris);
-        if (!this.Warp(position raycast de souris))
+        if (agent.Warp(position))
         {
-            Prend la position accessible la plus proche de la position de la souris
-                    if (distance entre les deux points <= seuil de tolérance) {
-                Warp sur cette position)
-                    else { Ne fait rien (mais CD quand même) }
+            //Debug.Log("Dash réalisé avec succès")
         }
-        */
+		
+        else
+        {
+            for (int i = 0; i < limitIterationToDash; i++)
+            {
+                angle = Random.Range(0f, 2f * Mathf.PI);
+                distance = Random.Range(0f, limitDash);
+                float x = position.x + distance * Mathf.Cos(angle);
+                float y = position.y + distance * Mathf.Sin(angle);
+                localisationDash = new Vector3(x, y, position.z);
+				
+                if(agent.Warp(localisationDash)) break;
+            }
+			
+        }
     }
 }

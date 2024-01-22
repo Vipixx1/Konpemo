@@ -1,4 +1,4 @@
-
+using UnityEngine;
 public class Caspow : Konpemo
 {
     public override void SetBaseStats()
@@ -22,7 +22,7 @@ public class Caspow : Konpemo
         if (nbParalysed == 0) { this.konpemoEnemy.isParalysed = true; }
     }
 
-    public override void Capacity() // Toxic, empoisonne l'ennemi target du Konpemo (Autre choix : empoisonne tous les ennemis dans une range)
+    public override void Capacity(Vector3? localisation = null)  // Toxic, empoisonne l'ennemi target du Konpemo (Autre choix : empoisonne tous les ennemis dans une range)
     {
         if (this.konpemoEnemy.isPoisoned == false)
         {

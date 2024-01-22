@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class CharAtkState : CharBaseState
 {
-    private bool canAttack;
     private float timeBetweenAttack;
     public override void EnterState(CharStateManager csm)
     {
-        canAttack = true;
         //csm.agent.SetDestination(csm.transform.position);
     }
     public override void UpdateState(CharStateManager csm)
@@ -18,14 +16,14 @@ public class CharAtkState : CharBaseState
         {
             csm.SwitchState(csm.charAtkMovState);
         }
-        else if (canAttack)
+        else if (csm.konpemo.canAttack)
         {
             if(csm.kingManager.GetKing()?.name != csm.konpemo.name)
             {
                 timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
                 csm.konpemo.SetTarget(csm.cibleKonpemo);
                 csm.konpemo.Attack();
-                csm.StartCoroutine(AttackCooldown(timeBetweenAttack));
+                csm.StartCoroutine(AttackCooldown(timeBetweenAttack, csm));
                 //Debug.Log("ATK");
             }
         }
@@ -34,10 +32,10 @@ public class CharAtkState : CharBaseState
             //Debug.Log(canAttack);
         }
     }
-    public IEnumerator AttackCooldown(float timeToWait)
+    public IEnumerator AttackCooldown(float timeToWait, CharStateManager csm)
     {
-        canAttack = false;
+        csm.konpemo.canAttack = false;
         yield return new WaitForSeconds(timeToWait);
-        canAttack = true;
+        csm.konpemo.canAttack = true;
     }
 }

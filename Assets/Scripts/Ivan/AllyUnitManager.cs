@@ -12,7 +12,8 @@ public class AllyUnitManager : MonoBehaviour
 
     [SerializeField] private UIManager uiManager;
     private int totalAllyUnitDied;
-
+    private bool hasEveryoneDied = false;
+	
     void Start()
     {
         aliveAllyKonpemos = new List<Konpemo>();
@@ -21,6 +22,7 @@ public class AllyUnitManager : MonoBehaviour
         allyDied.AddListener(AllyDiedHandler);
         allySpawn.AddListener(AllySpawnHandler);
         totalAllyUnitDied = 0;
+        
         
     }
     private void Update()
@@ -41,9 +43,11 @@ public class AllyUnitManager : MonoBehaviour
 
     private void CheckAllAllyDied()
     {
-        if (aliveAllyKonpemos.Count < 1)
+        if (aliveAllyKonpemos.Count < 1 && hasEveryoneDied)
         {
+			hasEveryoneDied = false;
             uiManager.DisplayDefeatScreen(GetTotalAllyUnitDied());
+
         }
     }
 

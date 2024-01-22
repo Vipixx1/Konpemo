@@ -17,27 +17,28 @@ public abstract class Konpemo : MonoBehaviour
 
     public bool isParalysed = false;
     public bool isPoisoned = false;
+	public bool canAttack;
 
-    [SerializeField]
     public int capacityType;
-    [SerializeField]
-    private AllyUnitManager allyUnitManager;
-    [SerializeField]
-    private EnemyUnitManager enemyUnitManager;
+	
+    [SerializeField] private AllyUnitManager allyUnitManager;
+    [SerializeField] private EnemyUnitManager enemyUnitManager;
 
-    //private string teamLayerMask //= this.gameObject.layer;
 
+	protected NavMeshAgent agent;
     public Animator animator;
-    
 
     public virtual void Start()
     {
+		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
-
-        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+		ChangeCapacityType();
+        canAttack = true;
+		
+        allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
         enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
-        
-        if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
+
+        /*if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
         {
             allyUnitManager.allySpawn.Invoke(this);
             StartCoroutine(IsAllyAliveCoroutine());
@@ -47,6 +48,11 @@ public abstract class Konpemo : MonoBehaviour
             enemyUnitManager.enemySpawn.Invoke(this);
             StartCoroutine(IsEnemyAliveCoroutine());
         }*/
+    }
+	
+    public virtual void ChangeCapacityType()
+    {
+        capacityType = 0; //valeur par défaut (ne fait rien quand on lance une capacité)
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -84,7 +90,7 @@ public abstract class Konpemo : MonoBehaviour
         konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
-    public virtual void Capacity() 
+    public virtual void Capacity(Vector3? localisation = null) 
     {
         Debug.Log("No capacity");
 
@@ -162,6 +168,7 @@ public abstract class Konpemo : MonoBehaviour
     }
 
 }
+
 public enum KonpemoSpecies
 {
     Evoren,

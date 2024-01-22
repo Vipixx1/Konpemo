@@ -9,9 +9,10 @@ public class IAIdleState : IABaseState
 
     public override void UpdateState(IAStateManager ia)
     {
-        if (ia.target = ia.CheckKing(ia.konpemo.rangeView.Value))
+        //Debug.Log("IDLE");
+        if (ia.target = ia.CheckTauntAndKing(ia.konpemo.rangeView.Value))
         {
-            //Debug.Log("I Follow the KING");
+            //Debug.Log("Je follow le ROI ou un taunt");
             ia.SwitchState(ia.IAMovingState);
         }
 

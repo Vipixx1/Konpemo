@@ -17,6 +17,7 @@ public class SelectionManager : MonoBehaviour
     private bool allyUnitHit;
     private bool UnitHit;
     KonpemoManager konpemoManagerHit;
+    KonpemoManager konpemoManagerToAddCapacity;
     List<KonpemoManager> selectedKonpemos;
     Camera mainCamera;
 
@@ -87,6 +88,11 @@ public class SelectionManager : MonoBehaviour
 
     private void SelectKonpemo(KonpemoManager konpemoManager)
     {
+        eventManager.AddCapacityListener(konpemoManager);
+        if(selectedKonpemos.Count > 0)
+        {
+            eventManager.RemoveCapacityListener(selectedKonpemos[selectedKonpemos.Count - 1]); //On enlève le listener de capacité pour l'ancien konpemoManager
+        }
         eventManager.AddListener(konpemoManager);
         selectedKonpemos.Add(konpemoManager);
         konpemoManager.selectionEffect.gameObject.SetActive(true);

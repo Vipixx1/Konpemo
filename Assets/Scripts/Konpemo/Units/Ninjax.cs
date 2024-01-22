@@ -29,7 +29,7 @@ public class Ninjax : Konpemo
         }
     }
 
-    public override void Capacity() // Brouillard
+    public override void Capacity(Vector3? localisation = null) // Brouillard
     {
 
     }

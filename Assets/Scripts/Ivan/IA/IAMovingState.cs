@@ -6,33 +6,43 @@ using UnityEngine;
 public class IAMovingState : IABaseState
 {
     private float distanceToCible;
-    private Konpemo visibleKing;
+    private Konpemo visibleKingOrTaunt;
     public override void EnterState(IAStateManager ia)
     {
 
     }
     public override void UpdateState(IAStateManager ia)
     {
+
         distanceToCible = (ia.target.transform.position - ia.transform.position).magnitude;
-        visibleKing = ia.CheckKing(ia.konpemo.rangeView.Value);
-        if (visibleKing != null)
+        visibleKingOrTaunt = ia.CheckTauntAndKing(ia.konpemo.rangeView.Value);
+        if (visibleKingOrTaunt != null)
         {
-            ia.target = visibleKing;
+            ia.target = visibleKingOrTaunt;
         }
-        if (distanceToCible <= ia.konpemo.rangeAttack.Value) //cible a portee d'atk
+        if (ia.target.isActiveAndEnabled)
         {
-            ia.agent.SetDestination(ia.transform.position);
-            ia.SwitchState(ia.IAAttackingState);
+            if (distanceToCible <= ia.konpemo.rangeAttack.Value) //cible a portee d'atk
+            {
+                ia.agent.SetDestination(ia.transform.position);
+                ia.SwitchState(ia.IAAttackingState);
+            }
+            else if (distanceToCible >= ia.konpemo.rangeView.Value)  // cible hors de portee de vision
+            {
+                ia.SwitchState(ia.IAIdleState);
+            }
+            else  //cible a portee de vision
+            {
+                ia.agent.SetDestination(ia.target.transform.position);
+            }
         }
-        else if (distanceToCible >= ia.konpemo.rangeView.Value)  // cible hors de portee de vision
+        else
         {
             ia.SwitchState(ia.IAIdleState);
         }
-        else  //cible a portee de vision
-        {
-            ia.agent.SetDestination(ia.target.transform.position);
-        }
+
     }
+	
     public override void OnCollisionEnter(IAStateManager ia)
     {
 

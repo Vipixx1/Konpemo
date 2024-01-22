@@ -15,9 +15,11 @@ public class IAPatrollingState: IABaseState
     public override void UpdateState(IAStateManager ia)
     {
         //Debug.Log("IDLE");
-        if (ia.target = ia.CheckKing(ia.konpemo.rangeView.Value))
+
+        if (ia.target = ia.CheckTauntAndKing(ia.konpemo.rangeView.Value))
         {
-            //Debug.Log("I follow the KING");
+            //Debug.Log("Je follow le ROI ou le taunt");
+
             ia.SwitchState(ia.IAMovingState);
         }
         else if (ia.target = ia.GetClosestTarget(ia.konpemo.rangeView.Value, ia.enemyLayerMask))

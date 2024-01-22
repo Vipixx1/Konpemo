@@ -5,29 +5,43 @@ using UnityEngine;
 
 public class IAAttackingState : IABaseState
 {
-    private bool canAttack;
     private float timeBetweenAttack;
+	
+    private Konpemo visibleKingOrTaunt;
+    private bool taunted = false;
 
     public override void EnterState(IAStateManager ia)
     {
-        canAttack = true;
+
     }
 
     public override void UpdateState(IAStateManager ia)
     {
+        visibleKingOrTaunt = ia.CheckTauntAndKing(ia.konpemo.rangeView.Value);
+        if (visibleKingOrTaunt == null)
+        {
+            taunted = false;
+        }
+        else if (visibleKingOrTaunt != null && !taunted)
+        {
+            ia.target = visibleKingOrTaunt;
+            taunted = true;
+            ia.SwitchState(ia.IAMovingState);
+        }
         if ((ia.target.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value) //cible hors de portee d'atk
+
         {
             ia.SwitchState(ia.IAMovingState);
         }
-        else if (canAttack)
+        else if (ia.konpemo.canAttack)
         {
             if (ia.target.isActiveAndEnabled)
             {
                 timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
                 ia.konpemo.SetTarget(ia.target);
                 ia.konpemo.Attack();
-                ia.StartCoroutine(AttackCooldown(timeBetweenAttack));
-                //Debug.Log("Deal Damages");
+                ia.StartCoroutine(AttackCooldown(timeBetweenAttack, ia));
+                Debug.Log("Deal Damages");
             }
             else
             {
@@ -40,11 +54,11 @@ public class IAAttackingState : IABaseState
             //Debug.Log("pas d'attaques");
         }
     }
-    public IEnumerator AttackCooldown(float timeToWait)
+    public IEnumerator AttackCooldown(float timeToWait, IAStateManager ia)
     {
-        canAttack = false;
+        ia.konpemo.canAttack = false;
         yield return new WaitForSeconds(timeToWait);
-        canAttack = true;
+        ia.konpemo.canAttack = true;
     }
     public override void OnCollisionEnter(IAStateManager ia)
     {

@@ -8,6 +8,8 @@ public class IAStateManager : MonoBehaviour
     public Konpemo konpemo;
     public NavMeshAgent agent;
 
+    public List<Konpemo> taunterKonpemos = new List<Konpemo>();
+
     public LayerMask enemyLayerMask;
     public Konpemo target;
 
@@ -70,11 +72,23 @@ public class IAStateManager : MonoBehaviour
         }
     }
 
-    public Konpemo CheckKing(float rangeView)
+
+    public Konpemo CheckTauntAndKing(float rangeView)
     {
-        // Code optimisé, au début je faisais un overlapSphere
-        king = kingManager.GetKing();
-        if (king != null)
+        //code optimisé au début je faisais un overlapSphere
+        if (taunterKonpemos != null)
+        {
+            foreach (Konpemo taunterKonpemo in taunterKonpemos)
+            {
+                if ((taunterKonpemo.transform.position - this.gameObject.transform.position).magnitude <= rangeView)
+                {
+                    return taunterKonpemo;
+                }
+            }
+            return null;
+        }
+		
+        else if (king != null)
         {
             if ((king.transform.position - this.gameObject.transform.position).magnitude <= rangeView)
             {

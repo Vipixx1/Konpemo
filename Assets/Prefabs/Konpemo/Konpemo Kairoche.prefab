@@ -473,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5020924374195174826, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Name
-      value: Konpemo Variant
+      value: Konpemo Kairoche
       objectReference: {fileID: 0}
     - target: {fileID: 5020924374195174826, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Layer

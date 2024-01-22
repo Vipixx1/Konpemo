@@ -40,7 +40,6 @@ public class Serbiere : Konpemo
     }
     public override void Attack() // Vortex Feu
     {
-        animator.SetTrigger("Attack");
         if (1 << this.gameObject.layer == masqueBleu.value)
 
         {

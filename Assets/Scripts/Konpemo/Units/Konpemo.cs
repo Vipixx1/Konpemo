@@ -88,14 +88,12 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Attack()
     {
-        animator.SetTrigger("Attack");
         konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
     public virtual void Capacity(Vector3? localisation = null) 
     {
         Debug.Log("No capacity");
-
         //Pour les capacit�s qui ciblent une position ou un alli� pr�cis, rajouter :
         //Si appuie sur clique gauche { Action; SetCooldown(cdCapacity) }
         //Si appuie sur Echap ou clique droit { Annule;  pas de CD }

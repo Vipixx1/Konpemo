@@ -15,7 +15,7 @@ public class Magitruite : Konpemo
         health.SetCurrentHealth(10f);
         strength.BaseValue = 0f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 0.5f;
+        speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.5f;
 
         cooldown.BaseValue = 0f;

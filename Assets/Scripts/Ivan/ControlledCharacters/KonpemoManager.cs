@@ -79,19 +79,19 @@ public class KonpemoManager : MonoBehaviour
         switch (konpemo.capacityType)
         {
             case CapacityType.NoClick:
-                eventManager.rCapacityEvent.AddListener(RCapacityHandler);
+                eventManager.capacityNoClickEvent.AddListener(NoClickCapacityHandler);
                 break;
 
             case CapacityType.ClickOnGround:
-                eventManager.zCapacityEvent.AddListener(ZCapacityHandler);
+                eventManager.capacityOnGroundEvent.AddListener(OnGroundCapacityHandler);
                 break;
 
             case CapacityType.ClickOnAlly:
-                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
+                eventManager.capacityOnUnitEvent.AddListener(OnUnitCapacityHandler);
                 break;
 
             case CapacityType.ClickOnEnemy:
-                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
+                eventManager.capacityOnUnitEvent.AddListener(OnUnitCapacityHandler);
                 break;
 
             default:
@@ -104,19 +104,19 @@ public class KonpemoManager : MonoBehaviour
         switch (konpemo.capacityType)
         {
             case CapacityType.NoClick:
-                eventManager.rCapacityEvent.RemoveListener(RCapacityHandler);
+                eventManager.capacityNoClickEvent.RemoveListener(NoClickCapacityHandler);
                 break;
 
             case CapacityType.ClickOnGround:
-                eventManager.zCapacityEvent.RemoveListener(ZCapacityHandler);
+                eventManager.capacityOnGroundEvent.RemoveListener(OnGroundCapacityHandler);
                 break;
 
             case CapacityType.ClickOnAlly:
-                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
+                eventManager.capacityOnUnitEvent.RemoveListener(OnUnitCapacityHandler);
                 break;
 
             case CapacityType.ClickOnEnemy:
-                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
+                eventManager.capacityOnUnitEvent.RemoveListener(OnUnitCapacityHandler);
                 break;
 
             default:
@@ -125,7 +125,7 @@ public class KonpemoManager : MonoBehaviour
         }
     }
 
-    public void RCapacityHandler()
+    public void NoClickCapacityHandler()
     {
         if (cdCapacityUp)
         {
@@ -134,16 +134,7 @@ public class KonpemoManager : MonoBehaviour
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
     }
-    public void ECapacityHandler(GameObject cibleToCastOn)
-    {
-        if (cdCapacityUp)
-        {
-            Debug.Log("E CAPACITY TO PUT HERE");
-            //konpemo.Capacity(cibleToCastOn);
-            StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
-        }
-    }
-    public void ZCapacityHandler(Vector3 localisationSpell)
+    public void OnGroundCapacityHandler(Vector3 localisationSpell)
     {
         if (cdCapacityUp)
         {
@@ -152,6 +143,17 @@ public class KonpemoManager : MonoBehaviour
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
     }
+
+    public void OnUnitCapacityHandler(GameObject targetToCastOn)
+    {
+        if (cdCapacityUp)
+        {
+            Debug.Log("E CAPACITY TO PUT HERE");
+            //konpemo.Capacity(targetToCastOn);
+            StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
+        }
+    }
+    
 
     public void MoveHandler(Vector3 position)
     {

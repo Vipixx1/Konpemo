@@ -306,7 +306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.5}
   m_SizeDelta: {x: 1.8517, y: 0.6617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7123644614131469328
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  offset: {x: -1, y: 1, z: 0}
 --- !u!1 &5020924374195174826
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +416,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9212905757589072486}
   - {fileID: 3983986237869730403}
@@ -452,7 +453,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.8, z: 1.5}
+  m_Size: {x: 1.05, y: 1.2, z: 2.25}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &5830403371991844343
 NavMeshAgent:
@@ -585,8 +586,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1885469718964853162}
   m_Father: {fileID: 8353117356273093927}

@@ -29,7 +29,7 @@ public class Serbiere : Konpemo
         health.SetCurrentHealth(300f);
         strength.BaseValue = 100f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 2f;
+        speed.BaseValue = 4f;
         attackSpeed.BaseValue = 0.33f;
 
         cooldown.BaseValue = 30f;
@@ -44,28 +44,20 @@ public class Serbiere : Konpemo
         this.capacityType = CapacityType.ClickOnGround;
     }
 
-    public override void Attack() // Vortex Feu
+    public override void Attack() // VortexDeFeu
     {
-        if (1 << this.gameObject.layer == masqueBleu.value)
 
         {
-            Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex, masqueRouge);
-            foreach (Collider collider in hitColliders)
-            {
-                //Debug.Log(collider.GetComponent<Konpemo>());
-                collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
-                vortexDeFeu.transform.position = konpemoEnemy.transform.position;
-                vortexDeFeu.Play();
-            }
-        }
-        else if (1 << this.gameObject.layer == masqueRouge.value)
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex, masqueBleu);
-            foreach (Collider collider in hitColliders)
-            {
-                collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
-                vortexDeFeu.transform.position = konpemoEnemy.transform.position;
-                vortexDeFeu.Play();
+            Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex);
+            foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
+            { 
+                if (this.gameObject.layer != collider.gameObject.layer)
+                {
+                    collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
+                    vortexDeFeu.transform.position = konpemoEnemy.transform.position;
+                    vortexDeFeu.Play();
+                }
+                
             }
         }
     }

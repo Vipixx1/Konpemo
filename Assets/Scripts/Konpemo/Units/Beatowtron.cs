@@ -9,7 +9,7 @@ public class Beatowtron : Konpemo
         health.SetCurrentHealth(300f);
         strength.BaseValue = 10f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 2f;
+        speed.BaseValue = 4f;
         attackSpeed.BaseValue = 0.2f;
 
         cooldown.BaseValue = 10f;

@@ -11,7 +11,7 @@ public class Evoren : Konpemo
         health.SetCurrentHealth(500f);
         strength.BaseValue = 40f;
         defense.BaseValue = 5f;
-        speed.BaseValue = 5f;
+        speed.BaseValue = 7f;
         attackSpeed.BaseValue = 1f;
 
         cooldown.BaseValue = 15f;

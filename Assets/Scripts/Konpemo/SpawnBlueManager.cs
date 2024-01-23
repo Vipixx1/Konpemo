@@ -9,27 +9,47 @@ public class SpawnBlueManager : MonoBehaviour
     private GameObject blueManager;
 
     [SerializeField]
-    private List<Spawner> spawnerBlueList = new();
+    private List<Transform> spawnerBlueList = new();
 
     private readonly List<Konpemo> konpemos = KonpemoCounting.konpemosBlue;
 
+    private AllyUnitManager allyUnitManager;
+
     void Start()
     {
+
+        allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
+
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            Spawner tmp = this.transform.GetChild(i).GetComponent<Spawner>();
+            Transform tmp = this.transform.GetChild(i).GetComponent<Transform>();
             spawnerBlueList.Add(tmp);
         }
 
         for (int j = 0; j < Mathf.Min(spawnerBlueList.Count, konpemos.Count); j++)
         {
-            Spawner spawner = spawnerBlueList[j];
-            Konpemo konpemo = konpemos[j];
+            Transform spawnerPosition = spawnerBlueList[j];
+            Konpemo konpemoPrefab = konpemos[j];
 
-            spawner.SetKonpemo(konpemo);
-            spawner.SetManager(blueManager);
+            Konpemo newKonpemo = Instantiate(konpemoPrefab);
+            newKonpemo.gameObject.layer = this.gameObject.layer;
+
+            GameObject newManager = Instantiate(blueManager);
+            newManager.transform.parent = newKonpemo.transform;
+
+            newKonpemo.transform.SetPositionAndRotation(spawnerPosition.position, spawnerPosition.rotation);
+            
+            spawnerPosition.gameObject.SetActive(false);
+
+            allyUnitManager.SetAllyAlive(newKonpemo);
+
+            newKonpemo.onDeath.AddListener(Handler);
         }
-        
+
+    }
+    public void Handler(Konpemo konpemo)
+    {
+        allyUnitManager.AllyDied(konpemo);
     }
 
 }

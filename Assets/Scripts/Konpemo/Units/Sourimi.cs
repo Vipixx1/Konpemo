@@ -11,7 +11,7 @@ public class Sourimi : Konpemo
 
     private float distance;
     private float angle;
-    private float limitDash = 1;
+    private float limitDash = 0.3f;
     private int limitIterationToDash = 10;
     private Vector3 localisationDash;
 
@@ -61,7 +61,7 @@ public class Sourimi : Konpemo
     {
         if (agent.Warp(position))
         {
-            //Debug.Log("Dash réalisé avec succès")
+            dashAnimation.Play();
         }
 		
         else

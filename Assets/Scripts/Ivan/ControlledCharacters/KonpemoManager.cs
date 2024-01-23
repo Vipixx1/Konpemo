@@ -179,32 +179,4 @@ public class KonpemoManager : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
         cdCapacityUp = true;
     }
-    public virtual IEnumerator IsAllyAliveCoroutine(Konpemo konpemo)
-    {
-        while (true)
-        {
-            if (konpemo.health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-                allyUnitManager.allyDied.Invoke(konpemo);
-                konpemo.Death();
-                break;
-            }
-            yield return null;
-        }
-    }
-    public virtual IEnumerator IsEnemyAliveCoroutine(Konpemo konpemo)
-    {
-        while (true)
-        {
-            if (konpemo.health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-                enemyUnitManager.enemyDied.Invoke(konpemo);
-                konpemo.Death();
-                break;
-            }
-            yield return null;
-        }
-    }
 }

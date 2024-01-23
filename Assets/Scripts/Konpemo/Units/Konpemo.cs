@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public abstract class Konpemo : MonoBehaviour
 {
@@ -33,17 +35,23 @@ public abstract class Konpemo : MonoBehaviour
     public Animator animator;
     public GameObject capacityArea;
 
+    //public Action<Konpemo> onDeath;
+    public UnityEvent<Konpemo> onDeath;
+
     public virtual void Start()
     {
 		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
 		SetCapacityType();
+        Debug.Log("Stats Fixés");
 
         capacityArea.transform.localScale = new Vector3(rangeCapacity.Value, 0, rangeCapacity.Value)*2;
         capacityArea.SetActive(false);
 
         canAttack = true;
 		
+        //this.onDeath.AddListener
+
         /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
         enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();*/
 
@@ -64,34 +72,6 @@ public abstract class Konpemo : MonoBehaviour
     public virtual void SetCapacityType()
     {
         capacityType = CapacityType.NoCapacity;
-    }
-    public virtual IEnumerator IsAllyAliveCoroutine()
-    {
-        while(true)
-        {
-            if (health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORT");
-                allyUnitManager.allyDied.Invoke(this);
-                this.Death();
-                break;
-            }
-            yield return null;
-        }
-    }
-    public virtual IEnumerator IsEnemyAliveCoroutine()
-    {
-        while (true)
-        {
-            if (health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORT");
-                enemyUnitManager.enemyDied.Invoke(this);
-                this.Death();
-                break;
-            }
-            yield return null;
-        }
     }
 
 
@@ -114,6 +94,13 @@ public abstract class Konpemo : MonoBehaviour
     {
         //animator.SetTrigger("TakingDamage");
         this.health.TakingFlatDamage(rawDamage, this.defense.Value);
+        if (this.health.GetCurrentHealth() < 0.01)
+        {
+            Debug.Log("envoi d'un onDeathEvent");
+            //onDeath?.Invoke(this);
+            onDeath.Invoke(this);
+            this.animator.SetTrigger("Death");
+        }
     }
 
     public virtual void Healing(float healthHealed)
@@ -131,8 +118,7 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Death()
     {
-        animator.SetTrigger("Death");
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     // Status of the Konpemo
@@ -172,7 +158,16 @@ public abstract class Konpemo : MonoBehaviour
             this.isParalysed = false;
         }
     }
-
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(this.gameObject.layer == 7)
+            {
+                this.TakingDamage(100000);
+            }
+        }
+    }
 }
 
 public enum KonpemoSpecies
@@ -196,3 +191,4 @@ public enum CapacityType
     ClickOnAlly,    // 3. Need to click on an ally to launch capacity
     ClickOnEnemy,   // 4. Need to click on an enemy to launch capacity
 }
+

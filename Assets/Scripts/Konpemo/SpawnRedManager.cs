@@ -12,7 +12,7 @@ public class SpawnRedManager : MonoBehaviour
     private GameObject redManager;
 
     [SerializeField]
-    private List<Spawner> spawnerRedList = new();
+    private List<Transform> spawnerRedList = new();
 
     [SerializeField] private Evoren evorenPrefab;
     [SerializeField] private Sourimi sourimiPrefab;
@@ -24,27 +24,45 @@ public class SpawnRedManager : MonoBehaviour
     [SerializeField] private Caillebonbon caillebonbonPrefab;
     [SerializeField] private Magitruite magitruitePrefab;
 
-    private readonly List<Konpemo> konpemos = new();
+    public static List<Konpemo> konpemosRed = new();
+
+    private EnemyUnitManager enemyUnitManager;
 
     void Start()
     {
-        
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
+
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            Spawner tmp = this.transform.GetChild(i).GetComponent<Spawner>();
+            Transform tmp = this.transform.GetChild(i).GetComponent<Transform>();
             spawnerRedList.Add(tmp);
         }
 
         GenerateRedTeam();
 
-        for (int i = 0; i < Mathf.Min(spawnerRedList.Count, konpemos.Count); i++)
+        for (int j = 0; j < Mathf.Min(spawnerRedList.Count, konpemosRed.Count); j++)
         {
-            Spawner spawner = spawnerRedList[i];
-            Konpemo konpemo = konpemos[i];
+            Transform spawnerPosition = spawnerRedList[j];
+            Konpemo konpemoPrefab = konpemosRed[j];
 
-            spawner.SetKonpemo(konpemo);
-            spawner.SetManager(redManager);
+            Konpemo newKonpemo = Instantiate(konpemoPrefab);
+            newKonpemo.gameObject.layer = this.gameObject.layer;
+
+            GameObject newManager = Instantiate(redManager);
+            newManager.transform.parent = newKonpemo.transform;
+
+            newKonpemo.transform.SetPositionAndRotation(spawnerPosition.position, spawnerPosition.rotation);
+
+            spawnerPosition.gameObject.SetActive(false);
+
+            enemyUnitManager.SetEnemyAlive(newKonpemo);
+
+            newKonpemo.onDeath.AddListener(Handler);
         }
+    }
+    public void Handler(Konpemo konpemo)
+    {
+        enemyUnitManager.EnemyDied(konpemo);
     }
 
 
@@ -57,7 +75,7 @@ public class SpawnRedManager : MonoBehaviour
             int konpemoId = rand.Next(0, nbKonpemoSpecies);
             Konpemo konpemo = ChooseKonpemo(konpemoId);
 
-            konpemos.Add(konpemo);
+            konpemosRed.Add(konpemo);
         }
     
     }

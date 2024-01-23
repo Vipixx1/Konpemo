@@ -117,7 +117,7 @@ public class EventManager : MonoBehaviour
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)  //si le point de casting est à l'intérieur de la zone de vision
                     {
                         //Debug.Log("Capacity OnGround event sent");
-                        zCapacityEvent.Invoke(hit.collider.transform.position);
+                        zCapacityEvent.Invoke(hit.point);   
                         mUiManager.HideSpriteBlue();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);

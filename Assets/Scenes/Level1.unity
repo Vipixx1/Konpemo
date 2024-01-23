@@ -15955,6 +15955,7 @@ MonoBehaviour:
   eventManager: {fileID: 688668761}
   locker: 0
   mOwner: {fileID: 0}
+  selectedKonpemos: []
 --- !u!1001 &894827085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24349,12 +24350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47552ad80fdefa443898655ef8829abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyDied:
-    m_PersistentCalls:
-      m_Calls: []
-  allySpawn:
-    m_PersistentCalls:
-      m_Calls: []
   aliveAllyKonpemos: []
   uiManager: {fileID: 561127090}
 --- !u!1001 &1326100794
@@ -32107,7 +32102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756551604}
   - component: {fileID: 1756551605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spawn Bleu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32654,7 +32649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1782523101}
   - component: {fileID: 1782523102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spawn Rouge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

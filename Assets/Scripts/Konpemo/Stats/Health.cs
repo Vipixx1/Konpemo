@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Health : CharacterStat
 {
     private float currentHealth;
-
     public void SetCurrentHealth(float currentHealth)
     {
         this.currentHealth = currentHealth;

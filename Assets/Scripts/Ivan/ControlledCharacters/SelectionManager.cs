@@ -18,8 +18,8 @@ public class SelectionManager : MonoBehaviour
     private bool UnitHit;
     KonpemoManager konpemoManagerHit;
     KonpemoManager konpemoManagerToAddCapacity;
-    [SerializeField]List<KonpemoManager> selectedKonpemos;
-    Camera mainCamera;
+    [SerializeField] public List<KonpemoManager> selectedKonpemos;
+    private Camera mainCamera;
 
 
     void Start()

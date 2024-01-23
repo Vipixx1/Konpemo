@@ -8,18 +8,13 @@ public class KonpemoManager : MonoBehaviour
     private Konpemo konpemo; //public ???
 	
 	public GameObject selectionEffect;
+
     [SerializeField]
     private AllyUnitManager allyUnitManager;
     [SerializeField]
     private EnemyUnitManager enemyUnitManager;
-    [SerializeField]
-    private string allyUnitMaskName = "Blue";
-    [SerializeField]
-    private string enemyUnitMaskName = "Red";
-    private Konpemo allyUnitKonpemo;
-    private Konpemo enemyUnitKonpemo;
-    /*[SerializeField]
-    private string health;*/
+
+
     private bool cdCapacityUp;
     private void Start()
     {

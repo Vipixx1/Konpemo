@@ -6,10 +6,12 @@ public class Sourimi : Konpemo
 {
     [SerializeField]
 	private Transform pointDeTir;
+    [SerializeField]
+    private ParticleSystem dashAnimation;
 
     private float distance;
     private float angle;
-    private float limitDash = 1;
+    private float limitDash = 0.3f;
     private int limitIterationToDash = 10;
     private Vector3 localisationDash;
 
@@ -60,7 +62,7 @@ public class Sourimi : Konpemo
     {
         if (agent.Warp(position))
         {
-            //Debug.Log("Dash réalisé avec succès")
+            dashAnimation.Play();
         }
 		
         else
@@ -73,7 +75,11 @@ public class Sourimi : Konpemo
                 float y = position.y + distance * Mathf.Sin(angle);
                 localisationDash = new Vector3(x, y, position.z);
 				
-                if(agent.Warp(localisationDash)) break;
+                if(agent.Warp(localisationDash))
+                {
+                    dashAnimation.Play();
+                    break;
+                }
             }
 			
         }

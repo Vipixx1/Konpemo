@@ -28,20 +28,7 @@ public class KonpemoManager : MonoBehaviour
         konpemo = this.gameObject.GetComponentInParent<Konpemo>();
 
         cdCapacityUp = true;
-        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
-        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
-        if (this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
-        {
-            allyUnitKonpemo = this.GetComponent<Konpemo>();
-            allyUnitManager.allySpawn.Invoke(allyUnitKonpemo);
-            StartCoroutine(IsAllyAliveCoroutine(allyUnitKonpemo));
-        }
-        if (this.gameObject.layer == LayerMask.NameToLayer(enemyUnitMaskName))
-        {
-            enemyUnitKonpemo = this.GetComponent<Konpemo>();
-            enemyUnitManager.enemySpawn.Invoke(enemyUnitKonpemo);
-            StartCoroutine(IsEnemyAliveCoroutine(enemyUnitKonpemo));
-        }*/
+
     }
 
     public void AddMoveListener(EventManager eventManager)
@@ -180,33 +167,5 @@ public class KonpemoManager : MonoBehaviour
         cdCapacityUp = false;
         yield return new WaitForSeconds(timeToWait);
         cdCapacityUp = true;
-    }
-    public virtual IEnumerator IsAllyAliveCoroutine(Konpemo konpemo)
-    {
-        while (true)
-        {
-            if (konpemo.health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-                allyUnitManager.allyDied.Invoke(konpemo);
-                konpemo.Death();
-                break;
-            }
-            yield return null;
-        }
-    }
-    public virtual IEnumerator IsEnemyAliveCoroutine(Konpemo konpemo)
-    {
-        while (true)
-        {
-            if (konpemo.health.GetCurrentHealth() < 1)
-            {
-                //Debug.Log("Je suis MORTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-                enemyUnitManager.enemyDied.Invoke(konpemo);
-                konpemo.Death();
-                break;
-            }
-            yield return null;
-        }
     }
 }

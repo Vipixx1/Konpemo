@@ -11416,7 +11416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   king: {fileID: 0}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 1264266720}
   allyUnitManager: {fileID: 965220027}
 --- !u!1001 &661457749
 PrefabInstance:
@@ -13357,6 +13357,7 @@ MonoBehaviour:
   eventManager: {fileID: 1069355079}
   locker: 0
   mOwner: {fileID: 0}
+  selectedKonpemos: []
 --- !u!1001 &782380888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16272,12 +16273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47552ad80fdefa443898655ef8829abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyDied:
-    m_PersistentCalls:
-      m_Calls: []
-  allySpawn:
-    m_PersistentCalls:
-      m_Calls: []
   aliveAllyKonpemos: []
   uiManager: {fileID: 1264266720}
 --- !u!4 &965220028
@@ -18075,13 +18070,13 @@ MonoBehaviour:
   goToFlwAllyEvent:
     m_PersistentCalls:
       m_Calls: []
-  rCapacityEvent:
+  capacityNoClickEvent:
     m_PersistentCalls:
       m_Calls: []
-  eCapacityEvent:
+  capacityOnGroundEvent:
     m_PersistentCalls:
       m_Calls: []
-  zCapacityEvent:
+  capacityOnUnitEvent:
     m_PersistentCalls:
       m_Calls: []
   masqueUnite:
@@ -27242,13 +27237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11140a1d714da8247aaad69a978fd71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDied:
-    m_PersistentCalls:
-      m_Calls: []
-  enemySpawn:
-    m_PersistentCalls:
-      m_Calls: []
   aliveEnemyKonpemos: []
+  uiManager: {fileID: 1264266720}
 --- !u!1 &1675942989
 GameObject:
   m_ObjectHideFlags: 0
@@ -28669,7 +28659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756551604}
   - component: {fileID: 1756551605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spawn Bleu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29170,7 +29160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1782523101}
   - component: {fileID: 1782523102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spawn Rouge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

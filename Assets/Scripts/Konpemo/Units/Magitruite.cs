@@ -63,7 +63,8 @@ public class Magitruite : Konpemo
     public override void TakingDamage(float damageTaken) //2e passif !
     {
         System.Random rand = new();
-        this.health.TakingFlatDamage(rand.Next(0, 2), 0);
+        base.TakingDamage(rand.Next(0, 2));
+        //this.health.TakingFlatDamage(rand.Next(0, 2), 0);
     }
 
     public override void Healing(float hpHealed)

@@ -9,15 +9,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject redCursor;
     [SerializeField] private GameObject blueCursor;
 
-    [SerializeField] private GameObject gameOverScreen;
-	[SerializeField] private TMP_Text defeatTimer;
-	
+    [SerializeField] private GameObject activeUI;
+    [SerializeField] private TMP_Text timer;
+    public TMP_Text konpemoEnemyAliveCounter;
+
     [SerializeField] private GameObject victoryScreen;
 	[SerializeField] private TMP_Text victoryTimer;
 
-    [SerializeField] private TMP_Text timer;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private TMP_Text defeatTimer;
+    [SerializeField] private TMP_Text konpemoAllyLostCounter;
 
-    [SerializeField] private TMP_Text konpemoLostCounter;
+    
 
     private void Start()
     {
@@ -26,13 +29,14 @@ public class UIManager : MonoBehaviour
 		
 		victoryScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-		
+		activeUI.SetActive(true);
         timer.gameObject.SetActive(true);
     }
 
     void Update()
     {
         timer.text = GetTime();    
+        
     }
 	
     public void DisplaySpriteRed()
@@ -56,15 +60,15 @@ public class UIManager : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
 		defeatTimer.text = GetTime();
-        konpemoLostCounter.text = nbKonpemoLost + "fell...";
-        timer.gameObject.SetActive(false);
+        konpemoAllyLostCounter.text = nbKonpemoLost + " fell...";
+        activeUI.SetActive(false);
     }
 
     public void DisplayVictoryScreen()
     {
 		victoryTimer.text = GetTime();
         victoryScreen.SetActive(true);
-        timer.gameObject.SetActive(false);
+        activeUI.SetActive(false);
     }
 
     public string GetTime()

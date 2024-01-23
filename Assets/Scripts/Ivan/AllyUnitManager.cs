@@ -6,46 +6,40 @@ using UnityEngine.SceneManagement;
 
 public class AllyUnitManager : MonoBehaviour
 {
-    public UnityEvent<Konpemo> allyDied;
-    public UnityEvent<Konpemo> allySpawn;
-    public List<Konpemo> aliveAllyKonpemos;
-
+    [SerializeField]
+    private List<Konpemo> aliveAllyKonpemos;
     [SerializeField] private UIManager uiManager;
     private int totalAllyUnitDied;
-    private bool hasEveryoneDied = false;
-	
+    private bool isEveryoneDead = false;
+
     void Start()
     {
-        aliveAllyKonpemos = new List<Konpemo>();
-        allyDied = new UnityEvent<Konpemo>();
-        allySpawn = new UnityEvent<Konpemo>();
-        allyDied.AddListener(AllyDiedHandler);
-        allySpawn.AddListener(AllySpawnHandler);
+        aliveAllyKonpemos = new();
         totalAllyUnitDied = 0;
-        
-        
+        isEveryoneDead = false;  
     }
     private void Update()
     {
         CheckAllAllyDied();
     }
 
-    public void AllyDiedHandler(Konpemo konpemo)
+    public void AllyDied(Konpemo konpemo)
     {
-        totalAllyUnitDied += 1;
+        //Debug.Log(aliveAllyKonpemos.Remove(konpemo));
         aliveAllyKonpemos.Remove(konpemo);
+        totalAllyUnitDied += 1;   
     }
 
-    public void AllySpawnHandler(Konpemo konpemo)
+    public void SetAllyAlive(Konpemo konpemo)
     {
         aliveAllyKonpemos.Add(konpemo);
     }
 
     private void CheckAllAllyDied()
     {
-        if (aliveAllyKonpemos.Count < 1 && hasEveryoneDied)
+        if (aliveAllyKonpemos.Count < 1 && !isEveryoneDead)
         {
-			hasEveryoneDied = false;
+			isEveryoneDead = true;
             uiManager.DisplayDefeatScreen(GetTotalAllyUnitDied());
 
         }

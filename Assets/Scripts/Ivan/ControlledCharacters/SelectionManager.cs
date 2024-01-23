@@ -18,8 +18,8 @@ public class SelectionManager : MonoBehaviour
     private bool UnitHit;
     KonpemoManager konpemoManagerHit;
     KonpemoManager konpemoManagerToAddCapacity;
-    List<KonpemoManager> selectedKonpemos;
-    Camera mainCamera;
+    [SerializeField] public List<KonpemoManager> selectedKonpemos;
+    private Camera mainCamera;
 
 
     void Start()
@@ -41,7 +41,7 @@ public class SelectionManager : MonoBehaviour
                 konpemoManagerHit = hit.collider.gameObject.GetComponentInChildren<KonpemoManager>();
                 if (!CheckKonpemoSelected(konpemoManagerHit)) //Konpemo not selected
                 {
-                    //Debug.Log("unité touché, tentative d'ajout listeners");
+                    //Debug.Log("unitï¿½ touchï¿½, tentative d'ajout listeners");
                     SelectKonpemo(konpemoManagerHit);
                     //Debug.Log(selectedKonpemos.Count);
                     
@@ -52,10 +52,10 @@ public class SelectionManager : MonoBehaviour
                     UnselectKonpemo(konpemoManagerHit);
                 }
             }
-            else if (!Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUnite))  //on ne clique pas sur une unité
+            else if (!Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUnite))  //on ne clique pas sur une unitï¿½
             {
                 UnselectKonpemos();
-                //Debug.Log("tous les konpemos déseléctionnés");
+                //Debug.Log("tous les konpemos deselectionnes");
                 //Debug.Log(selectedKonpemos.Count);
             }
             this.Unlock(this.gameObject);
@@ -91,7 +91,7 @@ public class SelectionManager : MonoBehaviour
         eventManager.AddCapacityListener(konpemoManager);
         if(selectedKonpemos.Count > 0)
         {
-            eventManager.RemoveCapacityListener(selectedKonpemos[selectedKonpemos.Count - 1]); //On enlève le listener de capacité pour l'ancien konpemoManager
+            eventManager.RemoveCapacityListener(selectedKonpemos[selectedKonpemos.Count - 1]); //On enlï¿½ve le listener de capacitï¿½ pour l'ancien konpemoManager
         }
         eventManager.AddListener(konpemoManager);
         selectedKonpemos.Add(konpemoManager);

@@ -29,7 +29,7 @@ public class Serbiere : Konpemo
         health.SetCurrentHealth(300f);
         strength.BaseValue = 100f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 2f;
+        speed.BaseValue = 4f;
         attackSpeed.BaseValue = 0.33f;
 
         cooldown.BaseValue = 30f;

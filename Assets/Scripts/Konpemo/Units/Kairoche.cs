@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Kairoche : Konpemo
 {
-    [SerializeField]
-    private LayerMask redMask;
+
     private IAStateManager iaStateManager;
 
     public override void SetBaseStats()
@@ -15,7 +15,7 @@ public class Kairoche : Konpemo
         health.SetCurrentHealth(650f);
         strength.BaseValue = 30f;
         defense.BaseValue = 10f;
-        speed.BaseValue = 1f;
+        speed.BaseValue = 3f;
         attackSpeed.BaseValue = 1f;
 
         cooldown.BaseValue = 15f;
@@ -28,11 +28,13 @@ public class Kairoche : Konpemo
     {
         this.capacityType = CapacityType.NoClick;
     }
+
     public override void Capacity(Vector3? localisation = null) // Taunt
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeView.Value, redMask);
-        foreach (Collider collider in hitColliders)
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         {
+            //Ne Marche que pour les allies :
             if(iaStateManager = collider.GetComponent<IAStateManager>())
             {
                 StartCoroutine(tauntCoroutine(iaStateManager));
@@ -48,9 +50,9 @@ public class Kairoche : Konpemo
     } 
     public override void Passive() // Explosion
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f, LayerMask.GetMask("Konpemo"));
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f);
 
-        foreach (Collider collider in hitColliders)
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         {
             collider.GetComponent<Konpemo>().TakingDamage(5 * this.strength.Value);
         }

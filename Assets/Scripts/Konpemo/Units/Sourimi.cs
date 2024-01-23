@@ -19,7 +19,7 @@ public class Sourimi : Konpemo
         health.SetCurrentHealth(400f);
         strength.BaseValue = 150f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 5f;
+        speed.BaseValue = 10f;
         attackSpeed.BaseValue = 0.3f;
 
         cooldown.BaseValue = 15f;
@@ -40,6 +40,7 @@ public class Sourimi : Konpemo
         if (thunderBall != null)
         {
             thunderBall.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
+            thunderBall.gameObject.layer = this.gameObject.layer;
             thunderBall.gameObject.SetActive(true);
             Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
             thunderBall.Setup(dirProj, this.strength.Value);

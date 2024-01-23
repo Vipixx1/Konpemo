@@ -10,7 +10,7 @@ public class Caillebonbon : Konpemo
         health.SetCurrentHealth(200f);
         strength.BaseValue = 40f;
         defense.BaseValue = 3f;
-        speed.BaseValue = 4f;
+        speed.BaseValue = 8f;
         attackSpeed.BaseValue = 1/0.75f;
 
         cooldown.BaseValue = 20f;
@@ -31,6 +31,7 @@ public class Caillebonbon : Konpemo
         if (windBlade != null)
         {
             windBlade.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
+            windBlade.gameObject.layer = this.gameObject.layer;
             windBlade.gameObject.SetActive(true);
             Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
             windBlade.Setup(dirProj, this.strength.Value);

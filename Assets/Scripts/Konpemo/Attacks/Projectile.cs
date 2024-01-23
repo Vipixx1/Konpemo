@@ -35,13 +35,17 @@ public abstract class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Rajouter une condition si c'est un Konpemo ennemi qui est touché. Traverse les alliés, est bloqué par les murs.
+
         if (other.TryGetComponent<Konpemo>(out var konpemo))
         {
-            konpemo.TakingDamage(damageProj);
-            numberEnemyHit++;
-            if (numberEnemyHit >= numberMax)
+            if (konpemo.gameObject.layer != this.gameObject.layer)
             {
-                this.gameObject.SetActive(false);
+                konpemo.TakingDamage(damageProj);
+                numberEnemyHit++;
+                if (numberEnemyHit >= numberMax)
+                {
+                    this.gameObject.SetActive(false);
+                }
             }
         }
         else 

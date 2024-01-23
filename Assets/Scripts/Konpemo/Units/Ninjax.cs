@@ -10,7 +10,7 @@ public class Ninjax : Konpemo
         health.SetCurrentHealth(350f);
         strength.BaseValue = 15f;
         defense.BaseValue = 3f;
-        speed.BaseValue = 5f;
+        speed.BaseValue = 10f;
         attackSpeed.BaseValue = 3f;
 
         cooldown.BaseValue = 25f;
@@ -28,9 +28,11 @@ public class Ninjax : Konpemo
     public override void Attack() // Piqûre
     {
         Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);
+        
         if (needle != null)
         {
             needle.transform.SetPositionAndRotation(pointDeTir.position, pointDeTir.rotation);
+            needle.gameObject.layer = this.gameObject.layer;
             needle.gameObject.SetActive(true);
             Vector3 dirProj = (this.konpemoEnemy.transform.position - pointDeTir.position).normalized;
             needle.Setup(dirProj, this.strength.Value);

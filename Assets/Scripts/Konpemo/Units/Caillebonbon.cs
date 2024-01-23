@@ -17,6 +17,11 @@ public class Caillebonbon : Konpemo
         rangeView.BaseValue = 15f;
     }
 
+    public override void SetCapacityType()
+    {
+        this.capacityType = 1;
+    }
+
     public override void Attack() // Coupe Vent
     {
         Projectile windBlade = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.CoupeVent);
@@ -34,9 +39,9 @@ public class Caillebonbon : Konpemo
         Debug.Log("Posons-nous un petit peu");
     }
 
-    public override void Passive() // Flying
+    /*public override void Passive() // Flying
     {
         Debug.Log("Tut tut les rageux");
-    }
+    }*/
 
 }

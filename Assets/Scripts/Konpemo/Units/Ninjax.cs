@@ -17,6 +17,11 @@ public class Ninjax : Konpemo
         rangeView.BaseValue = 15f;
     }
 
+    public override void SetCapacityType()
+    {
+        this.capacityType = 1;
+    }
+
     public override void Attack() // Piqûre
     {
         Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);

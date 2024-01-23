@@ -14,6 +14,11 @@ public class Caspow : Konpemo
         rangeView.BaseValue = 15f;
     }
 
+    public override void SetCapacityType()
+    {
+        this.capacityType = 2;
+    }
+
     public override void Attack() // Paralysie 1 chance sur 3
     {
         this.konpemoEnemy.TakingDamage(this.strength.Value);

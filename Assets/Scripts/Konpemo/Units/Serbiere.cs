@@ -5,6 +5,7 @@ public class Serbiere : Konpemo
     //rangeTrap = 3f;
     //nbTrap = 1
     //nbTrapMax = 2
+
     [SerializeField]
     private GameObject piege;
     private Vector3 localisationPiege;
@@ -34,9 +35,9 @@ public class Serbiere : Konpemo
         rangeAttack.BaseValue = 10f;
         rangeView.BaseValue = 15f;
     }
-    public override void ChangeCapacityType()
+    public override void SetCapacityType()
     {
-        this.capacityType = 3;//Capacité ciblant le sol
+        this.capacityType = 3; // Capacite qui necessite de cibler le sol
     }
     public override void Attack() // Vortex Feu
     {

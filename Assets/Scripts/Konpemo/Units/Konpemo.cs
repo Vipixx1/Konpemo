@@ -32,9 +32,9 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Start()
     {
-		agent = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
-		ChangeCapacityType();
+		SetCapacityType();
         canAttack = true;
 		
         /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
@@ -51,10 +51,12 @@ public abstract class Konpemo : MonoBehaviour
             StartCoroutine(IsEnemyAliveCoroutine());
         }*/
     }
-	
-    public virtual void ChangeCapacityType()
+
+    public abstract void SetBaseStats();
+
+    public virtual void SetCapacityType()
     {
-        capacityType = 0; //valeur par d�faut (ne fait rien quand on lance une capacit�)
+        capacityType = 0; //valeur par defaut (ne fait rien quand on lance une capacite)
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -84,7 +86,7 @@ public abstract class Konpemo : MonoBehaviour
             yield return null;
         }
     }
-    public abstract void SetBaseStats();
+
 
     public virtual void Attack()
     {
@@ -94,7 +96,7 @@ public abstract class Konpemo : MonoBehaviour
     public virtual void Capacity(Vector3? localisation = null) 
     {
         Debug.Log("No capacity");
-        //Pour les capacit�s qui ciblent une position ou un alli� pr�cis, rajouter :
+        //Pour les capacites qui ciblent une position ou un allie precis, rajouter :
         //Si appuie sur clique gauche { Action; SetCooldown(cdCapacity) }
         //Si appuie sur Echap ou clique droit { Annule;  pas de CD }
     }
@@ -180,4 +182,12 @@ public enum KonpemoSpecies
     Beatowtron,
     Caillebonbon,
     Magitruite,
+}
+
+public enum CapacityType
+{
+    NoCapacity,     // 0. Don't do anything when launch capacity
+    Instant,        // 1. No need to click anywhere to launch capacity
+    Euh,            // 2. Need to click on an ally or enemy to launch capacity
+    ClickOnGround   // 3. Need to click on the ground to launch capacity
 }

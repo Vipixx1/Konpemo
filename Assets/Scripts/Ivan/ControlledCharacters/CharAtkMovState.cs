@@ -20,7 +20,7 @@ public class CharAtkMovState : CharBaseState
         }
         else if (distanceToCible >= csm.konpemo.rangeView.Value) //cible hors de portee d'atk
         {
-            csm.SwitchState(csm.charIdleState);
+            csm.SwitchState(csm.charMovingState);
         }
         else  //cible dans la portee de vision
         {

@@ -26,14 +26,13 @@ public class Sourimi : Konpemo
         rangeView.BaseValue = 15f;
     }
 	
-	public override void ChangeCapacityType()
+	public override void SetCapacityType()
     {
-        this.capacityType = 3; // Capacité ciblant le sol
+        this.capacityType = 3; // Capacite qui necessite de cibler le sol
     }
 
     public override void Attack() // Ball'Foudre
     {
-        animator.SetTrigger("Attack");
         Projectile thunderBall = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.BallFoudre);
         if (thunderBall != null)
         {

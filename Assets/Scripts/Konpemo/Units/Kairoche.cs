@@ -1,11 +1,10 @@
 using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class Kairoche : Konpemo
 {
+    [SerializeField] private ParticleSystem explosionEffect;
+    [SerializeField] private ParticleSystem tauntEffect;
 
     private IAStateManager iaStateManager;
 
@@ -21,9 +20,10 @@ public class Kairoche : Konpemo
         cooldown.BaseValue = 15f;
 
         rangeAttack.BaseValue = 3f;
-        rangeCapacity.BaseValue = 6f;
+        rangeCapacity.BaseValue = 7.5f;
         rangeView.BaseValue = 10f;
     }
+
     public override void SetCapacityType()
     {
         this.capacityType = CapacityType.NoClick;
@@ -31,16 +31,19 @@ public class Kairoche : Konpemo
 
     public override void Capacity(Vector3? localisation = null) // Taunt
     {
+        tauntEffect.Play();
+
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
         foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         {
-            //Ne marche que pour l'utilisation de la capacite par un Kairoche allie pour le moment...
+            // Ne marche que pour l'utilisation de la capacite par un Kairoche allie pour le moment...
             if(iaStateManager = collider.GetComponent<IAStateManager>())
             {
                 StartCoroutine(TauntCoroutine(iaStateManager));
             }
         }
     }
+
     public IEnumerator TauntCoroutine(IAStateManager mIaStateManager)
     {
         mIaStateManager.taunterKonpemos.Add(this);
@@ -51,10 +54,19 @@ public class Kairoche : Konpemo
 
     public override void Passive() // Explosion
     {
+        explosionEffect.Play();
+
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
-        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null && collider.gameObject != this.gameObject)
         {
             collider.GetComponent<Konpemo>().TakingDamage(5 * this.strength.Value);
         }
+    }
+
+    public override void Death()
+    {
+        Passive();
+        onDeath.Invoke(this);
+        this.gameObject.SetActive(false);
     }
 }

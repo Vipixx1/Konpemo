@@ -576,10 +576,11 @@ MonoBehaviour:
   isPoisoned: 0
   canAttack: 1
   capacityType: 0
-  allyUnitManager: {fileID: 0}
-  enemyUnitManager: {fileID: 0}
   animator: {fileID: 2412042026017035003}
   capacityArea: {fileID: 2226263828200840344}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   pointDeTir: {fileID: 7187102432153195830}
 --- !u!95 &2412042026017035003
 Animator:

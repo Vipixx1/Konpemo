@@ -25,7 +25,7 @@ public class Ninjax : Konpemo
         this.capacityType = CapacityType.NoClick;
     }
 
-    public override void Attack() // Piqûre
+    public override void Attack() // Piqure
     {
         Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);
         

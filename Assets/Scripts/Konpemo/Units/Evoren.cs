@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Evoren : Konpemo
 {
-    [SerializeField] protected GameObject buffEffect;
+    [SerializeField] private GameObject buffEffect;
 
-    private float buffDuration = 10f;
+    private readonly float buffDuration = 10f;
 
     public override void SetBaseStats()
     {
@@ -22,7 +22,7 @@ public class Evoren : Konpemo
         rangeCapacity.BaseValue = 0f;
         rangeView.BaseValue = 10f;
     }
-
+    
     public override void SetCapacityType()
     {
         this.capacityType = CapacityType.NoClick;
@@ -31,12 +31,12 @@ public class Evoren : Konpemo
     public override void Capacity(Vector3? localisation = null) // Gonflette
     {
         StartCoroutine(Gonflette());
-        SetCooldown(cooldown.Value);
     }
 
     public IEnumerator Gonflette()
     {
         buffEffect.SetActive(true);
+
         StatModifier gonfletteStrength = new(20f, StatModType.Flat);
         StatModifier gonfletteDefense = new(3f, StatModType.Flat);
 

@@ -21,7 +21,7 @@ public class EventManager : MonoBehaviour
 
     public UnityEvent capacityNoClickEvent;
     public UnityEvent<Vector3> capacityOnGroundEvent;
-    public UnityEvent<GameObject> capacityOnUnitEvent;
+    public UnityEvent capacityOnUnitEvent;
 
     [SerializeField] private LayerMask masqueUnite;
     [SerializeField] private LayerMask masqueUniteEnnemi;
@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
 
         capacityNoClickEvent = new UnityEvent();
         capacityOnGroundEvent = new UnityEvent<Vector3>();
-        capacityOnUnitEvent = new UnityEvent<GameObject>();
+        //capacityOnUnitEvent = new UnityEvent();
 
         mainCamera = Camera.main;
     }
@@ -50,25 +50,27 @@ public class EventManager : MonoBehaviour
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool unitHit = Physics.Raycast(ray, Mathf.Infinity, masqueUnite);
-            if (!unitHit && Physics.Raycast(ray, out hit, Mathf.Infinity, masqueSol)) //move if not a unite hit
+            if (!unitHit && Physics.Raycast(ray, out hit, Mathf.Infinity, masqueSol))   // No unit has been clicked on
             {
                 positionSouris = hit.point;
                 goToEvent.Invoke(positionSouris);
             }
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi)) //un ennemi est touch�
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteEnnemi))       // An enemy has been clicked on
             {
                 cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
                 //Debug.Log("J'envois un goToAtkEvent");
                 goToAtkEvent.Invoke(cibleGameObject);
             }
             //Debug.Log("J'envois pas un goToFollowEvent");
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie)) //un alli� est touch�
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie))        // An ally has been clicked on
             {
                 cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
                 //Debug.Log("J'envois un goToFollowEvent");
                 goToFlwAllyEvent.Invoke(cibleGameObject);
             }
         }
+
+        // Capacity Management :
         if (Input.GetKeyDown(KeyCode.E))
         {
             konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
@@ -86,26 +88,24 @@ public class EventManager : MonoBehaviour
                         StartCoroutine(CapacityOnGroundCoroutine(uiManager, selectionManager, konpemoSelected));
                         break;
 
-                    case CapacityType.ClickOnAlly:
+                    /*case CapacityType.ClickOnAlly:
                         StartCoroutine(CapacityOnAllyCoroutine(uiManager, selectionManager, konpemoSelected));
                         break;
 
                     case CapacityType.ClickOnEnemy:
                         StartCoroutine(CapacityOnEnemyCoroutine(uiManager, selectionManager, konpemoSelected));
-                        break;
+                        break;*/
 
                     default:
-                        Debug.Log("Impossible de lancer la capacit�");
+                        Debug.Log("Impossible de lancer la capacite");
                         break;
                 }
             }
         }
     }
 
-    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
     private IEnumerator CapacityOnGroundCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
-
         mUiManager.DisplaySpriteBlue();
         konpemoExecutingCap.capacityArea.SetActive(true);
         selectionManager.Lock(this.gameObject);
@@ -117,7 +117,7 @@ public class EventManager : MonoBehaviour
                 rayZ = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(rayZ, out hit, Mathf.Infinity, masqueSol))
                 {
-                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)  //si le point de casting est � l'int�rieur de la zone de vision
+                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
                         //Debug.Log("Capacity OnGround event sent");
                         capacityOnGroundEvent.Invoke(hit.point);
@@ -126,7 +126,6 @@ public class EventManager : MonoBehaviour
                         mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    //
                 }
             }
             yield return null;
@@ -134,8 +133,8 @@ public class EventManager : MonoBehaviour
         yield return null;
     }
 
-    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oubli� pk j'ai mis ca mais dans le doute)
-    private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
+
+ /*   private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
         mUiManager.DisplaySpriteRed();
         konpemoExecutingCap.capacityArea.SetActive(true);
@@ -144,20 +143,17 @@ public class EventManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && selectionManager.Lock(this.gameObject))
             {
-                //Debug.Log("Dans la partie LOCK, vise un ennemi");
                 rayE = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(rayE, out hit, Mathf.Infinity, masqueUniteAllie))
                 {
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
-                        //Debug.Log("Capacity OnAlly event sent");
-                        capacityOnUnitEvent.Invoke(hit.collider.gameObject);
+                        capacityOnUnitEvent.Invoke();
                         mUiManager.HideSpriteRed();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    //
                 }
             }
             yield return null;
@@ -165,7 +161,6 @@ public class EventManager : MonoBehaviour
         yield return null;
     }
 
-    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oubli� pk j'ai mis ca mais dans le doute)
     private IEnumerator CapacityOnEnemyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
         mUiManager.DisplaySpriteRed();
@@ -182,19 +177,18 @@ public class EventManager : MonoBehaviour
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
                         //Debug.Log("Capacity OnEnemy event sent");
-                        capacityOnUnitEvent.Invoke(hit.collider.gameObject);
+                        capacityOnUnitEvent.Invoke();
                         mUiManager.HideSpriteRed();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    //
                 }
             }
             yield return null;
         }
         yield return null;
-    }
+    }*/
 
 
     public void AddListener(KonpemoManager konpemoManager)
@@ -210,7 +204,8 @@ public class EventManager : MonoBehaviour
         konpemoManager.RemoveAtkMoveListener(this);
         konpemoManager.RemoveFlwAllyListener(this);
     }
-    //Les deux m�thodes qui suivent sont s�par�s de celles au dessus afin de g�rer les capacit�s konpemo par konpemo
+
+    // Les deux methodes qui suivent sont separees de celles au dessus afin de gerer les capacites Konpemo par Konpemo
     public void AddCapacityListener(KonpemoManager konpemoManager)
     {
         konpemoManager.AddCapacityListener(this);

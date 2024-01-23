@@ -4,6 +4,8 @@ public class Caillebonbon : Konpemo
 {
     [SerializeField] private Transform pointDeTir;
 
+    [SerializeField] private ParticleSystem selfHealingEffect;    
+
     public override void SetBaseStats()
     {
         health.BaseValue = 200f;
@@ -43,9 +45,9 @@ public class Caillebonbon : Konpemo
         Debug.Log("Posons-nous un petit peu");
     }
 
+
     /*public override void Passive() // Flying
     {
         Debug.Log("Tut tut les rageux");
     }*/
-
 }

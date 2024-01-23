@@ -22,7 +22,7 @@ public class IAPatrollingState: IABaseState
 
             ia.SwitchState(ia.IAMovingState);
         }
-        else if (ia.target = ia.GetClosestTarget(ia.konpemo.rangeView.Value, ia.enemyLayerMask))
+        else if ((ia.target = ia.GetClosestTarget(ia.konpemo.rangeView.Value, ia.enemyLayerMask)) && !ia.invisbleKonpemos.Contains(ia.target))
         {
             ia.SwitchState(ia.IAMovingState);
         }

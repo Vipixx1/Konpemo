@@ -12,10 +12,6 @@ public class KonpemoManager : MonoBehaviour
     private AllyUnitManager allyUnitManager;
     [SerializeField]
     private EnemyUnitManager enemyUnitManager;
-    [SerializeField]
-    private string allyUnitMaskName = "Blue";
-    [SerializeField]
-    private string enemyUnitMaskName = "Red";
     private Konpemo allyUnitKonpemo;
     private Konpemo enemyUnitKonpemo;
     /*[SerializeField]

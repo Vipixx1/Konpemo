@@ -24,6 +24,11 @@ public class Magitruite : Konpemo
         rangeCapacity.BaseValue = 0f;
         rangeView.BaseValue = 10f;
     }
+    public override void SetCapacityTypeAndName()
+    {
+        this.capacityType = CapacityType.NoCapacity;
+        this.nameKonpemo = KonpemoSpecies.Magitruite.ToString();
+    }
 
     public override void Attack() // Gouttelette
     {

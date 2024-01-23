@@ -580,7 +580,12 @@ MonoBehaviour:
   enemyUnitManager: {fileID: 0}
   animator: {fileID: 2412042026017035003}
   capacityArea: {fileID: 2226263828200840344}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   pointDeTir: {fileID: 7187102432153195830}
+  pointTir: {fileID: 0}
+  fog: {fileID: 5930535528857445600, guid: e724255a33da0c341ad96b1f4cf35a0e, type: 3}
 --- !u!95 &2412042026017035003
 Animator:
   serializedVersion: 5

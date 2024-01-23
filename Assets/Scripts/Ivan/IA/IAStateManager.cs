@@ -9,6 +9,7 @@ public class IAStateManager : MonoBehaviour
     public NavMeshAgent agent;
 
     public List<Konpemo> taunterKonpemos = new List<Konpemo>();
+    public List<Konpemo> invisbleKonpemos = new List<Konpemo>();
 
     public LayerMask enemyLayerMask;
     public Konpemo target;
@@ -56,12 +57,15 @@ public class IAStateManager : MonoBehaviour
             Vector3 TargetDist = minDistGO.transform.position - this.gameObject.transform.position;
             foreach (Collider unitCollider in unitsColliders)
             {
-                // Trouve la cible la plus proche a partir des transforms
-                Vector3 newTargetDist = unitCollider.transform.position - this.gameObject.transform.position;
-                if (newTargetDist.magnitude <= TargetDist.magnitude)
+                if (!invisbleKonpemos.Contains(unitCollider.GetComponent<Konpemo>()))
                 {
-                    minDistGO = unitCollider.gameObject;
-                    TargetDist = minDistGO.transform.position - this.gameObject.transform.position;
+                    // Trouve la cible la plus proche a partir des transforms
+                    Vector3 newTargetDist = unitCollider.transform.position - this.gameObject.transform.position;
+                    if (newTargetDist.magnitude <= TargetDist.magnitude)
+                    {
+                        minDistGO = unitCollider.gameObject;
+                        TargetDist = minDistGO.transform.position - this.gameObject.transform.position;
+                    }
                 }
             }
             return minDistGO.GetComponent<Konpemo>();

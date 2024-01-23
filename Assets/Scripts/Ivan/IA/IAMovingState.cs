@@ -22,16 +22,16 @@ public class IAMovingState : IABaseState
         }
         if (ia.target.isActiveAndEnabled)
         {
-            if (distanceToCible <= ia.konpemo.rangeAttack.Value) //cible a portee d'atk
+            if (distanceToCible <= ia.konpemo.rangeAttack.Value && !ia.invisbleKonpemos.Contains(ia.target)) //cible a portee d'atk et pas invisible
             {
                 ia.agent.SetDestination(ia.transform.position);
                 ia.SwitchState(ia.IAAttackingState);
             }
-            else if (distanceToCible >= ia.konpemo.rangeView.Value)  // cible hors de portee de vision
+            else if (distanceToCible >= ia.konpemo.rangeView.Value)  // cible hors de portee de vision et hors de portee d'atk
             {
                 ia.SwitchState(ia.IAIdleState);
             }
-            else  //cible a portee de vision
+            else if(!ia.invisbleKonpemos.Contains(ia.target)) //cible a portee de vision et pas invisble
             {
                 ia.agent.SetDestination(ia.target.transform.position);
             }

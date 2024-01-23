@@ -441,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5830403371991844343, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_BaseOffset
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8152444010683568046, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Size.x
@@ -578,6 +578,9 @@ MonoBehaviour:
   enemyUnitManager: {fileID: 0}
   animator: {fileID: 6868125814305189540}
   capacityArea: {fileID: 5551843501416618572}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &6868125814305189540
 Animator:
   serializedVersion: 5

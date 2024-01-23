@@ -17,9 +17,10 @@ public class Caspow : Konpemo
         rangeView.BaseValue = 10f;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.ClickOnEnemy;
+        this.nameKonpemo = KonpemoSpecies.Caspow.ToString();
     }
 
     public override void Attack() // Paralysie 1 chance sur 3

@@ -31,9 +31,10 @@ public class Sourimi : Konpemo
         rangeView.BaseValue = 10f;
     }
 	
-	public override void SetCapacityType()
+	public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.ClickOnGround;
+        this.nameKonpemo = KonpemoSpecies.Sourimi.ToString();
     }
 
     public override void Attack() // Ball'Foudre

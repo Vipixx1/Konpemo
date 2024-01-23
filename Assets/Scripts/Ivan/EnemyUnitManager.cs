@@ -36,4 +36,9 @@ public class EnemyUnitManager : MonoBehaviour
     {
         return aliveEnemyKonpemos.Count;
     }
+
+    public List<Konpemo> GetEnemyKonpemos()
+    {
+        return aliveEnemyKonpemos;
+    }
 }

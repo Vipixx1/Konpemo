@@ -19,14 +19,14 @@ public class PiegeDeBreizh : MonoBehaviour
         if (1 << other.gameObject.layer == enemyMask.value)
         {
             //TIC TAC
-            Debug.Log("TicTac");
+            //Debug.Log("TicTac");
             StartCoroutine(DeclenchementPiegeCoroutine());
         }
     }
     public IEnumerator DeclenchementPiegeCoroutine()
     {
         yield return new WaitForSeconds(timeToBoom);
-        Debug.Log("BOOM");
+        //Debug.Log("BOOM");
         colliders = Physics.OverlapSphere(transform.position, trapRadius, enemyMask);
         foreach (Collider collider in colliders)
         {

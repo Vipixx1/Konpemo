@@ -26,23 +26,23 @@ public abstract class Konpemo : MonoBehaviour
 	public bool canAttack;
 
     public CapacityType capacityType;
+    public string nameKonpemo;
 	
     [SerializeField] private AllyUnitManager allyUnitManager;
-    [SerializeField] private EnemyUnitManager enemyUnitManager;
+    [SerializeField] protected EnemyUnitManager enemyUnitManager;
 
 	protected NavMeshAgent agent;
 
     public Animator animator;
     public GameObject capacityArea;
 
-    //public Action<Konpemo> onDeath;
     public UnityEvent<Konpemo> onDeath;
 
     public virtual void Start()
     {
 		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
-		SetCapacityType();
+		SetCapacityTypeAndName();
 
         capacityArea.transform.localScale = new Vector3(rangeCapacity.Value, 0, rangeCapacity.Value)*2;
         capacityArea.SetActive(false);
@@ -54,7 +54,7 @@ public abstract class Konpemo : MonoBehaviour
 
     public abstract void SetBaseStats();
 
-    public virtual void SetCapacityType()
+    public virtual void SetCapacityTypeAndName()
     {
         capacityType = CapacityType.NoCapacity;
     }

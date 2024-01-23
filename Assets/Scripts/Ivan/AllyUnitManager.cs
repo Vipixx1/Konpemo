@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AllyUnitManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<Konpemo> aliveAllyKonpemos;
+    public List<Konpemo> aliveAllyKonpemos;
     [SerializeField] private UIManager uiManager;
     private int totalAllyUnitDied;
     private bool isEveryoneDead = false;
@@ -16,11 +15,13 @@ public class AllyUnitManager : MonoBehaviour
     {
         aliveAllyKonpemos = new();
         totalAllyUnitDied = 0;
-        isEveryoneDead = false;  
+        isEveryoneDead = false;
+        uiManager.EditKonpemosPresentStart(aliveAllyKonpemos);
     }
     private void Update()
     {
         CheckAllAllyDied();
+        uiManager.EditKonpemosPresent(aliveAllyKonpemos);
     }
 
     public void AllyDied(Konpemo konpemo)

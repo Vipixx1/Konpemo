@@ -1,8 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Caillebonbon : Konpemo
 {
     [SerializeField] private Transform pointDeTir;
+
+    private List<Konpemo> enemyKonpemos;
+    private IAStateManager iaStateManager;
+    private float flyTime = 5f;
+    private float healingStrenght = 25f;
+    private float healingBuff = 75f;
+    private float limitToCheckBeatowtron = 3f;
+    private bool isBeatowtronHere = false;
+    //private float flyOffset;
+    //private float pastPositionY;
+
+    [SerializeField] private ParticleSystem flyParticles;
 
     public override void SetBaseStats()
     {
@@ -18,11 +32,18 @@ public class Caillebonbon : Konpemo
         rangeAttack.BaseValue = 7.5f;
         rangeCapacity.BaseValue = 0f;
         rangeView.BaseValue = 10f;
+        flyTime = 5f;
+        healingStrenght = 25f;
+        healingBuff = 75f;
+        limitToCheckBeatowtron = 3f;
+        isBeatowtronHere = false;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.NoClick;
+        this.nameKonpemo = KonpemoSpecies.Caillebonbon.ToString();
+        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
     }
 
     public override void Attack() // Coupe Vent
@@ -40,12 +61,46 @@ public class Caillebonbon : Konpemo
 
     public override void Capacity(Vector3? localisation = null)  // Atterrissage
     {
-        Debug.Log("Posons-nous un petit peu");
+        enemyKonpemos = enemyUnitManager.GetEnemyKonpemos();
+        foreach (Konpemo enemyKonpemo in enemyKonpemos)
+        {
+            if (iaStateManager = enemyKonpemo.GetComponentInChildren<IAStateManager>())
+            {
+                StartCoroutine(FlyCoroutine(iaStateManager, this));
+            }
+        }
     }
-
-    /*public override void Passive() // Flying
+    public override void Passive()
     {
-        Debug.Log("Tut tut les rageux");
-    }*/
+        Collider[] colliders = Physics.OverlapSphere(transform.position, limitToCheckBeatowtron, this.gameObject.layer);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.GetComponent<Beatowtron>() != null)
+            {
+                isBeatowtronHere = true;
+                break;
+            }
+        }
+        if (isBeatowtronHere)
+        {
+            Healing(healingStrenght + healingBuff);
+        }
+        else
+        {
+            Healing(healingStrenght);
+        }
+    }
+    public IEnumerator FlyCoroutine(IAStateManager iAStateManager, Konpemo konpemo)
+    {
+        iAStateManager.invisbleKonpemos.Add(konpemo);
+        flyParticles.Play();
+        //pastPositionY = skin.transform.position.y;
+        //skin.transform.position = new Vector3(skin.transform.position.x, skin.transform.position.y + flyOffset, skin.transform.position.z);
+        yield return new WaitForSeconds(flyTime);
+        //skin.transform.position = new Vector3(skin.transform.position.x, pastPositionY, skin.transform.position.z);
+        flyParticles.Stop();
+        iAStateManager.invisbleKonpemos.Remove(konpemo);
+        Passive(); //Atterissage
+    }
 
 }

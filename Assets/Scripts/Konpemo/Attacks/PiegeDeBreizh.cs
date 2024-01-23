@@ -16,9 +16,8 @@ public class PiegeDeBreizh : MonoBehaviour
     LayerMask enemyMask;
     private void OnTriggerEnter(Collider other)
     {
-        if (1 << other.gameObject.layer == enemyMask.value)
+        if (other.GetComponent<Konpemo>() && this.gameObject.layer != other.gameObject.layer)
         {
-            //TIC TAC
             Debug.Log("TicTac");
             StartCoroutine(DeclenchementPiegeCoroutine());
         }
@@ -27,12 +26,15 @@ public class PiegeDeBreizh : MonoBehaviour
     {
         yield return new WaitForSeconds(timeToBoom);
         Debug.Log("BOOM");
-        colliders = Physics.OverlapSphere(transform.position, trapRadius, enemyMask);
-        foreach (Collider collider in colliders)
+        colliders = Physics.OverlapSphere(transform.position, trapRadius);
+        foreach (Collider collider in colliders) if (collider.GetComponent<Konpemo>() != null)
         {
-            explosionParticle.Play();
-            collider.GetComponent<Konpemo>().TakingDamage(flatDamage);
-            StartCoroutine (DisableCoroutine(this.gameObject));
+            if (collider.gameObject.layer != transform.gameObject.layer)
+            {
+                explosionParticle.Play();
+                collider.GetComponent<Konpemo>().TakingDamage(flatDamage);
+                StartCoroutine(DisableCoroutine(this.gameObject));
+            }
         }
     }
     public IEnumerator DisableCoroutine(GameObject gameObject)

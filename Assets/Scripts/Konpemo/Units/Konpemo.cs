@@ -122,7 +122,6 @@ public abstract class Konpemo : MonoBehaviour
         while (timer < poisonDuration)
         {
             this.health.TakingFlatDamage(poisonTickDamage, 0);
-            /*if (this.currentHealth <= 0) { Death(); }*/
             timer++;
             yield return new WaitForSeconds(1);
         }
@@ -152,15 +151,15 @@ public abstract class Konpemo : MonoBehaviour
 
 public enum KonpemoSpecies
 {
-    Evoren,
-    Sourimi,
-    Kairoche,
-    Serbiere,
-    Ninjax,
-    Caspow,
-    Beatowtron,
-    Caillebonbon,
-    Magitruite,
+    Evoren,         // 0. Base Unit (self boost)
+    Sourimi,        // 1. Single Target Mage (TP/Flash)
+    Kairoche,       // 2. Tank Unit (Taunt + Self-Destruct)
+    Serbiere,       // 3. AoE Mage (Put traps)
+    Ninjax,         // 4. Ninja Unit (SmokeScreen)
+    Caspow,         // 5. Thieve Unit (
+    Beatowtron,     // 6
+    Caillebonbon,   // 7
+    Magitruite,     // 8
 }
 
 public enum CapacityType

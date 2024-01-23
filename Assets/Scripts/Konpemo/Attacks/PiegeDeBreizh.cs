@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class PiegeDeBreizh : MonoBehaviour
 {
-    private float flatDamage = 150;
-    private float trapRadius = 3;
-    private float timeToBoom = 2;
+    private float flatDamage = 150f;
+    private float trapRadius = 3f;
+    private float timeToBoom = 2f;
     private float particleDuration = 0.3f;
+
     private Collider[] colliders;
 
     [SerializeField]
     ParticleSystem explosionParticle;
-    [SerializeField]
-    LayerMask enemyMask;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (1 << other.gameObject.layer == enemyMask.value)
+        if (other.GetComponent<Konpemo>() && this.gameObject.layer != other.gameObject.layer)
         {
             //TIC TAC
             //Debug.Log("TicTac");
+
             StartCoroutine(DeclenchementPiegeCoroutine());
         }
     }
     public IEnumerator DeclenchementPiegeCoroutine()
     {
         yield return new WaitForSeconds(timeToBoom);
+
         //Debug.Log("BOOM");
-        colliders = Physics.OverlapSphere(transform.position, trapRadius, enemyMask);
-        foreach (Collider collider in colliders)
+        colliders = Physics.OverlapSphere(transform.position, trapRadius);
+        foreach (Collider collider in colliders) if (collider.GetComponent<Konpemo>() != null)
         {
-            explosionParticle.Play();
-            collider.GetComponent<Konpemo>().TakingDamage(flatDamage);
-            StartCoroutine (DisableCoroutine(this.gameObject));
+            if (collider.gameObject.layer != transform.gameObject.layer)
+            {
+                explosionParticle.Play();
+                collider.GetComponent<Konpemo>().TakingDamage(flatDamage);
+                StartCoroutine(DisableCoroutine(this.gameObject));
+            }
         }
     }
     public IEnumerator DisableCoroutine(GameObject gameObject)

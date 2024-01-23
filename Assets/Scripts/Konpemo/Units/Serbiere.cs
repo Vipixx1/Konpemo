@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class Serbiere : Konpemo
 {
-    //rangeTrap = 3f;
-    //nbTrap = 1
-    //nbTrapMax = 2
+
 
     [SerializeField]
     private GameObject piege;
@@ -50,12 +48,12 @@ public class Serbiere : Konpemo
         Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex);
         vortexDeFeu.transform.position = konpemoEnemy.transform.position;
         vortexDeFeu.Play();
+		
         foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         { 
             if (this.gameObject.layer != collider.gameObject.layer)
             {
                 collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
-                
             }
         }
     }
@@ -68,6 +66,7 @@ public class Serbiere : Konpemo
             localisationPiege.y += offsetPiege;
         }
         mPiege = Instantiate(piege, localisationPiege, Quaternion.identity);
+        mPiege.gameObject.layer = this.gameObject.layer;
     }
     public void OnDrawGizmos()
     {

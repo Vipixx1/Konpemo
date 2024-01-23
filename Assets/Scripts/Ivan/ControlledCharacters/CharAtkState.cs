@@ -18,15 +18,19 @@ public class CharAtkState : CharBaseState
         }
         else if (csm.konpemo.canAttack)
         {
-            if(csm.kingManager.GetKing()?.name != csm.konpemo.name)
+            if (csm.cibleKonpemo.isActiveAndEnabled)
             {
-                timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
-                csm.konpemo.SetTarget(csm.cibleKonpemo);
-                csm.konpemo.animator.SetTrigger("Attack");
-                csm.StartCoroutine(AttackCooldown(timeBetweenAttack, csm));
-                //Debug.Log("ATK");
+                if (csm.kingManager.GetKing()?.name != csm.konpemo.name)
+                {
+                    timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
+                    csm.konpemo.SetTarget(csm.cibleKonpemo);
+                    csm.konpemo.animator.SetTrigger("Attack");
+                    csm.StartCoroutine(AttackCooldown(timeBetweenAttack, csm));
+                    //Debug.Log("ATK");
+                }
             }
         }
+
         else
         {
             //Debug.Log(canAttack);

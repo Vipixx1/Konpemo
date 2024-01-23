@@ -30,6 +30,7 @@ public class Beatowtron : Konpemo
         float hpHealed = RandomHeal();
 
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeHeal, this.gameObject.layer);
+
         //HIGHLIGHT THE AREA WHERE THE ALLIED CAN BE HEAL
         foreach (Collider collider in hitColliders)
         {

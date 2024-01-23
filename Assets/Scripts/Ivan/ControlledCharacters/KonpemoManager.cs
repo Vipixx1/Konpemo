@@ -75,7 +75,7 @@ public class KonpemoManager : MonoBehaviour
                 break;*/
 
             default:
-                Debug.Log("Impossible d'attacher la capacite");
+                //Debug.Log("Impossible d'attacher la capacite");
                 break;
         }
     }
@@ -137,15 +137,15 @@ public class KonpemoManager : MonoBehaviour
 
     public void MoveHandler(Vector3 position)
     {
-        //Debug.Log("J'ai reçu un goToEvent");
+        //Debug.Log("J'ai reï¿½u un goToEvent");
         charStateManager.destination = position;
         charStateManager.SwitchState(charStateManager.charMovingState);
     }
 
-    public void AtkMoveHandler(Konpemo cible)
+    public void AtkMoveHandler(Konpemo target)
     {
-        //Debug.Log("J'ai reçu un goToAtkEvent");
-        charStateManager.targetKonpemo = cible;
+        //Debug.Log("J'ai recu un goToAtkEvent");
+        charStateManager.targetKonpemo = target;
         charStateManager.SwitchState(charStateManager.charAtkMovState);
     }
 

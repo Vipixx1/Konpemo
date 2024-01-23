@@ -28,14 +28,14 @@ public class IAAttackingState : IABaseState
             taunted = true;
             ia.SwitchState(ia.IAMovingState);
         }
-        if ((ia.target.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value) //cible hors de portee d'atk
+        if ((ia.target.transform.position - ia.transform.position).magnitude >= ia.konpemo.rangeAttack.Value && !ia.invisbleKonpemos.Contains(ia.target)) //cible hors de portee d'atk et pas invisble
 
         {
             ia.SwitchState(ia.IAMovingState);
         }
         else if (ia.konpemo.canAttack)
         {
-            if (ia.target.isActiveAndEnabled)
+            if (ia.target.isActiveAndEnabled && !ia.invisbleKonpemos.Contains(ia.target))
             {
                 timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
                 ia.konpemo.SetTarget(ia.target);

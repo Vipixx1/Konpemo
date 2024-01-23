@@ -24,9 +24,10 @@ public class Kairoche : Konpemo
         rangeView.BaseValue = 10f;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.NoClick;
+        this.nameKonpemo = KonpemoSpecies.Kairoche.ToString();
     }
 
     public override void Capacity(Vector3? localisation = null) // Taunt

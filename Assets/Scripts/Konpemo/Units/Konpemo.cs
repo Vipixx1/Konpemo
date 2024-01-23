@@ -24,6 +24,11 @@ public abstract class Konpemo : MonoBehaviour
 	public bool canAttack;
 
     public CapacityType capacityType;
+	
+    public string nameKonpemo;
+	
+    [SerializeField] private AllyUnitManager allyUnitManager;
+    [SerializeField] protected EnemyUnitManager enemyUnitManager;
 
     protected NavMeshAgent agent;
 
@@ -37,7 +42,7 @@ public abstract class Konpemo : MonoBehaviour
     public virtual void Start()
     {
         SetBaseStats();
-		SetCapacityType();
+		SetCapacityTypeAndName();
         isPoisoned = false;
         canAttack = true;
 
@@ -54,7 +59,7 @@ public abstract class Konpemo : MonoBehaviour
     //==================================================//
     public abstract void SetBaseStats();
 
-    public virtual void SetCapacityType()
+    public virtual void SetCapacityTypeAndName()
     {
         capacityType = CapacityType.NoCapacity;
     }

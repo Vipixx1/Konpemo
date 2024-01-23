@@ -29,9 +29,10 @@ public class Serbiere : Konpemo
         rangeView.BaseValue = 10f;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.ClickOnGround;
+        this.nameKonpemo = KonpemoSpecies.Serbiere.ToString();
     }
 
     public override void Attack() // VortexDeFeu

@@ -20,9 +20,10 @@ public class Beatowtron : Konpemo
         rangeView.BaseValue = 10f;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.NoClick;
+        this.nameKonpemo = KonpemoSpecies.Beatowtron.ToString();
     }
 
     public override void Capacity(Vector3? localisation = null)  // Soin

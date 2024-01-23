@@ -19,9 +19,10 @@ public class Caspow : Konpemo
         rangeView.BaseValue = 10f;
     }
 
-    public override void SetCapacityType()
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.NoClick;
+        this.nameKonpemo = KonpemoSpecies.Caspow.ToString();
     }
 
     public override void Capacity(Vector3? localisation = null)  // Toxic, empoisonne tous les ennemis dans une range

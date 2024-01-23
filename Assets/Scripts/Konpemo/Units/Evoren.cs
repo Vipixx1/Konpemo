@@ -22,10 +22,11 @@ public class Evoren : Konpemo
         rangeCapacity.BaseValue = 0f;
         rangeView.BaseValue = 10f;
     }
-    
-    public override void SetCapacityType()
+
+    public override void SetCapacityTypeAndName()
     {
         this.capacityType = CapacityType.NoClick;
+        this.nameKonpemo = KonpemoSpecies.Evoren.ToString();
     }
 
     public override void Capacity(Vector3? localisation = null) // Gonflette

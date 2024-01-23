@@ -18,14 +18,17 @@ public class PiegeDeBreizh : MonoBehaviour
     {
         if (other.GetComponent<Konpemo>() && this.gameObject.layer != other.gameObject.layer)
         {
-            Debug.Log("TicTac");
+            //TIC TAC
+            //Debug.Log("TicTac");
+
             StartCoroutine(DeclenchementPiegeCoroutine());
         }
     }
     public IEnumerator DeclenchementPiegeCoroutine()
     {
         yield return new WaitForSeconds(timeToBoom);
-        Debug.Log("BOOM");
+
+        //Debug.Log("BOOM");
         colliders = Physics.OverlapSphere(transform.position, trapRadius);
         foreach (Collider collider in colliders) if (collider.GetComponent<Konpemo>() != null)
         {

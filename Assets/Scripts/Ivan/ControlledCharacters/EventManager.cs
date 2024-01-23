@@ -62,7 +62,7 @@ public class EventManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie)) //un allié est touché
             {
                 cibleGameObject = hit.collider.gameObject.GetComponent<Konpemo>();
-                Debug.Log("J'envois un goToFollowEvent");
+                //Debug.Log("J'envois un goToFollowEvent");
                 goToFlwAllyEvent.Invoke(cibleGameObject);
             }
         }

@@ -6,6 +6,8 @@ public class Sourimi : Konpemo
 {
     [SerializeField]
 	private Transform pointDeTir;
+    [SerializeField]
+    private ParticleSystem dashAnimation;
 
     private float distance;
     private float angle;
@@ -69,7 +71,11 @@ public class Sourimi : Konpemo
                 float y = position.y + distance * Mathf.Sin(angle);
                 localisationDash = new Vector3(x, y, position.z);
 				
-                if(agent.Warp(localisationDash)) break;
+                if(agent.Warp(localisationDash))
+                {
+                    dashAnimation.Play();
+                    break;
+                }
             }
 			
         }

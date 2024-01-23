@@ -7,7 +7,7 @@ public class Caspow : Konpemo
         health.SetCurrentHealth(350f);
         strength.BaseValue = 50f;
         defense.BaseValue = 5f;
-        speed.BaseValue = 8f;
+        speed.BaseValue = 6f;
         attackSpeed.BaseValue = 1f;
 
         cooldown.BaseValue = 15f;

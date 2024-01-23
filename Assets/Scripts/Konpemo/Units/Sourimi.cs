@@ -19,7 +19,7 @@ public class Sourimi : Konpemo
         health.SetCurrentHealth(400f);
         strength.BaseValue = 150f;
         defense.BaseValue = 0f;
-        speed.BaseValue = 10f;
+        speed.BaseValue = 7f;
         attackSpeed.BaseValue = 0.3f;
 
         cooldown.BaseValue = 15f;

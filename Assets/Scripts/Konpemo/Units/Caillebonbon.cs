@@ -10,7 +10,7 @@ public class Caillebonbon : Konpemo
         health.SetCurrentHealth(200f);
         strength.BaseValue = 40f;
         defense.BaseValue = 3f;
-        speed.BaseValue = 8f;
+        speed.BaseValue = 7f;
         attackSpeed.BaseValue = 1/0.75f;
 
         cooldown.BaseValue = 20f;

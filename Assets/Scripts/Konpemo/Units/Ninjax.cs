@@ -10,7 +10,7 @@ public class Ninjax : Konpemo
         health.SetCurrentHealth(350f);
         strength.BaseValue = 15f;
         defense.BaseValue = 3f;
-        speed.BaseValue = 10f;
+        speed.BaseValue = 7f;
         attackSpeed.BaseValue = 3f;
 
         cooldown.BaseValue = 25f;

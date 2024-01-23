@@ -13,19 +13,29 @@ public class CharAtkMovState : CharBaseState
     public override void UpdateState(CharStateManager csm)
     {
         distanceToCible = (csm.cibleKonpemo.transform.position - csm.transform.position).magnitude;
-        if (distanceToCible <= csm.konpemo.rangeAttack.Value) //cible a portee d'atk
+
+        // Si la cible est dans la portee d'attaque (RangeAttack) :
+        if (distanceToCible <= csm.konpemo.rangeAttack.Value) 
         {
             csm.agent.SetDestination(csm.transform.position);
             csm.SwitchState(csm.charAtkState);
         }
-        else if (distanceToCible >= csm.konpemo.rangeView.Value) //cible hors de portee d'atk
-        {
-            csm.SwitchState(csm.charMovingState);
-        }
-        else  //cible dans la portee de vision
+
+        // Si la cible est hors de la portee d'attaque , mais dans la portee de vision (RangeVision) :
+        else
         {
             csm.agent.SetDestination(csm.cibleKonpemo.transform.position);
         }
+
+        // Si la cible est hors de portee d'attaque et hors de portee vision :
+        // A IMPLEMENTER SI ON RAJOUTE UN FOG OF WAR...
+        /*else if (distanceToCible >= csm.konpemo.rangeView.Value) 
+        {
+            csm.destination = csm.cibleKonpemo.transform.position;
+            csm.SwitchState(csm.charMovingState);
+        }
+*/
+
     }
 }
 

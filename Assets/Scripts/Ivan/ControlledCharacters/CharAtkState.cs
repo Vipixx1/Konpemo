@@ -22,7 +22,7 @@ public class CharAtkState : CharBaseState
             {
                 timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
                 csm.konpemo.SetTarget(csm.cibleKonpemo);
-                csm.konpemo.Attack();
+                csm.konpemo.animator.SetTrigger("Attack");
                 csm.StartCoroutine(AttackCooldown(timeBetweenAttack, csm));
                 //Debug.Log("ATK");
             }

@@ -40,6 +40,7 @@ public class CharStateManager : MonoBehaviour
     void Update()
     {
         agent.speed = konpemo.speed.Value;
+        konpemo.animator.SetFloat("Speed", agent.velocity.magnitude);
         currentState.UpdateState(this);
     }
 

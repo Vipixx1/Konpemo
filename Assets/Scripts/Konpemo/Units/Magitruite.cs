@@ -17,9 +17,12 @@ public class Magitruite : Konpemo
         defense.BaseValue = 0f;
         speed.BaseValue = 0.5f;
         attackSpeed.BaseValue = 0.5f;
+
         cooldown.BaseValue = 0f;
-        rangeAttack.BaseValue = 8f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 5f;
+        rangeCapacity.BaseValue = 0f;
+        rangeView.BaseValue = 10f;
     }
 
     public override void Attack() // Gouttelette

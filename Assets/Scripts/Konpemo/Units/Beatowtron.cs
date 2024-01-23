@@ -11,9 +11,17 @@ public class Beatowtron : Konpemo
         defense.BaseValue = 0f;
         speed.BaseValue = 2f;
         attackSpeed.BaseValue = 0.2f;
+
         cooldown.BaseValue = 10f;
-        rangeAttack.BaseValue = 8f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 3f;
+        rangeCapacity.BaseValue = 7.5f;
+        rangeView.BaseValue = 10f;
+    }
+
+    public override void SetCapacityType()
+    {
+        this.capacityType = CapacityType.ClickOnAlly;
     }
 
     public override void Capacity(Vector3? localisation = null)  // Soin

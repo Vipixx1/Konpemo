@@ -39,7 +39,7 @@ public class IAAttackingState : IABaseState
             {
                 timeBetweenAttack = 1 / ia.konpemo.attackSpeed.Value;
                 ia.konpemo.SetTarget(ia.target);
-                ia.konpemo.Attack();
+                ia.konpemo.animator.SetTrigger("Attack");
                 ia.StartCoroutine(AttackCooldown(timeBetweenAttack, ia));
                 Debug.Log("Deal Damages");
             }

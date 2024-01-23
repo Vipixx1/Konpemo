@@ -10,8 +10,11 @@ public abstract class Konpemo : MonoBehaviour
     public Defense defense = new();
     public Speed speed = new();
     public AttackSpeed attackSpeed = new();
+
     public Cooldown cooldown = new();
+
     public RangeAttack rangeAttack = new();
+    public RangeCapacity rangeCapacity = new();
     public RangeView rangeView = new();
     
     protected Konpemo konpemoEnemy = null;
@@ -20,21 +23,25 @@ public abstract class Konpemo : MonoBehaviour
     public bool isPoisoned = false;
 	public bool canAttack;
 
-    public int capacityType;
+    public CapacityType capacityType;
 	
     [SerializeField] private AllyUnitManager allyUnitManager;
     [SerializeField] private EnemyUnitManager enemyUnitManager;
 
-
 	protected NavMeshAgent agent;
 
     public Animator animator;
+    public GameObject capacityArea;
 
     public virtual void Start()
     {
-		agent = this.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
-		ChangeCapacityType();
+		SetCapacityType();
+
+        capacityArea.transform.localScale = new Vector3(rangeCapacity.Value, 0, rangeCapacity.Value)*2;
+        capacityArea.SetActive(false);
+
         canAttack = true;
 		
         /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
@@ -51,10 +58,12 @@ public abstract class Konpemo : MonoBehaviour
             StartCoroutine(IsEnemyAliveCoroutine());
         }*/
     }
-	
-    public virtual void ChangeCapacityType()
+
+    public abstract void SetBaseStats();
+
+    public virtual void SetCapacityType()
     {
-        capacityType = 0; //valeur par d�faut (ne fait rien quand on lance une capacit�)
+        capacityType = CapacityType.NoCapacity;
     }
     public virtual IEnumerator IsAllyAliveCoroutine()
     {
@@ -84,21 +93,16 @@ public abstract class Konpemo : MonoBehaviour
             yield return null;
         }
     }
-    public abstract void SetBaseStats();
+
 
     public virtual void Attack()
     {
-        animator.SetTrigger("Attack");
         konpemoEnemy?.TakingDamage(this.strength.Value);
     }
 
     public virtual void Capacity(Vector3? localisation = null) 
     {
         Debug.Log("No capacity");
-
-        //Pour les capacit�s qui ciblent une position ou un alli� pr�cis, rajouter :
-        //Si appuie sur clique gauche { Action; SetCooldown(cdCapacity) }
-        //Si appuie sur Echap ou clique droit { Annule;  pas de CD }
     }
 
     public virtual void Passive()
@@ -182,4 +186,13 @@ public enum KonpemoSpecies
     Beatowtron,
     Caillebonbon,
     Magitruite,
+}
+
+public enum CapacityType
+{
+    NoCapacity,     // 0. Don't do anything when launch capacity
+    NoClick,        // 1. No need to click anywhere to launch capacity
+    ClickOnGround,  // 2. Need to click on the ground to launch capacity
+    ClickOnAlly,    // 3. Need to click on an ally to launch capacity
+    ClickOnEnemy,   // 4. Need to click on an enemy to launch capacity
 }

@@ -5,6 +5,7 @@ public class Serbiere : Konpemo
     //rangeTrap = 3f;
     //nbTrap = 1
     //nbTrapMax = 2
+
     [SerializeField]
     private GameObject piege;
     private Vector3 localisationPiege;
@@ -29,18 +30,22 @@ public class Serbiere : Konpemo
         strength.BaseValue = 100f;
         defense.BaseValue = 0f;
         speed.BaseValue = 2f;
-        attackSpeed.BaseValue = 0.5f;
+        attackSpeed.BaseValue = 0.33f;
+
         cooldown.BaseValue = 30f;
-        rangeAttack.BaseValue = 10f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 7f;
+        rangeCapacity.BaseValue = 7.5f;
+        rangeView.BaseValue = 10f;
     }
-    public override void ChangeCapacityType()
+
+    public override void SetCapacityType()
     {
-        this.capacityType = 3;//Capacité ciblant le sol
+        this.capacityType = CapacityType.ClickOnGround;
     }
+
     public override void Attack() // Vortex Feu
     {
-
         if (1 << this.gameObject.layer == masqueBleu.value)
 
         {

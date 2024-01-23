@@ -8,6 +8,7 @@ public class Kairoche : Konpemo
     [SerializeField]
     private LayerMask redMask;
     private IAStateManager iaStateManager;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 650f;
@@ -16,13 +17,16 @@ public class Kairoche : Konpemo
         defense.BaseValue = 10f;
         speed.BaseValue = 1f;
         attackSpeed.BaseValue = 1f;
+
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 3f;
+        rangeCapacity.BaseValue = 6f;
+        rangeView.BaseValue = 10f;
     }
-    public override void ChangeCapacityType()
+    public override void SetCapacityType()
     {
-        this.capacityType = 1;//Capacité ciblant rien du tout
+        this.capacityType = CapacityType.NoClick;
     }
     public override void Capacity(Vector3? localisation = null) // Taunt
     {

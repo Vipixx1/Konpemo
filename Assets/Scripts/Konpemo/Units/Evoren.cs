@@ -4,6 +4,7 @@ using UnityEngine;
 public class Evoren : Konpemo
 {
     [SerializeField] protected GameObject buffEffect;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 500f;
@@ -12,17 +13,21 @@ public class Evoren : Konpemo
         defense.BaseValue = 5f;
         speed.BaseValue = 5f;
         attackSpeed.BaseValue = 1f;
+
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 3f;
+        rangeCapacity.BaseValue = 0f;
+        rangeView.BaseValue = 10f;
     }
-    public override void ChangeCapacityType()
+
+    public override void SetCapacityType()
     {
-        this.capacityType = 1;//Capacité ciblant rien du tout
+        this.capacityType = CapacityType.NoClick;
     }
+
     public override void Capacity(Vector3? localisation = null) // Gonflette
     {
-        animator.SetTrigger("Capacity");
         StartCoroutine(Gonflette());
         SetCooldown(cooldown.Value);
     }
@@ -43,13 +48,4 @@ public class Evoren : Konpemo
         defense.RemoveModifier(gonfletteDefense);
 
     }
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Evoren HP: " + health.Value);
-            Debug.Log("Evoren ATK: " + strength.Value);
-            Debug.Log("Evoren DEF: " + defense.Value);
-        }
-    }*/
 }

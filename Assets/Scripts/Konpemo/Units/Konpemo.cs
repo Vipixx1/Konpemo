@@ -43,28 +43,13 @@ public abstract class Konpemo : MonoBehaviour
 		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
 		SetCapacityType();
-        Debug.Log("Stats Fixés");
 
         capacityArea.transform.localScale = new Vector3(rangeCapacity.Value, 0, rangeCapacity.Value)*2;
         capacityArea.SetActive(false);
 
         canAttack = true;
+        this.animator.SetFloat("Health", health.Value);
 		
-        //this.onDeath.AddListener
-
-        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
-        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();*/
-
-        /*if(this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
-        {
-            allyUnitManager.allySpawn.Invoke(this);
-            StartCoroutine(IsAllyAliveCoroutine());
-        }
-        if (this.gameObject.layer == LayerMask.NameToLayer(enemyUnitMaskName))
-        {
-            enemyUnitManager.enemySpawn.Invoke(this);
-            StartCoroutine(IsEnemyAliveCoroutine());
-        }*/
     }
 
     public abstract void SetBaseStats();
@@ -94,13 +79,7 @@ public abstract class Konpemo : MonoBehaviour
     {
         //animator.SetTrigger("TakingDamage");
         this.health.TakingFlatDamage(rawDamage, this.defense.Value);
-        if (this.health.GetCurrentHealth() < 0.01)
-        {
-            Debug.Log("envoi d'un onDeathEvent");
-            //onDeath?.Invoke(this);
-            onDeath.Invoke(this);
-            this.animator.SetTrigger("Death");
-        }
+        this.animator.SetFloat("Health", this.health.GetCurrentHealth());
     }
 
     public virtual void Healing(float healthHealed)
@@ -118,6 +97,7 @@ public abstract class Konpemo : MonoBehaviour
 
     public virtual void Death()
     {
+        onDeath.Invoke(this);
         this.gameObject.SetActive(false);
     }
 

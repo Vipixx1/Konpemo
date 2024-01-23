@@ -28,20 +28,7 @@ public class KonpemoManager : MonoBehaviour
         konpemo = this.gameObject.GetComponentInParent<Konpemo>();
 
         cdCapacityUp = true;
-        /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();
-        enemyUnitManager = GameObject.Find("EnemyUnitManager").GetComponent<EnemyUnitManager>();
-        if (this.gameObject.layer == LayerMask.NameToLayer(allyUnitMaskName))
-        {
-            allyUnitKonpemo = this.GetComponent<Konpemo>();
-            allyUnitManager.allySpawn.Invoke(allyUnitKonpemo);
-            StartCoroutine(IsAllyAliveCoroutine(allyUnitKonpemo));
-        }
-        if (this.gameObject.layer == LayerMask.NameToLayer(enemyUnitMaskName))
-        {
-            enemyUnitKonpemo = this.GetComponent<Konpemo>();
-            enemyUnitManager.enemySpawn.Invoke(enemyUnitKonpemo);
-            StartCoroutine(IsEnemyAliveCoroutine(enemyUnitKonpemo));
-        }*/
+
     }
 
     public void AddMoveListener(EventManager eventManager)

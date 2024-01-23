@@ -8,16 +8,16 @@ public class Serbiere : Konpemo
 
     [SerializeField]
     private GameObject piege;
+
     private Vector3 localisationPiege;
+
     [SerializeField]
     private float offsetPiege = 0.1f;
     private GameObject mPiege;
-    [SerializeField]
-    private LayerMask masqueBleu;
-    [SerializeField]
-    private LayerMask masqueRouge;
+
     [SerializeField]
     ParticleSystem vortexDeFeu;
+
     [SerializeField]
     private float rangeVortex = 3;
     [SerializeField]
@@ -46,17 +46,14 @@ public class Serbiere : Konpemo
 
     public override void Attack() // VortexDeFeu
     {
-
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex);
-            foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
-            { 
-                if (this.gameObject.layer != collider.gameObject.layer)
-                {
-                    collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
-                    vortexDeFeu.transform.position = konpemoEnemy.transform.position;
-                    vortexDeFeu.Play();
-                }
+        Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex);
+        vortexDeFeu.transform.position = konpemoEnemy.transform.position;
+        vortexDeFeu.Play();
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
+        { 
+            if (this.gameObject.layer != collider.gameObject.layer)
+            {
+                collider.GetComponent<Konpemo>().TakingDamage(this.strength.Value);
                 
             }
         }

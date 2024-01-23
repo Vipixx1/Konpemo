@@ -545,6 +545,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2412042026017035003}
   m_SourcePrefab: {fileID: 100100000, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+--- !u!1 &2226263828200840344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 180742412264498120, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+  m_PrefabInstance: {fileID: 2046718270272782160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3111583874034701619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3983986237869730403, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
@@ -574,6 +579,7 @@ MonoBehaviour:
   allyUnitManager: {fileID: 0}
   enemyUnitManager: {fileID: 0}
   animator: {fileID: 2412042026017035003}
+  capacityArea: {fileID: 2226263828200840344}
   pointDeTir: {fileID: 7187102432153195830}
 --- !u!95 &2412042026017035003
 Animator:

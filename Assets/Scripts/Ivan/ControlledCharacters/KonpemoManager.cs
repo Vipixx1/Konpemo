@@ -78,15 +78,22 @@ public class KonpemoManager : MonoBehaviour
     {
         switch (konpemo.capacityType)
         {
-            case 1:
+            case CapacityType.NoClick:
                 eventManager.rCapacityEvent.AddListener(RCapacityHandler);
                 break;
-            case 2:
-                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
-                break;
-            case 3:
+
+            case CapacityType.ClickOnGround:
                 eventManager.zCapacityEvent.AddListener(ZCapacityHandler);
                 break;
+
+            case CapacityType.ClickOnAlly:
+                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
+                break;
+
+            case CapacityType.ClickOnEnemy:
+                eventManager.eCapacityEvent.AddListener(ECapacityHandler);
+                break;
+
             default:
                 //Debug.Log("Impossible d'attacher la capacité");
                 break;
@@ -96,17 +103,24 @@ public class KonpemoManager : MonoBehaviour
     {
         switch (konpemo.capacityType)
         {
-            case 1:
+            case CapacityType.NoClick:
                 eventManager.rCapacityEvent.RemoveListener(RCapacityHandler);
                 break;
-            case 2:
-                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
-                break;
-            case 3:
+
+            case CapacityType.ClickOnGround:
                 eventManager.zCapacityEvent.RemoveListener(ZCapacityHandler);
                 break;
+
+            case CapacityType.ClickOnAlly:
+                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
+                break;
+
+            case CapacityType.ClickOnEnemy:
+                eventManager.eCapacityEvent.RemoveListener(ECapacityHandler);
+                break;
+
             default:
-                Debug.Log("Impossible d'enlever la capacité");
+                //Debug.Log("Impossible de retirer la capacité");
                 break;
         }
     }

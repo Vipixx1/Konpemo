@@ -577,6 +577,7 @@ MonoBehaviour:
   allyUnitManager: {fileID: 0}
   enemyUnitManager: {fileID: 0}
   animator: {fileID: 6868125814305189540}
+  capacityArea: {fileID: 5551843501416618572}
 --- !u!95 &6868125814305189540
 Animator:
   serializedVersion: 5
@@ -598,6 +599,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &5551843501416618572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 180742412264498120, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+  m_PrefabInstance: {fileID: 5732585878033856900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8703147025902195687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3983986237869730403, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}

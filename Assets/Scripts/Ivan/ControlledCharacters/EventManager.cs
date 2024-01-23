@@ -66,10 +66,10 @@ public class EventManager : MonoBehaviour
                 goToFlwAllyEvent.Invoke(cibleGameObject);
             }
         }
-        if(Input.GetKeyDown (KeyCode.E)) //capacite cible perso
+        if (Input.GetKeyDown(KeyCode.E)) //capacite cible perso
         {
             konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
-            if(konpemoManagerSelected != null)
+            if (konpemoManagerSelected != null)
             {
                 konpemoSelected = konpemoManagerSelected.GetComponentInParent<Konpemo>();
                 //Debug.Log(konpemoSelected.ToString());
@@ -100,8 +100,9 @@ public class EventManager : MonoBehaviour
     }
 
     //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
-    private IEnumerator CapacityOnGroundCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap) 
+    private IEnumerator CapacityOnGroundCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
+
         mUiManager.DisplaySpriteBlue();
         konpemoExecutingCap.capacityArea.SetActive(true);
         selectionManager.Lock(this.gameObject);
@@ -115,23 +116,23 @@ public class EventManager : MonoBehaviour
                 {
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)  //si le point de casting est à l'intérieur de la zone de vision
                     {
-                        //Debug.Log("Capacity 2 event sent");
+                        //Debug.Log("Capacity OnGround event sent");
                         zCapacityEvent.Invoke(hit.collider.transform.position);
+                        mUiManager.HideSpriteBlue();
+                        konpemoExecutingCap.capacityArea.SetActive(false);
+                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    break;
+                    //
                 }
             }
-            break;
+            yield return null;
         }
-        mUiManager.HideSpriteBlue();
-        konpemoExecutingCap.capacityArea.SetActive(false);
-        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 
     //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oublié pk j'ai mis ca mais dans le doute)
-    private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)  
+    private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
         mUiManager.DisplaySpriteRed();
         konpemoExecutingCap.capacityArea.SetActive(true);
@@ -145,19 +146,19 @@ public class EventManager : MonoBehaviour
                 if (Physics.Raycast(rayE, out hit, Mathf.Infinity, masqueUniteAllie))
                 {
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
-                    { 
+                    {
                         //Debug.Log("Capacity OnAlly event sent");
                         eCapacityEvent.Invoke(hit.collider.gameObject);
+                        mUiManager.HideSpriteRed();
+                        konpemoExecutingCap.capacityArea.SetActive(false);
+                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    break;
+                    //
                 }
             }
-            break;
+            yield return null;
         }
-        mUiManager.HideSpriteRed();
-        konpemoExecutingCap.capacityArea.SetActive(false);
-        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 
@@ -179,16 +180,16 @@ public class EventManager : MonoBehaviour
                     {
                         //Debug.Log("Capacity OnEnemy event sent");
                         eCapacityEvent.Invoke(hit.collider.gameObject);
+                        mUiManager.HideSpriteRed();
+                        konpemoExecutingCap.capacityArea.SetActive(false);
+                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
-                    break;
+                    //
                 }
             }
-            break;
+            yield return null;
         }
-        mUiManager.HideSpriteRed();
-        konpemoExecutingCap.capacityArea.SetActive(false);
-        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 

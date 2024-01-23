@@ -31,12 +31,17 @@ public abstract class Konpemo : MonoBehaviour
 	protected NavMeshAgent agent;
 
     public Animator animator;
+    public GameObject capacityArea;
 
     public virtual void Start()
     {
 		agent = this.gameObject.GetComponent<NavMeshAgent>();
         SetBaseStats();
 		SetCapacityType();
+
+        capacityArea.transform.localScale = new Vector3(rangeCapacity.Value, 0, rangeCapacity.Value)*2;
+        capacityArea.SetActive(false);
+
         canAttack = true;
 		
         /*allyUnitManager = GameObject.Find("AllyUnitManager").GetComponent<AllyUnitManager>();

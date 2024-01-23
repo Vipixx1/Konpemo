@@ -103,6 +103,7 @@ public class EventManager : MonoBehaviour
     private IEnumerator CapacityOnGroundCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap) 
     {
         mUiManager.DisplaySpriteBlue();
+        konpemoExecutingCap.capacityArea.SetActive(true);
         selectionManager.Lock(this.gameObject);
         while (true)
         {
@@ -116,14 +117,16 @@ public class EventManager : MonoBehaviour
                     {
                         //Debug.Log("Capacity 2 event sent");
                         zCapacityEvent.Invoke(hit.collider.transform.position);
-                        mUiManager.HideSpriteBlue();
-                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
+                    break;
                 }
             }
-            yield return null;
+            break;
         }
+        mUiManager.HideSpriteBlue();
+        konpemoExecutingCap.capacityArea.SetActive(false);
+        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 
@@ -131,6 +134,7 @@ public class EventManager : MonoBehaviour
     private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)  
     {
         mUiManager.DisplaySpriteRed();
+        konpemoExecutingCap.capacityArea.SetActive(true);
         selectionManager.Lock(this.gameObject);
         while (true)
         {
@@ -144,14 +148,16 @@ public class EventManager : MonoBehaviour
                     { 
                         //Debug.Log("Capacity OnAlly event sent");
                         eCapacityEvent.Invoke(hit.collider.gameObject);
-                        mUiManager.HideSpriteRed();
-                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
+                    break;
                 }
             }
-            yield return null;
+            break;
         }
+        mUiManager.HideSpriteRed();
+        konpemoExecutingCap.capacityArea.SetActive(false);
+        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 
@@ -159,6 +165,7 @@ public class EventManager : MonoBehaviour
     private IEnumerator CapacityOnEnemyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
     {
         mUiManager.DisplaySpriteRed();
+        konpemoExecutingCap.capacityArea.SetActive(true);
         selectionManager.Lock(this.gameObject);
         while (true)
         {
@@ -170,16 +177,18 @@ public class EventManager : MonoBehaviour
                 {
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
-                        //Debug.Log("Capacity 2 event sent");
+                        //Debug.Log("Capacity OnEnemy event sent");
                         eCapacityEvent.Invoke(hit.collider.gameObject);
-                        mUiManager.HideSpriteRed();
-                        mSelectionManager.Unlock(this.gameObject);
                         break;
                     }
+                    break;
                 }
             }
-            yield return null;
+            break;
         }
+        mUiManager.HideSpriteRed();
+        konpemoExecutingCap.capacityArea.SetActive(false);
+        mSelectionManager.Unlock(this.gameObject);
         yield return null;
     }
 

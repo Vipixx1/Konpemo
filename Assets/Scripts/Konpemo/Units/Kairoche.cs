@@ -34,14 +34,14 @@ public class Kairoche : Konpemo
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
         foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         {
-            //Ne Marche que pour les allies :
+            //Ne marche que pour l'utilisation de la capacite par un Kairoche allie pour le moment...
             if(iaStateManager = collider.GetComponent<IAStateManager>())
             {
-                StartCoroutine(tauntCoroutine(iaStateManager));
+                StartCoroutine(TauntCoroutine(iaStateManager));
             }
         }
     }
-    public IEnumerator tauntCoroutine(IAStateManager mIaStateManager)
+    public IEnumerator TauntCoroutine(IAStateManager mIaStateManager)
     {
         mIaStateManager.taunterKonpemos.Add(this);
         yield return new WaitForSeconds(cooldown.Value);

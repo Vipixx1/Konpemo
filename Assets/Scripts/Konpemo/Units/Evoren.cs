@@ -5,6 +5,8 @@ public class Evoren : Konpemo
 {
     [SerializeField] protected GameObject buffEffect;
 
+    private float buffDuration = 10f;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 500f;
@@ -41,7 +43,7 @@ public class Evoren : Konpemo
         strength.AddModifier(gonfletteStrength);
         defense.AddModifier(gonfletteDefense);
         
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(buffDuration);
         
         buffEffect.SetActive(false);
         strength.RemoveModifier(gonfletteStrength);

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PiegeDeBreizh : MonoBehaviour
 {
-    private float flatDamage = 150;
-    private float trapRadius = 3;
-    private float timeToBoom = 2;
+    private float flatDamage = 150f;
+    private float trapRadius = 3f;
+    private float timeToBoom = 2f;
     private float particleDuration = 0.3f;
+
     private Collider[] colliders;
 
     [SerializeField]
     ParticleSystem explosionParticle;
-    [SerializeField]
-    LayerMask enemyMask;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Konpemo>() && this.gameObject.layer != other.gameObject.layer)

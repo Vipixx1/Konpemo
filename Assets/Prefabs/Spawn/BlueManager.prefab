@@ -67,6 +67,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionEffect: {fileID: 9130729647561828439}
+  allyUnitManager: {fileID: 0}
+  enemyUnitManager: {fileID: 0}
+  allyUnitMaskName: Blue
+  enemyUnitMaskName: Red
 --- !u!1 &9130729647561828439
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &491784633093235764
 Transform:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class SelectionManager : MonoBehaviour
             allyUnitHit = Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUniteAllie);
             if (allyUnitHit)
             {
-                if (!Input.GetKey(KeyCode.LeftShift)) UnSelectKonpemos();
+                if (!Input.GetKey(KeyCode.LeftShift)) UnselectKonpemos();
                 konpemoManagerHit = hit.collider.gameObject.GetComponentInChildren<KonpemoManager>();
                 if (!CheckKonpemoSelected(konpemoManagerHit)) //Konpemo not selected
                 {
@@ -49,12 +49,12 @@ public class SelectionManager : MonoBehaviour
                 else //Konpemo already selected
                 {
                     Debug.Log("remove des listeners");
-                    unSelectKonpemo(konpemoManagerHit);
+                    UnselectKonpemo(konpemoManagerHit);
                 }
             }
             else if (!Physics.Raycast(ray, out hit, Mathf.Infinity, masqueUnite))  //on ne clique pas sur une unité
             {
-                UnSelectKonpemos();
+                UnselectKonpemos();
                 //Debug.Log("tous les konpemos déseléctionnés");
                 //Debug.Log(selectedKonpemos.Count);
             }
@@ -97,18 +97,20 @@ public class SelectionManager : MonoBehaviour
         selectedKonpemos.Add(konpemoManager);
         konpemoManager.selectionEffect.gameObject.SetActive(true);
     }
-    private void unSelectKonpemo(KonpemoManager konpemoManager)
+    private void UnselectKonpemo(KonpemoManager konpemoManager)
     {
         eventManager.RemoveListener(konpemoManager);
+        eventManager.RemoveCapacityListener(konpemoManager);
         selectedKonpemos.Remove(konpemoManager);
         konpemoManager.selectionEffect.gameObject.SetActive(false);
     }
-    private void UnSelectKonpemos()
+    private void UnselectKonpemos()
     {
         foreach (KonpemoManager mKonpemoManager in selectedKonpemos)
         {
             eventManager.RemoveListener(mKonpemoManager);
-            mKonpemoManager.selectionEffect.gameObject.SetActive(false);
+            eventManager.RemoveCapacityListener(mKonpemoManager);
+            mKonpemoManager.selectionEffect.SetActive(false);
         }
         selectedKonpemos.Clear();
     }

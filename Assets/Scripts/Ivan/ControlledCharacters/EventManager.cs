@@ -18,9 +18,10 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> goToEvent;
     public UnityEvent<Konpemo> goToAtkEvent;
     public UnityEvent<Konpemo> goToFlwAllyEvent;
-    public UnityEvent rCapacityEvent;
-    public UnityEvent<GameObject> eCapacityEvent;
-    public UnityEvent<Vector3> zCapacityEvent;
+
+    public UnityEvent capacityNoClickEvent;
+    public UnityEvent<Vector3> capacityOnGroundEvent;
+    public UnityEvent<GameObject> capacityOnUnitEvent;
 
     [SerializeField] private LayerMask masqueUnite;
     [SerializeField] private LayerMask masqueUniteEnnemi;
@@ -35,9 +36,11 @@ public class EventManager : MonoBehaviour
         goToEvent = new UnityEvent<Vector3>();
         goToAtkEvent = new UnityEvent<Konpemo>();
         goToFlwAllyEvent = new UnityEvent<Konpemo>();
-        rCapacityEvent = new UnityEvent();
-        eCapacityEvent = new UnityEvent<GameObject>();
-        zCapacityEvent = new UnityEvent<Vector3>();
+
+        capacityNoClickEvent = new UnityEvent();
+        capacityOnGroundEvent = new UnityEvent<Vector3>();
+        capacityOnUnitEvent = new UnityEvent<GameObject>();
+
         mainCamera = Camera.main;
     }
 
@@ -66,7 +69,7 @@ public class EventManager : MonoBehaviour
                 goToFlwAllyEvent.Invoke(cibleGameObject);
             }
         }
-        if (Input.GetKeyDown(KeyCode.E)) //capacite cible perso
+        if (Input.GetKeyDown(KeyCode.E))
         {
             konpemoManagerSelected = selectionManager.GetLastKonpemoSelected();
             if (konpemoManagerSelected != null)
@@ -76,7 +79,7 @@ public class EventManager : MonoBehaviour
                 switch (konpemoSelected.capacityType)
                 {
                     case CapacityType.NoClick:
-                        rCapacityEvent.Invoke();
+                        capacityNoClickEvent.Invoke();
                         break;
 
                     case CapacityType.ClickOnGround:
@@ -117,7 +120,7 @@ public class EventManager : MonoBehaviour
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)  //si le point de casting est à l'intérieur de la zone de vision
                     {
                         //Debug.Log("Capacity OnGround event sent");
-                        zCapacityEvent.Invoke(hit.collider.transform.position);
+                        capacityOnGroundEvent.Invoke(hit.collider.transform.position);
                         mUiManager.HideSpriteBlue();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);
@@ -148,7 +151,7 @@ public class EventManager : MonoBehaviour
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
                         //Debug.Log("Capacity OnAlly event sent");
-                        eCapacityEvent.Invoke(hit.collider.gameObject);
+                        capacityOnUnitEvent.Invoke(hit.collider.gameObject);
                         mUiManager.HideSpriteRed();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);
@@ -179,7 +182,7 @@ public class EventManager : MonoBehaviour
                     if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
                     {
                         //Debug.Log("Capacity OnEnemy event sent");
-                        eCapacityEvent.Invoke(hit.collider.gameObject);
+                        capacityOnUnitEvent.Invoke(hit.collider.gameObject);
                         mUiManager.HideSpriteRed();
                         konpemoExecutingCap.capacityArea.SetActive(false);
                         mSelectionManager.Unlock(this.gameObject);

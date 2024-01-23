@@ -48,10 +48,10 @@ public class Kairoche : Konpemo
         mIaStateManager.taunterKonpemos.Remove(this);
         yield return null;
     } 
+
     public override void Passive() // Explosion
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f);
-
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
         foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         {
             collider.GetComponent<Konpemo>().TakingDamage(5 * this.strength.Value);

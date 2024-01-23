@@ -12,14 +12,17 @@ public class Ninjax : Konpemo
         defense.BaseValue = 3f;
         speed.BaseValue = 5f;
         attackSpeed.BaseValue = 3f;
+
         cooldown.BaseValue = 25f;
-        rangeAttack.BaseValue = 10f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 7.5f;
+        rangeCapacity.BaseValue = 5f;
+        rangeView.BaseValue = 10f;
     }
 
     public override void SetCapacityType()
     {
-        this.capacityType = 1;
+        this.capacityType = CapacityType.NoClick;
     }
 
     public override void Attack() // Piqûre

@@ -75,46 +75,32 @@ public class EventManager : MonoBehaviour
                 //Debug.Log(konpemoSelected.ToString());
                 switch (konpemoSelected.capacityType)
                 {
-                    case 1:
+                    case CapacityType.NoClick:
                         rCapacityEvent.Invoke();
                         break;
-                    case 2:
-                        StartCoroutine(Capacity2Coroutine(uiManager, selectionManager));
+
+                    case CapacityType.ClickOnGround:
+                        StartCoroutine(CapacityOnGroundCoroutine(uiManager, selectionManager, konpemoSelected));
                         break;
-                    case 3:
-                        StartCoroutine(Capacity3Coroutine(uiManager, selectionManager, konpemoSelected));
+
+                    case CapacityType.ClickOnAlly:
+                        StartCoroutine(CapacityOnAllyCoroutine(uiManager, selectionManager, konpemoSelected));
                         break;
+
+                    case CapacityType.ClickOnEnemy:
+                        StartCoroutine(CapacityOnEnemyCoroutine(uiManager, selectionManager, konpemoSelected));
+                        break;
+
                     default:
-                        //Debug.Log("Impossible de lancer la capacité");
+                        Debug.Log("Impossible de lancer la capacité");
                         break;
                 }
             }
         }
     }
-    private IEnumerator Capacity2Coroutine(UIManager mUiManager, SelectionManager mSelectionManager)  // Capacite ciblée sur ennemi //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oublié pk j'ai mis ca mais dans le doute)
-    {
-        mUiManager.DisplaySpriteRed();
-        selectionManager.Lock(this.gameObject);
-        while (true)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && selectionManager.Lock(this.gameObject))
-            {
-                //Debug.Log("Dans la partie LOCK, vise un ennemi");
-                rayE = mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(rayE, out hit, Mathf.Infinity, masqueUniteEnnemi))
-                {
-                    //Debug.Log("Capacity 2 event sent");
-                    eCapacityEvent.Invoke(hit.collider.gameObject);
-                    mUiManager.HideSpriteRed();
-                    mSelectionManager.Unlock(this.gameObject);
-                    break;
-                }
-            }
-            yield return null;
-        }
-        yield return null;
-    }
-    private IEnumerator Capacity3Coroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap) //capacité ciblée sur sol //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
+
+    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK
+    private IEnumerator CapacityOnGroundCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap) 
     {
         mUiManager.DisplaySpriteBlue();
         selectionManager.Lock(this.gameObject);
@@ -126,9 +112,9 @@ public class EventManager : MonoBehaviour
                 rayZ = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(rayZ, out hit, Mathf.Infinity, masqueSol))
                 {
-                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeView.Value)  //si le point de casting est à l'intérieur de la zone de vision
+                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)  //si le point de casting est à l'intérieur de la zone de vision
                     {
-                        //Debug.Log("Capacity 3 event sent");
+                        //Debug.Log("Capacity 2 event sent");
                         zCapacityEvent.Invoke(hit.collider.transform.position);
                         mUiManager.HideSpriteBlue();
                         mSelectionManager.Unlock(this.gameObject);
@@ -140,6 +126,63 @@ public class EventManager : MonoBehaviour
         }
         yield return null;
     }
+
+    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oublié pk j'ai mis ca mais dans le doute)
+    private IEnumerator CapacityOnAllyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)  
+    {
+        mUiManager.DisplaySpriteRed();
+        selectionManager.Lock(this.gameObject);
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && selectionManager.Lock(this.gameObject))
+            {
+                //Debug.Log("Dans la partie LOCK, vise un ennemi");
+                rayE = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(rayE, out hit, Mathf.Infinity, masqueUniteAllie))
+                {
+                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
+                    { 
+                        //Debug.Log("Capacity OnAlly event sent");
+                        eCapacityEvent.Invoke(hit.collider.gameObject);
+                        mUiManager.HideSpriteRed();
+                        mSelectionManager.Unlock(this.gameObject);
+                        break;
+                    }
+                }
+            }
+            yield return null;
+        }
+        yield return null;
+    }
+
+    //ATTENTION POUR DEBUGER IL FAUDRA PASSER LE KONPEMO DANS LE LOCK / (j'ai oublié pk j'ai mis ca mais dans le doute)
+    private IEnumerator CapacityOnEnemyCoroutine(UIManager mUiManager, SelectionManager mSelectionManager, Konpemo konpemoExecutingCap)
+    {
+        mUiManager.DisplaySpriteRed();
+        selectionManager.Lock(this.gameObject);
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && selectionManager.Lock(this.gameObject))
+            {
+                //Debug.Log("Dans la partie LOCK, vise un ennemi");
+                rayE = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(rayE, out hit, Mathf.Infinity, masqueUniteEnnemi))
+                {
+                    if ((hit.point - konpemoExecutingCap.transform.position).magnitude <= konpemoExecutingCap.rangeCapacity.Value)
+                    {
+                        //Debug.Log("Capacity 2 event sent");
+                        eCapacityEvent.Invoke(hit.collider.gameObject);
+                        mUiManager.HideSpriteRed();
+                        mSelectionManager.Unlock(this.gameObject);
+                        break;
+                    }
+                }
+            }
+            yield return null;
+        }
+        yield return null;
+    }
+
 
     public void AddListener(KonpemoManager konpemoManager)
     {

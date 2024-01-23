@@ -17,13 +17,16 @@ public class Kairoche : Konpemo
         defense.BaseValue = 10f;
         speed.BaseValue = 1f;
         attackSpeed.BaseValue = 1f;
+
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 5f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 3f;
+        rangeCapacity.BaseValue = 6f;
+        rangeView.BaseValue = 10f;
     }
     public override void SetCapacityType()
     {
-        this.capacityType = 1; // Capacité qui ne necessite pas de cibler une zone
+        this.capacityType = CapacityType.NoClick;
     }
     public override void Capacity(Vector3? localisation = null) // Taunt
     {

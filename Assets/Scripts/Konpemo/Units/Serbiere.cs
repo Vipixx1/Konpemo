@@ -30,15 +30,20 @@ public class Serbiere : Konpemo
         strength.BaseValue = 100f;
         defense.BaseValue = 0f;
         speed.BaseValue = 2f;
-        attackSpeed.BaseValue = 0.5f;
+        attackSpeed.BaseValue = 0.33f;
+
         cooldown.BaseValue = 30f;
-        rangeAttack.BaseValue = 10f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 7f;
+        rangeCapacity.BaseValue = 7.5f;
+        rangeView.BaseValue = 10f;
     }
+
     public override void SetCapacityType()
     {
-        this.capacityType = 3; // Capacite qui necessite de cibler le sol
+        this.capacityType = CapacityType.ClickOnGround;
     }
+
     public override void Attack() // Vortex Feu
     {
         if (1 << this.gameObject.layer == masqueBleu.value)

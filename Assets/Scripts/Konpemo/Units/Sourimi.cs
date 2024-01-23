@@ -21,14 +21,17 @@ public class Sourimi : Konpemo
         defense.BaseValue = 0f;
         speed.BaseValue = 5f;
         attackSpeed.BaseValue = 0.3f;
+
         cooldown.BaseValue = 15f;
-        rangeAttack.BaseValue = 10f;
-        rangeView.BaseValue = 15f;
+
+        rangeAttack.BaseValue = 7.5f;
+        rangeCapacity.BaseValue = 7.5f;
+        rangeView.BaseValue = 10f;
     }
 	
 	public override void SetCapacityType()
     {
-        this.capacityType = 3; // Capacite qui necessite de cibler le sol
+        this.capacityType = CapacityType.ClickOnGround;
     }
 
     public override void Attack() // Ball'Foudre

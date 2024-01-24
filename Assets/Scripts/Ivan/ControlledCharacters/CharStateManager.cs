@@ -18,7 +18,7 @@ public class CharStateManager : MonoBehaviour
     public CharFlwAllyState charFlwAllyState = new();
 
     public Vector3 destination;
-    public Konpemo cibleKonpemo;
+    public Konpemo targetKonpemo;
 
 
     void Start()

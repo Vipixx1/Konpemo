@@ -576,8 +576,6 @@ MonoBehaviour:
   isPoisoned: 0
   canAttack: 1
   capacityType: 0
-  allyUnitManager: {fileID: 0}
-  enemyUnitManager: {fileID: 0}
   animator: {fileID: 2412042026017035003}
   capacityArea: {fileID: 2226263828200840344}
   onDeath:

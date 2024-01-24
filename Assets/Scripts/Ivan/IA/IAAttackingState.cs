@@ -41,7 +41,6 @@ public class IAAttackingState : IABaseState
                 ia.konpemo.SetTarget(ia.target);
                 ia.konpemo.animator.SetTrigger("Attack");
                 ia.StartCoroutine(AttackCooldown(timeBetweenAttack, ia));
-                Debug.Log("Deal Damages");
             }
             else
             {

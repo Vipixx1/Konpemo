@@ -5,7 +5,7 @@ using UnityEngine;
 public class KonpemoManager : MonoBehaviour
 {
     private CharStateManager charStateManager;
-    private Konpemo konpemo; //public ???
+    private Konpemo konpemo;
 	
 	public GameObject selectionEffect;
 
@@ -14,22 +14,20 @@ public class KonpemoManager : MonoBehaviour
     [SerializeField]
     private EnemyUnitManager enemyUnitManager;
 
-
     private bool cdCapacityUp;
+
     private void Start()
     {
-        //health = this.GetComponent<Konpemo>().health.Value.ToString();
         charStateManager = this.gameObject.GetComponent<CharStateManager>();
         konpemo = this.gameObject.GetComponentInParent<Konpemo>();
 
         cdCapacityUp = true;
-
     }
 
     public void AddMoveListener(EventManager eventManager)
     {
         eventManager.goToEvent.AddListener(MoveHandler);
-        //Debug.Log("Listener bien ajout�");
+        //Debug.Log("Listener bien ajoute");
     }
 
     public void RemoveMoveListener(EventManager eventManager)
@@ -68,16 +66,16 @@ public class KonpemoManager : MonoBehaviour
                 eventManager.capacityOnGroundEvent.AddListener(OnGroundCapacityHandler);
                 break;
 
-            case CapacityType.ClickOnAlly:
+            /*case CapacityType.ClickOnAlly:
                 eventManager.capacityOnUnitEvent.AddListener(OnUnitCapacityHandler);
                 break;
 
             case CapacityType.ClickOnEnemy:
                 eventManager.capacityOnUnitEvent.AddListener(OnUnitCapacityHandler);
-                break;
+                break;*/
 
             default:
-                //Debug.Log("Impossible d'attacher la capacit�");
+                //Debug.Log("Impossible d'attacher la capacite");
                 break;
         }
     }
@@ -93,16 +91,16 @@ public class KonpemoManager : MonoBehaviour
                 eventManager.capacityOnGroundEvent.RemoveListener(OnGroundCapacityHandler);
                 break;
 
-            case CapacityType.ClickOnAlly:
+            /*case CapacityType.ClickOnAlly:
                 eventManager.capacityOnUnitEvent.RemoveListener(OnUnitCapacityHandler);
                 break;
 
             case CapacityType.ClickOnEnemy:
                 eventManager.capacityOnUnitEvent.RemoveListener(OnUnitCapacityHandler);
-                break;
+                break;*/
 
             default:
-                //Debug.Log("Impossible de retirer la capacit�");
+                //Debug.Log("Impossible de retirer la capacite");
                 break;
         }
     }
@@ -111,7 +109,7 @@ public class KonpemoManager : MonoBehaviour
     {
         if (cdCapacityUp)
         {
-            Debug.Log("R CAPACITY TO PUT HERE");
+            //Debug.Log("NO CLICK CAPACITY TO PUT HERE");
             konpemo.Capacity();
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
@@ -120,21 +118,21 @@ public class KonpemoManager : MonoBehaviour
     {
         if (cdCapacityUp)
         {
-            Debug.Log("Z CAPACITY TO PUT HERE");
+            //Debug.Log("ON GROUND CAPACITY TO PUT HERE");
             konpemo.Capacity(localisationSpell);
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
     }
 
-    public void OnUnitCapacityHandler(GameObject targetToCastOn)
+    /*public void OnUnitCapacityHandler()
     {
         if (cdCapacityUp)
         {
-            Debug.Log("E CAPACITY TO PUT HERE");
-            //konpemo.Capacity(targetToCastOn);
+            Debug.Log("ON UNIT CAPACITY TO PUT HERE");
+            konpemo.Capacity();
             StartCoroutine(CapacityCooldown(konpemo.cooldown.Value));
         }
-    }
+    }*/
     
 
     public void MoveHandler(Vector3 position)
@@ -144,16 +142,16 @@ public class KonpemoManager : MonoBehaviour
         charStateManager.SwitchState(charStateManager.charMovingState);
     }
 
-    public void AtkMoveHandler(Konpemo cible)
+    public void AtkMoveHandler(Konpemo target)
     {
-        //Debug.Log("J'ai re�u un goToAtkEvent");
-        charStateManager.cibleKonpemo = cible;
+        //Debug.Log("J'ai recu un goToAtkEvent");
+        charStateManager.targetKonpemo = target;
         charStateManager.SwitchState(charStateManager.charAtkMovState);
     }
 
     public void FlwAllyHandler(Konpemo allyToFollow)
     {
-        charStateManager.cibleKonpemo = allyToFollow;
+        charStateManager.targetKonpemo = allyToFollow;
         charStateManager.SwitchState(charStateManager.charFlwAllyState);
     }
 

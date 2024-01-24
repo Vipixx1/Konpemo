@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text textSelection5;
     [SerializeField] private Slider healthBar5;
 
-    private List<Slider> sliderList = new();
-    private List<TMP_Text> textList = new();
+    public List<Slider> sliderList = new();
+    public List<TMP_Text> textList = new();
 
 
 
@@ -127,13 +127,11 @@ public class UIManager : MonoBehaviour
     }
     public void EditKonpemosPresent(List<Konpemo> konpemos)
     {
-        int i = 0;
-        foreach (Konpemo konpemo in konpemos)
+        for (int i = 0; i < konpemos.Count; i++)
         {
             textList[i].text = konpemos[i].nameKonpemo;
             sliderList[i].maxValue = konpemos[i].health.Value;
             sliderList[i].value = konpemos[i].health.GetCurrentHealth();
-            i++;
         }
     }
 

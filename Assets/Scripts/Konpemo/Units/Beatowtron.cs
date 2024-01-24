@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Beatowtron : Konpemo
 {
-    private float rangeHeal = 3f;
+    [SerializeField] private ParticleSystem healingEffect;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 300f;
@@ -21,7 +22,7 @@ public class Beatowtron : Konpemo
 
     public override void SetCapacityTypeAndName()
     {
-        this.capacityType = CapacityType.ClickOnAlly;
+        this.capacityType = CapacityType.NoClick;
         this.nameKonpemo = KonpemoSpecies.Beatowtron.ToString();
     }
 
@@ -29,17 +30,11 @@ public class Beatowtron : Konpemo
     {
         float hpHealed = RandomHeal();
 
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeHeal, this.gameObject.layer);
-
-        //HIGHLIGHT THE AREA WHERE THE ALLIED CAN BE HEAL
-        foreach (Collider collider in hitColliders)
+        healingEffect.Play();
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() && this.gameObject.layer == collider.gameObject.layer)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Raycast, if cible alliée, selectionne cet allié dans une variable, heal cet allié
-                collider.GetComponent<Konpemo>().Healing(hpHealed);
-            }
-            
+            collider.GetComponent<Konpemo>().Healing(hpHealed);
         }
     }
 
@@ -47,5 +42,4 @@ public class Beatowtron : Konpemo
     {
         return UnityEngine.Random.Range(1, 100);
     }
-
 }

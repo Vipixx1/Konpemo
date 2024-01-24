@@ -6,6 +6,9 @@ public class Caillebonbon : Konpemo
 {
     [SerializeField] private Transform pointDeTir;
 
+    [SerializeField] private ParticleSystem selfHealingEffect;   
+	[SerializeField] private ParticleSystem flyParticles;	
+
     private List<Konpemo> enemyKonpemos;
     private IAStateManager iaStateManager;
     private float flyTime = 5f;
@@ -16,7 +19,7 @@ public class Caillebonbon : Konpemo
     //private float flyOffset;
     //private float pastPositionY;
 
-    [SerializeField] private ParticleSystem flyParticles;
+    
 
     public override void SetBaseStats()
     {

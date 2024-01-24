@@ -4,10 +4,9 @@ using UnityEngine.UIElements;
 
 public class Sourimi : Konpemo
 {
-    [SerializeField]
-	private Transform pointDeTir;
-    [SerializeField]
-    private ParticleSystem dashAnimation;
+    [SerializeField] private Transform pointDeTir;
+
+    [SerializeField] private ParticleSystem dashAnimation;
 
     private float distance;
     private float angle;

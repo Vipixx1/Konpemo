@@ -1,13 +1,13 @@
-    using System.Collections;
+using System.Collections;
 using UnityEngine;
-using System;
-using System.Linq;
-using UnityEngine.UI;
-
 
 public class Magitruite : Konpemo
 {
-    private float percentSpeedReduction = -0.1f;
+
+    [SerializeField] private ParticleSystem splashEffect;
+
+    private readonly float percentSpeedReduction = -0.1f;
+    private readonly float durationSpeedReduction = 5f;
 
     public override void SetBaseStats()
     {
@@ -32,9 +32,11 @@ public class Magitruite : Konpemo
 
     public override void Attack() // Gouttelette
     {
-        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 4f, 6);
+        splashEffect.Play();
 
-        foreach (Collider collider in hitColliders.Where(collider => collider.gameObject.layer != this.gameObject.layer))
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeAttack.Value);
+
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null && collider.gameObject.layer != this.gameObject.layer)
         {
             if (collider.GetComponent<Konpemo>().speed.StatModifiers.Count > 0)
             {
@@ -56,7 +58,7 @@ public class Magitruite : Konpemo
     public IEnumerator Gouttelette(Konpemo konpemo)
     {
         konpemo.speed.AddModifier(new StatModifier(percentSpeedReduction, StatModType.PercentAdd, "Gouttelette"));
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(durationSpeedReduction);
         konpemo.speed.RemoveAllModifiersFromSource("Gouttelette");
 
     }
@@ -65,17 +67,20 @@ public class Magitruite : Konpemo
         Debug.Log("Pluie magique");
     }
 
-    public override void TakingDamage(float damageTaken) //2e passif !
+    public override void TakingDamage(float damageTaken)
     {
         System.Random rand = new();
         base.TakingDamage(rand.Next(0, 2));
-        //this.health.TakingFlatDamage(rand.Next(0, 2), 0);
+
+        if (this.health.GetCurrentHealth() < 0) { Death(); }
+        // No animation for Death...
+
     }
 
     public override void Healing(float hpHealed)
     {
         System.Random rand = new();
-        this.health.HealingFlatDamage(rand.Next(0, 2));
+        base.Healing(rand.Next(0, 2));
     }
 
     public override IEnumerator Poison(float poisonTickDamage, int poisonDuration)
@@ -84,8 +89,7 @@ public class Magitruite : Konpemo
         while (timer < poisonDuration)
         {
             System.Random rand = new();
-            this.health.TakingFlatDamage(rand.Next(0, 2), 0);
-            // if (this.health.currentHealth <= 0) { Death(); }
+            this.TakingDamage(rand.Next(0, 2));
             timer++;
             yield return new WaitForSeconds(1);
         }

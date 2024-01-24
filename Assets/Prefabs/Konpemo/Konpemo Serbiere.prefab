@@ -227,15 +227,47 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: lengthInSec
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
       propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998544106336951428, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].time
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2345345113447804413, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
       propertyPath: m_Name
-      value: Red energy explosion
+      value: Red Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 2765400240326555391, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
       propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765400240326555391, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: startDelay.scalar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4908933306299120035, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
@@ -244,6 +276,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5362897515311971848, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
       propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5362897515311971848, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+      propertyPath: startDelay.scalar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5436412773135279181, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
@@ -263,7 +299,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8724062008000739951, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+    - {fileID: 7749370771072419076, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
+    - {fileID: 3788130468519098340, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3615eafa8ecef1842b581480843d504b, type: 3}
@@ -285,6 +324,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 356099969594358560, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 356099969594358560, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5020924374195174826, guid: 88fd9b4350724e14a8519e6841b6d7d8, type: 3}
       propertyPath: m_Name
       value: Konpemo Serbiere
@@ -391,17 +438,13 @@ MonoBehaviour:
   isPoisoned: 0
   canAttack: 1
   capacityType: 0
-  allyUnitManager: {fileID: 0}
-  enemyUnitManager: {fileID: 0}
   animator: {fileID: 3591126377509429963}
   capacityArea: {fileID: 7603718415880302890}
   onDeath:
     m_PersistentCalls:
       m_Calls: []
-  piege: {fileID: 5930535528857445600, guid: bcbed1baa394ff844b39a1494535f825, type: 3}
-  offsetPiege: 0.1
-  vortexDeFeu: {fileID: 6915597711512832893}
-  rangeVortex: 3
+  vortexAnimation: {fileID: 6915597711512832893}
+  trap: {fileID: 5930535528857445600, guid: bcbed1baa394ff844b39a1494535f825, type: 3}
   seeGizmoRangeVortex: 0
 --- !u!95 &3591126377509429963
 Animator:

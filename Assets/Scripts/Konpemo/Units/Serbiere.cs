@@ -3,23 +3,15 @@ using UnityEngine;
 public class Serbiere : Konpemo
 {
 
+    [SerializeField] private ParticleSystem vortexAnimation;
+    private readonly float rangeVortex = 3;
 
-    [SerializeField]
-    private GameObject piege;
+    [SerializeField] private GameObject trap;
+    private Vector3 trapLocalisation;
+    private readonly float trapOffset = 0.1f;
 
-    private Vector3 localisationPiege;
 
-    [SerializeField]
-    private float offsetPiege = 0.1f;
-    private GameObject mPiege;
-
-    [SerializeField]
-    ParticleSystem vortexDeFeu;
-
-    [SerializeField]
-    private float rangeVortex = 3;
-    [SerializeField]
-    private bool seeGizmoRangeVortex = false;
+    [SerializeField] private bool seeGizmoRangeVortex = false;
 
     public override void SetBaseStats()
     {
@@ -46,8 +38,8 @@ public class Serbiere : Konpemo
     public override void Attack() // VortexDeFeu
     {
         Collider[] hitColliders = Physics.OverlapSphere(konpemoEnemy.transform.position, rangeVortex);
-        vortexDeFeu.transform.position = konpemoEnemy.transform.position;
-        vortexDeFeu.Play();
+        vortexAnimation.transform.position = konpemoEnemy.transform.position;
+        vortexAnimation.Play();
 		
         foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() != null)
         { 
@@ -58,16 +50,18 @@ public class Serbiere : Konpemo
         }
     }
 
-    public override void Capacity(Vector3? localisation) // Piège de Breizh
+    public override void Capacity(Vector3? localisation) // Piege de Breizh
     {
-        if(localisation.HasValue)
+        if (localisation.HasValue)
         {
-            localisationPiege = localisation.Value;
-            localisationPiege.y += offsetPiege;
+            trapLocalisation = localisation.Value;
+            trapLocalisation.y += trapOffset;
         }
-        mPiege = Instantiate(piege, localisationPiege, Quaternion.identity);
-        mPiege.gameObject.layer = this.gameObject.layer;
+
+        GameObject mPiege = Instantiate(trap, trapLocalisation, Quaternion.identity);
+        mPiege.layer = this.gameObject.layer;
     }
+
     public void OnDrawGizmos()
     {
         if(seeGizmoRangeVortex)
@@ -76,5 +70,4 @@ public class Serbiere : Konpemo
             Gizmos.DrawWireSphere(konpemoEnemy.transform.position, rangeVortex);
         }
     }
-
 }

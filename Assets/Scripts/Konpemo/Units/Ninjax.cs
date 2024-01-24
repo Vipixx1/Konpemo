@@ -36,7 +36,7 @@ public class Ninjax : Konpemo
         this.nameKonpemo = KonpemoSpecies.Ninjax.ToString();
     }
 
-    public override void Attack() // Piqûre
+    public override void Attack() // Piqure
     {
         Projectile needle = ProjectilePool.SharedInstance.GetPooledObject(ProjectileType.Piqure);
 

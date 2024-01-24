@@ -27,7 +27,6 @@ public class MenuManager : MonoBehaviour
     {
         if (levelName == "") levelToLoad = null;
         else levelToLoad = levelName;
-        Debug.Log(levelToLoad);
     }
 
     public void QuitGame()

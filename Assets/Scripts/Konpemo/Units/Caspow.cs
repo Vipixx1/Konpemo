@@ -1,6 +1,8 @@
 using UnityEngine;
 public class Caspow : Konpemo
 {
+    [SerializeField] private ParticleSystem toxicEffect;
+
     public override void SetBaseStats()
     {
         health.BaseValue = 350f;
@@ -13,34 +15,30 @@ public class Caspow : Konpemo
         cooldown.BaseValue = 15f;
 
         rangeAttack.BaseValue = 3f;
-        rangeCapacity.BaseValue = 0f;
+        rangeCapacity.BaseValue = 7.5f;
         rangeView.BaseValue = 10f;
     }
 
     public override void SetCapacityTypeAndName()
     {
-        this.capacityType = CapacityType.ClickOnEnemy;
+        this.capacityType = CapacityType.NoClick;
         this.nameKonpemo = KonpemoSpecies.Caspow.ToString();
     }
 
-    public override void Attack() // Paralysie 1 chance sur 3
+    public override void Capacity(Vector3? localisation = null)  // Toxic, empoisonne tous les ennemis dans une range
     {
-        this.konpemoEnemy.TakingDamage(this.strength.Value);
-        System.Random rand = new System.Random();
-        int nbParalysed = rand.Next(0, 3);
-        if (nbParalysed == 0) { this.konpemoEnemy.isParalysed = true; }
-    }
+        toxicEffect.Play();
 
-    public override void Capacity(Vector3? localisation = null)  // Toxic, empoisonne l'ennemi target du Konpemo (Autre choix : empoisonne tous les ennemis dans une range)
-    {
-        if (this.konpemoEnemy.isPoisoned == false)
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, rangeCapacity.Value);
+        foreach (Collider collider in hitColliders) if (collider.GetComponent<Konpemo>() && this.gameObject.layer != collider.gameObject.layer)
         {
-            SetCooldown(this.cooldown.Value);
-            this.konpemoEnemy.Poisoning(10f, 10);
-            
-        }
-        
-    }
+            konpemoEnemy = collider.GetComponent<Konpemo>();
+            if (konpemoEnemy.isPoisoned == false)
+            {
+                konpemoEnemy.Poisoning(10f, 10);
 
-    
+            }
+        }
+   
+    }
 }

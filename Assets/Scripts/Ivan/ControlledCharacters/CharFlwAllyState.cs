@@ -12,7 +12,7 @@ public class CharFlwAllyState : CharBaseState
     }
     public override void UpdateState(CharStateManager csm)
     {
-        if((csm.gameObject.transform.position - csm.cibleKonpemo.transform.position).magnitude <= tooCloseLimit)
+        if((csm.gameObject.transform.position - csm.targetKonpemo.transform.position).magnitude <= tooCloseLimit)
         {
             ableToMove = false;
             csm.agent.SetDestination(csm.gameObject.transform.position);
@@ -23,7 +23,7 @@ public class CharFlwAllyState : CharBaseState
         }
         if(ableToMove)
         {
-            csm.agent.SetDestination(csm.cibleKonpemo.transform.position);
+            csm.agent.SetDestination(csm.targetKonpemo.transform.position);
         }
     }
 }

@@ -12,18 +12,18 @@ public class CharAtkState : CharBaseState
     }
     public override void UpdateState(CharStateManager csm)
     {
-        if ((csm.cibleKonpemo.transform.position - csm.transform.position).magnitude >= csm.konpemo.rangeAttack.Value) //cible hors de portee d'atk
+        if ((csm.targetKonpemo.transform.position - csm.transform.position).magnitude >= csm.konpemo.rangeAttack.Value) //cible hors de portee d'atk
         {
             csm.SwitchState(csm.charAtkMovState);
         }
         else if (csm.konpemo.canAttack)
         {
-            if (csm.cibleKonpemo.isActiveAndEnabled)
+            if (csm.targetKonpemo.isActiveAndEnabled)
             {
                 if (csm.kingManager.GetKing()?.name != csm.konpemo.name)
                 {
                     timeBetweenAttack = 1 / csm.konpemo.attackSpeed.Value;
-                    csm.konpemo.SetTarget(csm.cibleKonpemo);
+                    csm.konpemo.SetTarget(csm.targetKonpemo);
                     csm.konpemo.animator.SetTrigger("Attack");
                     csm.StartCoroutine(AttackCooldown(timeBetweenAttack, csm));
                     //Debug.Log("ATK");

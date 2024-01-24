@@ -45,6 +45,7 @@ public class ProjectilePool : MonoBehaviour
                 return pooledObjects[i];
             }
         }
+
         switch(projType)
         {
             case ProjectileType.BallFoudre:
@@ -65,11 +66,5 @@ public class ProjectilePool : MonoBehaviour
             default: return null;
         }
         
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) { foreach (Projectile elt in pooledObjects) Debug.Log(elt.ToString() + elt.projType.ToString()); }
     }
 }

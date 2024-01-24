@@ -10865,6 +10865,9 @@ MonoBehaviour:
   healthBar4: {fileID: 295761059}
   textSelection5: {fileID: 2088273353}
   healthBar5: {fileID: 526691865}
+  echapScreen: {fileID: 0}
+  sliderList: []
+  textList: []
 --- !u!1001 &561167726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32517,9 +32520,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 266225911}
   - {fileID: 299904220}
   - {fileID: 276610087}
+  - {fileID: 266225911}
   - {fileID: 1027769284}
   - {fileID: 1210751853}
   m_Father: {fileID: 0}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -35,13 +36,14 @@ public class UIManager : MonoBehaviour
     public List<Slider> sliderList = new();
     public List<TMP_Text> textList = new();
 
+    private float timerStart;    
 
 
     private void Start()
     {
         redCursor.SetActive(false);
         blueCursor.SetActive(false);
-		
+
 		victoryScreen.SetActive(false);
         gameOverScreen.SetActive(false);
 		activeUI.SetActive(true);
@@ -49,12 +51,14 @@ public class UIManager : MonoBehaviour
 
         SetupListHealthBar(sliderList);
         SetupListText(textList);
-
+        
+        timerStart = Time.time;
     }
 
     void Update()
     {
         timer.text = GetTime();
+        
     }
 	
     public void DisplaySpriteRed()
@@ -91,8 +95,9 @@ public class UIManager : MonoBehaviour
 
     public string GetTime()
     {
-        int minutes = Mathf.FloorToInt(Time.time / 60F);
-        int seconds = Mathf.FloorToInt(Time.time - minutes * 60);
+        float time = Time.time - timerStart;
+        int minutes = Mathf.FloorToInt(time / 60F);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
 
         string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
         return niceTime;

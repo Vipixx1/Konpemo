@@ -91,7 +91,7 @@ public class SelectionManager : MonoBehaviour
         eventManager.AddCapacityListener(konpemoManager);
         if(selectedKonpemos.Count > 0)
         {
-            eventManager.RemoveCapacityListener(selectedKonpemos[selectedKonpemos.Count - 1]); //On enl�ve le listener de capacit� pour l'ancien konpemoManager
+            eventManager.RemoveCapacityListener(selectedKonpemos[selectedKonpemos.Count - 1]); //On enl�ve le listener de capacit� pour l'ancien konpemoManagerx    
         }
         eventManager.AddListener(konpemoManager);
         selectedKonpemos.Add(konpemoManager);

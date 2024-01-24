@@ -139,7 +139,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             if(this.gameObject.layer == 7)
             {
-                this.TakingDamage(100000);
+                this.TakingDamage(50);
             }
         }
 
@@ -148,7 +148,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             if (this.gameObject.layer == 8)
             {
-                this.TakingDamage(100000);
+                this.TakingDamage(50);
             }
         }
 
@@ -157,7 +157,7 @@ public abstract class Konpemo : MonoBehaviour
         {
             if (this.gameObject.layer == 7)
             {
-                this.Healing(100000);
+                this.Healing(50);
             }
         }
     }

@@ -28,6 +28,8 @@ public class AllyUnitManager : MonoBehaviour
     {
         //Debug.Log(aliveAllyKonpemos.Remove(konpemo));
         aliveAllyKonpemos.Remove(konpemo);
+        uiManager.textList[aliveAllyKonpemos.Count].gameObject.SetActive(false);
+        uiManager.sliderList[aliveAllyKonpemos.Count].gameObject.SetActive(false);
         totalAllyUnitDied += 1;   
     }
 

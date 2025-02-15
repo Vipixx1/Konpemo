@@ -12,9 +12,9 @@ There are two ways of winning: Taking back the flag or killing all the enemies.
 There are also two ways of losing: All your units die or your king dies.
 
 # Controls
-Arrows = Move the camera
-Left Clic = Select one Konpemo
-Shift + Left Clic = Select one or many Konpemo
+Arrows = Move the camera \
+Left Clic = Select one Konpemo \
+Shift + Left Clic = Select one or many Konpemo \
 Right Clic = Move the Konpemo
 
 # Known bugs
